@@ -1,0 +1,66 @@
+body {
+  font-family: 'Nanum Gothic';
+  background-color: #E9EBEE;
+}
+
+body {
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+p,
+h5 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-brand {
+  font-size: 3rem;
+  font-family: 'Gugi', cursive;
+  letter-spacing: 2px;
+  color: black !important;
+}
+
+.navbar-brand span {
+  color: #FC8A15;
+}
+
+.nav-link {
+  font-size: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.card-info-main {
+  font-family: 'Sunflower', sans-serif;
+}
+
+.card-info-sub {
+  font-size: 0.4rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+.card-footer {
+  color: #4ea1d3;
+}
+
+.card-btn-area .btn {
+  width: 60px;
+  font-size: 0.75rem;
+}
+
+.card-reply {
+  background-color: rgba(0, 0, 0, .03);
+}

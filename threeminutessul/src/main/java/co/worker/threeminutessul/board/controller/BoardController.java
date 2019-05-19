@@ -32,7 +32,7 @@ public class BoardController {
 		}
 		req.setAttribute("jsonlist", jsonArr);
 		req.setAttribute("list",list);
-		return "boardTest";
+		return "board/boardList";
 	}
 	
 }
