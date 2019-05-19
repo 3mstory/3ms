@@ -23,14 +23,14 @@ public class BoardController {
 	@RequestMapping(value = "/boardTest.tmssul", method = { RequestMethod.GET })
 	public String boardTest(HttpServletRequest req, HttpServletResponse resp) {
 		List<BoardVO> list = service.getBoard();
-		JSONArray jsonArr = new JSONArray();
+		/*JSONArray jsonArr = new JSONArray();
 		for(BoardVO vo : list) {
 			JSONObject json = new JSONObject();
 			json.put("seq", vo.getBoardSeq());
 			json.put("content",vo.getContent());
 			jsonArr.add(json);
-		}
-		req.setAttribute("jsonlist", jsonArr);
+		}*/
+		//req.setAttribute("jsonlist", jsonArr);
 		req.setAttribute("list",list);
 		return "board/boardList";
 	}
