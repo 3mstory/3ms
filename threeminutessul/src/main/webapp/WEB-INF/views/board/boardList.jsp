@@ -20,11 +20,67 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
+<!-- 임시 회원가입 모달 -->
+<div class="modal fade" id="join_form" tabindex="-1" role="dialog" aria-labelledby="join_form" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header p-4">
+				<h4 class="mx-auto font_tit font-weight-bold">회원가입</h4>
+			</div>
+			<div class="modal-body px-4 py-0">
+				<form>
+					<div class="form-group mb-4">
+						<input type="text" class="form-control" id="id" aria-describedby="아이디" placeholder="id">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="password" placeholder="password">
+					</div>
+					<div class="form-group mb-4">
+						<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임">
+					</div>
+					<div class="form-group mb-4">
+						<input type="file" class="btn btn-outline-secondary form-control-file" id="file_input">
+					</div>
+					<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
+						data-toggle="modal" data-target="#login_form">로그인하러가기</button>
+					<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 임시 로그인 모달 -->
+<div class="modal fade" id="login_form" tabindex="-1" role="dialog" aria-labelledby="login_form" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content ">
+			<div class="modal-header p-4">
+				<h4 class="mx-auto font_tit font-weight-bold">로그인</h4>
+			</div>
+			<div class="modal-body px-4 py-0">
+				<form>
+					<div class="form-group mb-4">
+						<input type="text" class="form-control" id="id" aria-describedby="아이디" placeholder="id">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control " id="password" placeholder="password">
+					</div>
+					<div class="container my-4">
+						<div class="row">
+							<button type="button" class="btn btn-outline-secondary mx-auto col-4" data-dismiss="modal"
+								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
+							<button type="submit" class="btn btn-primary mx-auto col-4" data-dismiss="modal"
+								aria-label="login">로그인</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 <body style="height:100vh; background-color: #E9EBEE">
 	<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
 		<div class="container flex-sm-column">
-			<a class="navbar-brand mx-auto p-0" href="#"><span>3</span>분썰</a>
+			<a class="navbar-brand mx-auto p-0 font_header" href="#"><span class="font_color_main">3</span>분썰</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -32,6 +88,9 @@
 
 			<div class="collapse navbar-collapse " id="navbarNav">
 				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">임시로그인버튼</a>
+					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="#">연애</a>
 					</li>
@@ -44,7 +103,6 @@
 				</ul>
 			</div>
 		</div>
-
 	</nav>
 
 	<div class="container-fluid smooth-scroll" id="cont">
@@ -84,13 +142,27 @@
 							</div>
 						</div>
 						
-						<div class="container-fluid my-4 card-reply">
-							<div class="row card-reply-header pb-2">
-								<h5>댓글 0개</h5>
+						<div class="card-reply-area">
+							<div class="card-reply-header mt-4">
+								<span class="reply-tit text-dark font-weight-bolder">
+									댓글<span class="reply-cnt font_color_main">&nbsp;4</span>개
+								</span>
 							</div>
 							<div class="card-reply-body">
-								<p class="nickname">익명123</p>
-								<p class="contents pl-2">안녕하세요 이것은 댓글입니다.</p>
+								<ul class="card-replys">
+									<li class="reply-item my-1">
+										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
+										<span>이것은 첫번째 댓글입니다. 깔깔깔깔 너무 재밌어요 한번 더 연재해주시면 감사하겠습니다.</span>
+									</li>
+									<li class="reply-item my-1">
+										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
+										<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
+									</li>
+									<li class="reply-item my-1">
+										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
+										<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
+									</li>
+								</ul>
 							</div>
 						</div>
 	
