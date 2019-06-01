@@ -131,7 +131,7 @@
 						${vo.title}
 					</div>
 					<div class="card-text card-preview on">
-						이곳은 미리보기가 표시되는 곳입니다. 앞 세줄 정도를 미리 보여주고 나머지 내용은 궁금하면 클릭해 ...
+						${vo.preText}
 					</div>
 					<div class="collapse card-text mb-4 card-collapse">
 						<p class="card-contents mb-4">
