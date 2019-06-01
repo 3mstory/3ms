@@ -31,7 +31,6 @@
 				<h4 class="mx-auto font_tit font-weight-bold">회원가입</h4>
 			</div>
 			<div class="modal-body px-4 py-0">
-<<<<<<< HEAD
 				<form action="/threeminutessul/userjoin.tmssul" method="POST" encType="multipart/form-data">
 					<div class="form-group mb-4">
 						<input type="text" class="form-control" id="userid" name="userid" aria-describedby="아이디" placeholder="id">
@@ -61,49 +60,19 @@
 				<h4 class="mx-auto font_tit font-weight-bold">로그인</h4>
 			</div>
 			<div class="modal-body px-4 py-0">
-				<form>
+				<form action="/threeminutessul/loginok.tmssul" method="POST">
 					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="id" aria-describedby="아이디" placeholder="id">
+						<input type="text" class="form-control" id="userid" name="userid" aria-describedby="아이디" placeholder="id">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" id="password" placeholder="password">
-					</div>
-					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임">
-					</div>
-					<div class="form-group mb-4">
-						<input type="file" class="btn btn-outline-secondary form-control-file" id="file_input">
-					</div>
-					<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
-						data-toggle="modal" data-target="#login_form">로그인하러가기</button>
-					<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- 임시 로그인 모달 -->
-<div class="modal fade" id="login_form" tabindex="-1" role="dialog" aria-labelledby="login_form" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content ">
-			<div class="modal-header p-4">
-				<h4 class="mx-auto font_tit font-weight-bold">로그인</h4>
-			</div>
-			<div class="modal-body px-4 py-0">
-				<form>
-					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="id" aria-describedby="아이디" placeholder="id">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control " id="password" placeholder="password">
+						<input type="password" class="form-control " id="userpw" name="userpw" placeholder="password">
 					</div>
 					<div class="container my-4">
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-4" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-4" data-dismiss="modal"
-								aria-label="login">로그인</button>
->>>>>>> branch 'master' of https://github.com/3mstory/3ms.git
+							<button type="submit" class="btn btn-primary mx-auto col-4" 
+								aria-label="login">로그인</button><!-- data-dismiss="modal" -->
 						</div>
 					</div>
 				</form>
@@ -125,12 +94,9 @@
 					<li class="nav-item">
 						<a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">임시로그인버튼</a>
 					</li>
-<<<<<<< HEAD
 					<li class="nav-item">
 						<a class="nav-link" href="/threeminutessul/boardAdd.tmssul">임시게시판 글쓰기</a>
 					</li>
-=======
->>>>>>> branch 'master' of https://github.com/3mstory/3ms.git
 					<li class="nav-item active">
 						<a class="nav-link" href="#">연애</a>
 					</li>
@@ -152,7 +118,7 @@
 					<div class="row">
 						<img class="rounded-circle px-2"
 							src="resources/files/${vo.userid}/${vo.profile}"
-							width="50px" height="50px" onerror="resources/files/default.PNG">
+							width="50px" height="50px" onError="/resources/files/default.PNG">
 						<div class="col d-flex flex-column justify-content-center">
 							<div class="row d-block card-info-main text-bolder">${vo.writer}</div>
 							<div class="row d-block text-secondary card-info-sub">${vo.regdate}</div>
