@@ -118,7 +118,7 @@
 					<div class="row">
 						<img class="rounded-circle px-2"
 							src="resources/files/${vo.userid}/${vo.profile}"
-							width="50px" height="50px" onError="/resources/files/default.PNG">
+							width="50px" height="50px" onError="this.src='resources/files/default.PNG'">
 						<div class="col d-flex flex-column justify-content-center">
 							<div class="row d-block card-info-main text-bolder">${vo.writer}</div>
 							<div class="row d-block text-secondary card-info-sub">${vo.regdate}</div>
