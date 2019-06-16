@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
+-->
+<mapper namespace="board">
+	<select id="boardTest" resultType="co.worker.threeminutessul.board.model.BoardVO">
+		select
+			b.boardSeq,
+			b.title,
+			b.content,
+			ui.nickname as writer,
+			case when to_char(regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(regdate,'YYYY-MM-DD hh24:mi:ss') then regdate else updatedate end as regdate,
+			b.likey,
+			b.hate,
+			b.isanony
+		from tblBoard b
+			inner join tblUserInfo ui on b.writer = ui.userSeq 
+		limit 5;
+	</select>
+</mapper>
