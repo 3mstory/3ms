@@ -16,6 +16,18 @@ public class BoardServiceImpl implements BoardServiceIF{
 
 	@Override
 	public List<BoardVO> getBoard() {
-		return dao.getBoard();
+		List<BoardVO> list = dao.getBoard();
+		
+		for(BoardVO board : list) {
+			int contentLength = board.getContent().length();
+			String preText = "";
+			if(contentLength>14) {
+				preText = board.getContent().substring(0, 13); //14글자 기준으로 미리보기 짜름
+			}else {
+				preText = board.getContent();
+			}
+			board.setPreText(preText+"...");
+		}
+		return list;
 	}
 }

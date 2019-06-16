@@ -6,18 +6,23 @@
 mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 -->
 <mapper namespace="board">
-	<select id="boardTest" resultType="co.worker.threeminutessul.board.model.BoardVO">
+	<select id="boardList" resultType="co.worker.threeminutessul.board.model.BoardVO">
 		select
 			b.boardSeq,
 			b.title,
 			b.content,
+			ui.userid,
 			ui.nickname as writer,
-			case when to_char(regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(regdate,'YYYY-MM-DD hh24:mi:ss') then regdate else updatedate end as regdate,
+			case 
+				when to_char(regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(regdate,'YYYY-MM-DD hh24:mi:ss') then regdate 
+				else updatedate 
+			end as regdate,
+			ui.profile,
 			b.likey,
 			b.hate,
 			b.isanony
 		from tblBoard b
-			inner join tblUserInfo ui on b.writer = ui.userSeq 
-		limit 5;
+			inner join tblUserInfo ui on b.writer = ui.userSeq
+		order by b.boardSeq desc
 	</select>
 </mapper>

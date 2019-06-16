@@ -13,5 +13,11 @@
 </configuration> -->
 
 <configuration>
-	
+	<typeAliases>
+		<typeAlias type="co.worker.threeminutessul.user.model.UserVO" alias="userVo"/>
+		<typeAlias type="co.worker.threeminutessul.login.model.LoginVO" alias="loginVo"/>
+		<typeAlias type="co.worker.threeminutessul.comment.medel.CommentVO" alias="commentVo"/>
+		<typeAlias type="co.worker.threeminutessul.likeyhate.model.HateVO" alias="hateVo"/>
+		<typeAlias type="co.worker.threeminutessul.likeyhate.model.LikeyVO" alias="likeyVo"/>
+	</typeAliases>	
 </configuration>

@@ -1,18 +1,40 @@
 package co.worker.threeminutessul.board.model;
 
-import java.util.Calendar;
-
 public class BoardVO {
 	private int boardSeq;
 	private String writer;
 	private String title;
 	private String content;
-	private Calendar regdate;
-	private Calendar updatedate;
+	private String regdate;
+	private String updatedate;
 	private int likey;
 	private int hate;
-	private int isanony;
+	private String isanony;
 	
+	
+	//추가요소..
+	private String profile;
+	private String userid;
+	private String preText;
+	
+	public String getPreText() {
+		return preText;
+	}
+	public void setPreText(String preText) {
+		this.preText = preText;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public int getBoardSeq() {
 		return boardSeq;
 	}
@@ -37,16 +59,16 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Calendar getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Calendar regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public Calendar getUpdatedate() {
+	public String getUpdatedate() {
 		return updatedate;
 	}
-	public void setUpdatedate(Calendar updatedate) {
+	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
 	public int getLikey() {
@@ -61,10 +83,17 @@ public class BoardVO {
 	public void setHate(int hate) {
 		this.hate = hate;
 	}
-	public int getIsanony() {
+	public String getIsanony() {
 		return isanony;
 	}
-	public void setIsanony(int isanony) {
+	public void setIsanony(String isanony) {
 		this.isanony = isanony;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [boardSeq=" + boardSeq + ", writer=" + writer + ", title=" + title + ", content=" + content
+				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", likey=" + likey + ", hate=" + hate
+				+ ", isanony=" + isanony + ", profile=" + profile + ", userid=" + userid + ", preText=" + preText + "]";
+	}
+	
 }
