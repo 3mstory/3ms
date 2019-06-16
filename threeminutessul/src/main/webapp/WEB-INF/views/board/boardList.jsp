@@ -28,26 +28,42 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header p-4">
-				<h4 class="mx-auto font_tit font-weight-bold">회원가입</h4>
+				<h4 class="mx-auto font-tit font-weight-bold">회원가입</h4>
 			</div>
 			<div class="modal-body px-4 py-0">
-				<form action="/threeminutessul/userjoin.tmssul" method="POST" encType="multipart/form-data">
-					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="userid" name="userid" aria-describedby="아이디" placeholder="id">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control" id="id" aria-describedby="아이디" placeholder="id">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" id="userpw" name="userpw" placeholder="password">
+						<input type="password" class="form-control" id="password" placeholder="password">
 					</div>
-					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="닉네임" placeholder="닉네임">
+					<div class="form-group">
+						<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임">
 					</div>
-					<div class="form-group mb-4">
-						<input type="file" class="btn btn-outline-secondary form-control-file" id="input_file" name="input_file">
+					<div class="form-group">
+						<div class="custom-file" id="customFile">
+							<input type="file" accept="image/*" class="custom-file-input" id="join-file-input"
+								aria-describedby="ProfileUpload">
+							<label class="custom-file-label text-secondary" for="exampleInputFile">
+								프로필 사진
+							</label>
+						</div>
 					</div>
-					<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
-						data-toggle="modal" data-target="#login_form">로그인하러가기</button>
-					<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
 				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-6">
+							<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
+								data-toggle="modal" data-target="#login_form">로그인</button>
+						</div>
+						<div class="col-6">
+							<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -57,7 +73,7 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content ">
 			<div class="modal-header p-4">
-				<h4 class="mx-auto font_tit font-weight-bold">로그인</h4>
+				<h4 class="mx-auto font-tit font-weight-bold">로그인</h4>
 			</div>
 			<div class="modal-body px-4 py-0">
 				<form action="/threeminutessul/loginok.tmssul" method="POST">
@@ -69,10 +85,10 @@
 					</div>
 					<div class="container my-4">
 						<div class="row">
-							<button type="button" class="btn btn-outline-secondary mx-auto col-4" data-dismiss="modal"
+							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-4" 
-								aria-label="login">로그인</button><!-- data-dismiss="modal" -->
+							<button type="submit" class="btn btn-primary mx-auto col-5" data-dismiss="modal"
+								aria-label="login">로그인</button>
 						</div>
 					</div>
 				</form>
@@ -83,7 +99,7 @@
 <body style="height:100vh; background-color: #E9EBEE">
 	<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
 		<div class="container flex-sm-column">
-			<a class="navbar-brand mx-auto p-0 font_header" href="#"><span class="font_color_main">3</span>분썰</a>
+			<a class="navbar-brand mx-auto p-0 font-header" href="#"><span class="font-color-main">3</span>분썰</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -120,7 +136,7 @@
 							src="resources/files/${vo.userid}/${vo.profile}"
 							width="50px" height="50px" onError="this.src='resources/files/default.PNG'">
 						<div class="col d-flex flex-column justify-content-center">
-							<div class="row d-block card-info-main text-bolder">${vo.writer}</div>
+							<div class="row d-block font-tit">${vo.writer}</div>
 							<div class="row d-block text-secondary card-info-sub">${vo.regdate}</div>
 						</div>
 					</div>
@@ -194,42 +210,15 @@
 				</div>
 			</div> 
 
-			<div class="card-body">
-				<div class="card-title font-weight-bold text-truncate">
-					하루종일 롤만하다가 기절할뻔한 이야기
-				</div>
-				<div class="card-text card-preview on">
-					이곳은 미리보기가 표시되는 곳입니다. 앞 세줄 정도를 미리 보여주고 나머지 내용은 궁금하면 클릭해 ...
-				</div>
-				<div class="collapse card-text mb-4 card-collapse">
-					<p class="card-contents mb-4">
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-						이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.이곳에 그 다음 내용들이 보이게 됩니다.
-					</p>
-					<div class="row card-btn-area justify-content-center">
-						<div class="btn btn-outline-dark mx-4 d-flex flex-column justify-content-center">
-							<i class="d-block far fa-grin-squint-tears fa-2x"></i>
-							<p>5,000</p>
-						</div>
-						<div class="btn btn-outline-dark mx-4 p-2 d-flex flex-column justify-content-center">
-							<i class="far fa-trash-alt fa-2x"></i>
-							<p>1,200</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<button type="button" class="card-btn btn w-100" data-toggle="collapse" data-target="#card2 .card-collapse">
-				<i class="fas fa-chevron-down"></i>
-			</button>
-		</div> -->
-
+	<!-- Floating Action Button-->
+	<div class="zoom">
+		<a href="/board_write.html" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i class="fas fa-pencil-alt"></i></a>
+		<!--<ul class="zoom-menu">
+			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">s</a></li>
+			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">d</a></li>
+			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">f</a></li>
+		</ul>
+		-->
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
