@@ -3,19 +3,43 @@ body {
   background-color: #E9EBEE;
 }
 
-body {
-  -ms-overflow-style: none;
-}
-
 body::-webkit-scrollbar {
   display: none;
 }
 
 p,
-h5 {
+ul,
+h1,
+h2,
+h3,
+h4,
+h5 li h5 {
   margin: 0 !important;
   padding: 0 !important;
+
+  list-style: none;
 }
+
+.btn-primary {
+  background-color: #FFF !important;
+  border: 1px solid #FC8A15 !important;
+  color: #FC8A15 !important;
+}
+
+.btn-primary:hover {
+  background-color: #FC8A15 !important;
+  color: #FFF !important;
+}
+
+.font-sm {
+  font-size: 0.9rem !important;
+}
+
+.modal-header,
+.modal-footer {
+  border: 0 !important;
+}
+
 
 .btn:focus,
 .btn:active {
@@ -25,12 +49,19 @@ h5 {
 
 .navbar-brand {
   font-size: 3rem;
-  font-family: 'Gugi', cursive;
   letter-spacing: 2px;
   color: black !important;
 }
 
-.navbar-brand span {
+.font_tit {
+  font-family: 'Sunflower', sans-serif;
+}
+
+.font_header {
+  font-family: 'Gugi', cursive;
+}
+
+.font_color_main {
   color: #FC8A15;
 }
 
@@ -38,10 +69,6 @@ h5 {
   font-size: 1rem;
   padding-top: 0;
   padding-bottom: 0;
-}
-
-.card-info-main {
-  font-family: 'Sunflower', sans-serif;
 }
 
 .card-info-sub {
@@ -56,11 +83,16 @@ h5 {
   color: #4ea1d3;
 }
 
+.card-reply-area {
+  font-size: 0.85rem;
+}
+
 .card-btn-area .btn {
   width: 60px;
   font-size: 0.75rem;
 }
 
-.card-reply {
-  background-color: rgba(0, 0, 0, .03);
+.reply-item .writer {
+  font-size: 0.75rem;
+  border-color: transparent;
 }
