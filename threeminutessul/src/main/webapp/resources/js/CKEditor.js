@@ -21,6 +21,7 @@ class MyUploadAdapter {
   _initRequest() {
     const xhr = this.xhr = new XMLHttpRequest();
     xhr.open('POST', '/threeminutessul/boardImageUpload.tmssul', true);
+    console.log(xhr);
     xhr.responseType = 'json';
   }
 
