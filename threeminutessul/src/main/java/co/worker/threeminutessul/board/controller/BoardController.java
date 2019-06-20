@@ -53,7 +53,7 @@ public class BoardController {
 			String actionCode = "alert('로그인을 먼저 진행해주시기 바랍니다.'); history.back();";
 			//String actionCode = "alert('로그인을 먼저 진행해주시기 바랍니다.'); history.back();";
 			NewPageAction.action(resp, actionCode);
-			return null;
+			return null
 		};*/
 		return "board/boardAdd";
 		//로그인을 먼저 진행해주시기 바랍니다.
@@ -70,6 +70,7 @@ public class BoardController {
 		String userSeq = (String)session.getAttribute("userSeq");
 		String actionCode="";
 		String uploadPath="";
+		File file = null;
 		//파일업로드
 		
 
@@ -89,17 +90,17 @@ public class BoardController {
 			String rootPath = req.getSession().getServletContext().getRealPath("resources/boardUpload");
 			
 			//폴더생성.
-			File uploadFolder = new File(rootPath,userid);
+			File uploadFolder = new File(rootPath,"123");
 			System.out.println(uploadFolder.exists());
 			if(!uploadFolder.exists()) {
-				uploadFolder.mkdir();
+				uploadFolder.mkdirs();
 			}
 			
 			// 저장될 파일의 경로
-			uploadPath = rootPath+"\\"+userid;
+			uploadPath = rootPath+"/"+"123";
 			
-			filename = FileUploadUtil.getFileName(uploadPath, uploadFile.getOriginalFilename());
-			File file = new File(uploadPath + "\\" + filename);
+			filename = FileUploadUtil.getFileName(uploadPath, uploadFile.getOriginalFilename());			String filename2 = uploadFile.getOriginalFilename();
+			file = new File(uploadPath +'/'+ filename2);
 			// 스프링이 받아놓은 첨부파일을 임시 폴더에서 우리가 희망하는 폴더에 이동하기.(Was가 temp라는 임시폴더에 저장해논걸 files 폴더로
 			// 이동시켜야함)
 			uploadFile.transferTo(file); // 실제 파일 이동.(temp -> files)
@@ -115,8 +116,8 @@ public class BoardController {
 			actionCode="alert('서버에서 오류가 발생했습니다. 잠시후 다시 시도해주세요.'); history.back();";
 			NewPageAction.action(resp, actionCode);
 		}*/
-		
-		json.put("url", uploadPath); //여기에 업로드된 경로 넣기.
+		String returl = req.getSession().getServletContext().getContextPath();
+		json.put("url", "resources/boardUpload/123/abc.png"); //여기에 업로드된 경로 넣기.
 		
 		return json;
 		

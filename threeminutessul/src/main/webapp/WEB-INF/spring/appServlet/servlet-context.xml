@@ -22,8 +22,9 @@
 	namespace에서 aop 클릭해야 한다.
 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
 
