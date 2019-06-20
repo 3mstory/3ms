@@ -14,4 +14,8 @@ public class FileBean {
 	}
 
 	
+	@Override
+	public String toString() {
+		return "FileBean [upload=" + upload + "]";
+	}
 }
