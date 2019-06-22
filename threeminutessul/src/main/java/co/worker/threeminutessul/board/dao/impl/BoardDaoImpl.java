@@ -19,4 +19,9 @@ public class BoardDaoImpl implements BoardDaoIF{
 	public List<BoardVO> getBoard() {
 		return template.selectList("board.boardList");
 	}
+
+	@Override
+	public int insertBoard(BoardVO vo) {
+		return template.insert("board.insertBoard", vo);
+	}
 }

@@ -32,12 +32,12 @@
   </nav>
 
   <div class="container-fluid" id="cont">
-    <form action="" method="post" class="mb-0">
+    <form action="/threeminutessul/boardAddOk.tmssul" method="post" class="mb-0" novalidate>
       <div class="form-group my-3">
-        <input type="text" class="form-control ty_tit" placeholder="글 제목을 입력해주세요." required>
+        <input type="text" class="form-control ty_tit" name="title" placeholder="글 제목을 입력해주세요." required>
       </div>
       <div class="form-group">
-        <textarea class="form-control vh-75" placeholder="내용을 입력해주세요." name="" id="write_cont" cols="30" rows="10"
+        <textarea class="form-control vh-75" placeholder="내용을 입력해주세요." name="contents" id="write_cont" cols="30" rows="10"
           required></textarea>
       </div>
       <nav class="btm-navbar container p-0">

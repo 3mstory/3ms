@@ -19,15 +19,20 @@ public class BoardServiceImpl implements BoardServiceIF{
 		List<BoardVO> list = dao.getBoard();
 		
 		for(BoardVO board : list) {
-			int contentLength = board.getContent().length();
+			int contentLength = board.getContents().length();
 			String preText = "";
 			if(contentLength>14) {
-				preText = board.getContent().substring(0, 13); //14글자 기준으로 미리보기 짜름
+				preText = board.getContents().substring(0, 13); //14글자 기준으로 미리보기 짜름
 			}else {
-				preText = board.getContent();
+				preText = board.getContents();
 			}
 			board.setPreText(preText+"...");
 		}
 		return list;
+	}
+
+	@Override
+	public int insertBoard(BoardVO vo) {
+		return dao.insertBoard(vo);
 	}
 }

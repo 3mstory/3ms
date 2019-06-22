@@ -8,4 +8,6 @@ public interface BoardDaoIF {
 
 	List<BoardVO> getBoard();
 
+	int insertBoard(BoardVO vo);
+
 }

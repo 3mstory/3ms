@@ -2,19 +2,25 @@ package co.worker.threeminutessul.board.model;
 
 public class BoardVO {
 	private int boardSeq;
-	private String writer;
+	private int writer; //=userSeq
 	private String title;
-	private String content;
+	private String contents;
 	private String regdate;
 	private String updatedate;
 	private int likey;
 	private int hate;
-	private String isanony;
-	
+	private int isanony;
 	
 	//추가요소..
 	private String profile;
-	private String userid;
+	private String userid; //=id
+	private String nickname;//=닉네임
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	private String preText;
 	
 	public String getPreText() {
@@ -41,10 +47,10 @@ public class BoardVO {
 	public void setBoardSeq(int boardSeq) {
 		this.boardSeq = boardSeq;
 	}
-	public String getWriter() {
+	public int getWriter() {
 		return writer;
 	}
-	public void setWriter(String writer) {
+	public void setWriter(int writer) {
 		this.writer = writer;
 	}
 	public String getTitle() {
@@ -53,11 +59,11 @@ public class BoardVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public String getContents() {
+		return contents;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 	public String getRegdate() {
 		return regdate;
@@ -83,17 +89,18 @@ public class BoardVO {
 	public void setHate(int hate) {
 		this.hate = hate;
 	}
-	public String getIsanony() {
+	public int getIsanony() {
 		return isanony;
 	}
-	public void setIsanony(String isanony) {
+	public void setIsanony(int isanony) {
 		this.isanony = isanony;
 	}
 	@Override
 	public String toString() {
-		return "BoardVO [boardSeq=" + boardSeq + ", writer=" + writer + ", title=" + title + ", content=" + content
+		return "BoardVO [boardSeq=" + boardSeq + ", writer=" + writer + ", title=" + title + ", contents=" + contents
 				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", likey=" + likey + ", hate=" + hate
-				+ ", isanony=" + isanony + ", profile=" + profile + ", userid=" + userid + ", preText=" + preText + "]";
+				+ ", isanony=" + isanony + ", profile=" + profile + ", userid=" + userid + ", nickname=" + nickname
+				+ ", preText=" + preText + "]";
 	}
 	
 }

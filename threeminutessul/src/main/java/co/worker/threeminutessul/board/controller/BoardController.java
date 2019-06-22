@@ -70,6 +70,7 @@ public class BoardController {
 		String userSeq = (String)session.getAttribute("userSeq");
 		String actionCode="";
 		String uploadPath="";
+		String filePath="";
 		File file = null;
 		//파일업로드
 		
@@ -90,20 +91,24 @@ public class BoardController {
 			String rootPath = req.getSession().getServletContext().getRealPath("resources/boardUpload");
 			
 			//폴더생성.
-			File uploadFolder = new File(rootPath,"123");
+			File uploadFolder = new File(rootPath,userid);
 			System.out.println(uploadFolder.exists());
 			if(!uploadFolder.exists()) {
 				uploadFolder.mkdirs();
 			}
 			
 			// 저장될 파일의 경로
-			uploadPath = rootPath+"/"+"123";
+			uploadPath = rootPath+"/"+userid;
 			
-			filename = FileUploadUtil.getFileName(uploadPath, uploadFile.getOriginalFilename());			String filename2 = uploadFile.getOriginalFilename();
-			file = new File(uploadPath +'/'+ filename2);
+			filename = FileUploadUtil.getFileName(uploadPath, uploadFile.getOriginalFilename());
+			String filename2 = uploadFile.getOriginalFilename(); 
+			filePath=uploadPath +'/'+ filename2; //실제저장할 파일명 _1 _2이런식.
+			file = new File(filePath);
 			// 스프링이 받아놓은 첨부파일을 임시 폴더에서 우리가 희망하는 폴더에 이동하기.(Was가 temp라는 임시폴더에 저장해논걸 files 폴더로
 			// 이동시켜야함)
 			uploadFile.transferTo(file); // 실제 파일 이동.(temp -> files)
+			
+			filePath = uploadPath +'/'+ filename2;
 		}
 		
 	
@@ -117,7 +122,7 @@ public class BoardController {
 			NewPageAction.action(resp, actionCode);
 		}*/
 		String returl = req.getSession().getServletContext().getContextPath();
-		json.put("url", "resources/boardUpload/123/abc.png"); //여기에 업로드된 경로 넣기.
+		json.put("url", "resources/boardUpload/"+userid+"/"+uploadFile.getOriginalFilename()); //여기에 업로드된 경로 넣기.
 		
 		return json;
 		
@@ -125,7 +130,12 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardAddOk.tmssul", method = { RequestMethod.POST })
 	public void boardAddOk(HttpServletRequest req, HttpServletResponse resp, HttpSession session, BoardVO vo) throws Exception {
+		vo.setUserid((String)session.getAttribute("userid"));
+		vo.setWriter(Integer.parseInt((String)session.getAttribute("userSeq")));
+		vo.setIsanony(0);
 		
+		int result = service.insertBoard(vo);
+		System.out.println(result);
 	}
 	
 }

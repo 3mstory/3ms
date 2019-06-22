@@ -151,7 +151,7 @@
 					</div>
 					<div class="collapse card-text mb-4 card-collapse">
 						<p class="card-contents mb-4">
-							${vo.content}
+							${vo.contents}
 						</p>
 						<div class="row card-btn-area justify-content-center">
 							<div class="btn btn-outline-dark mx-4 d-flex flex-column justify-content-center">

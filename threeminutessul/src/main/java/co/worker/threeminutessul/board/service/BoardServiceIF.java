@@ -8,4 +8,6 @@ public interface BoardServiceIF {
 
 	List<BoardVO> getBoard();
 
+	int insertBoard(BoardVO vo);
+
 }

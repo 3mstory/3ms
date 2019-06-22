@@ -10,9 +10,10 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 		select
 			b.boardSeq,
 			b.title,
-			b.content,
+			b.content contents,
 			ui.userid,
-			ui.nickname as writer,
+			ui.nickname,
+			ui.userSeq as writer,
 			case 
 				when to_char(regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(regdate,'YYYY-MM-DD hh24:mi:ss') then regdate 
 				else updatedate 
@@ -25,4 +26,12 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 			inner join tblUserInfo ui on b.writer = ui.userSeq
 		order by b.boardSeq desc
 	</select>
+	
+	<insert id="insertBoard" parameterType="boardVo">
+		insert into tblBoard(writer,title,content,regdate,updatedate,likey,hate,isanony) 
+		values(
+			#{writer},#{title},#{contents},now(),now(),#{likey},#{hate},#{isanony}	
+		)
+	</insert>
+	
 </mapper>
