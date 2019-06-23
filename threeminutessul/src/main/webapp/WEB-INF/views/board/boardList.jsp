@@ -187,7 +187,12 @@
 								</ul>
 							</div>
 						</div>
-	
+						<div class="input-group card-reply-input mt-3">
+							<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능" aria-label="닉네임 클릭시 지정 댓글 가능" aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="far fa-paper-plane"></i></button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<button type="button" class="card-btn btn w-100" data-toggle="collapse" data-target="#card_${vo.boardSeq} .card-collapse">
