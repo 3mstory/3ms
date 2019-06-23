@@ -7,13 +7,13 @@ $(function () {
     $('#card_write').attr('rows', breaks + 2);
   });
 
-  $('.card-btn').on('click', function (e) {
+  $('.card-collapse').on('shown.bs.collapse',function(){
     var topoffset = $('.navbar').outerHeight();
     var target = $(this).parents('.card');
     var tgmargin = target.css('margin-top').substr(-2,0);
     $('html, body').animate({
       scrollTop: target.offset().top - topoffset - tgmargin
-    }, 100);
+    },0);
   });
 
   $(".custom-file-input").on("change", function () {
