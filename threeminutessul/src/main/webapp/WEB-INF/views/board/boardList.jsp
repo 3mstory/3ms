@@ -87,7 +87,7 @@
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-5" 
+							<button type="submit" class="btn btn-primary mx-auto col-5" data-dismiss="modal"
 								aria-label="login">로그인</button>
 						</div>
 					</div>
@@ -126,8 +126,9 @@
 			</div>
 		</div>
 	</nav>
-
+	<div class="nvbar-hr"></div>
 	<div class="container-fluid smooth-scroll" id="cont">
+		<div class="accordion" id="brd-acdn">
 		<c:forEach items="${list}" var="vo">
 			<div class="card my-3" id="card_${vo.boardSeq}">
 				<div class="card-header">
@@ -146,10 +147,7 @@
 					<div class="card-title font-weight-bold text-truncate">
 						${vo.title}
 					</div>
-					<div class="card-text card-preview on">
-						${vo.preText}
-					</div>
-					<div class="collapse card-text mb-4 card-collapse">
+					<div class="collapse card-text card-collapse" data-parent="#brd-acdn">
 						<p class="card-contents mb-4">
 							${vo.contents}
 						</p>
@@ -167,35 +165,43 @@
 						<div class="card-reply-area">
 							<div class="card-reply-header mt-4">
 								<span class="reply-tit text-dark font-weight-bolder">
-									댓글<span class="reply-cnt font_color_main">&nbsp;4</span>개
+									댓글<span class="reply-cnt font-color-main">&nbsp;4</span>개
 								</span>
 							</div>
 							<div class="card-reply-body">
 								<ul class="card-replys">
-									<li class="reply-item my-1">
+									<li class="card-reply-item my-1">
 										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
 										<span>이것은 첫번째 댓글입니다. 깔깔깔깔 너무 재밌어요 한번 더 연재해주시면 감사하겠습니다.</span>
 									</li>
-									<li class="reply-item my-1">
+									<li class="card-reply-item my-1">
 										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
 										<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
 									</li>
-									<li class="reply-item my-1">
+									<li class="card-reply-item my-1">
 										<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
 										<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
 									</li>
+									
 								</ul>
 							</div>
 						</div>
-	
+						<div class="input-group card-reply-input mt-3">
+							<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능" aria-label="닉네임 클릭시 지정 댓글 가능" aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="far fa-paper-plane"></i></button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<button type="button" class="card-btn btn w-100" data-toggle="collapse" data-target="#card_${vo.boardSeq} .card-collapse">
+				<button type="button" class="card-btn btn w-100 collapsed" data-toggle="collapse"
+					data-target="#card1 .card-collapse">
 					<i class="fas fa-chevron-down"></i>
+					<i class="fas fa-chevron-up"></i>
 				</button>
-				
 			</div>
 		</c:forEach>
+</div>
 
 		<!-- <div class="card my-3" id="card2">
 			<div class="card-header">
