@@ -197,7 +197,7 @@
 						</div>
 					</div>
 					<button type="button" class="card-btn btn w-100 collapsed" data-toggle="collapse"
-						data-target="#card1 .card-collapse">
+						data-target="#card_${vo.boardSeq} .card-collapse">
 						<i class="fas fa-chevron-down"></i>
 						<i class="fas fa-chevron-up"></i>
 					</button>
