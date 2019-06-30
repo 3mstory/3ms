@@ -30,6 +30,7 @@
       <a href="#" onclick="window.history.back();"><i class=" fas fa-times fa-2x text-secondary"></i></a>
     </div>
   </nav>
+  <div class="nvbar-hr"></div>
 
   <div class="container-fluid" id="cont">
     <form action="/threeminutessul/boardAddOk.tmssul" method="post" class="mb-0" novalidate>

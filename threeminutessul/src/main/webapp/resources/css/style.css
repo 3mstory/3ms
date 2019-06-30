@@ -22,17 +22,17 @@ a,ul,li {text-decoration: none !important;list-style: none !important;}
 .font-color-main {color: #FC8A15;}
 /*card*/
 .card{margin:15px 0;}
+.card .image img{display:block;box-sizing:border-box;width:100%}
 .card-body{padding:1rem 1.25rem!important;}
 .card-info-sub {font-size: 0.4rem;}
 .card-footer {color: #4ea1d3;}
 .card-reply-area {font-size: 0.85rem;}
-.card-reply-input{margin:0 -0.5rem;width:auto!important;}
+.card-reply-input{position:relative;margin:0 -0.5rem;width:auto!important;}
+.card-reply-mention{position:absolute; top:50%; left: 10px; transform:translateY(-50%);font-size:0.5rem;color:grey;z-index:999;}
 .card-reply-input input{border:1px solid #6c757d!important;}
 .card-btn-area .btn {width: 60px;font-size: 0.75rem;}
-.card-btn.collapsed .fa-chevron-up {display: none;}
-.card-btn.collapsed .fa-chevron-down {display: block;}
-.card-btn .fa-chevron-up {display: block;}
-.card-btn .fa-chevron-down {display: none;}
+.card-btn .fa-chevron-up {display: none;}
+.card-btn .fa-chevron-down {display: block;}
 .card-reply-item .writer {font-size: 0.75rem;border-color: transparent;}
 /*FAB*/
 .zoom {position: fixed;bottom: 20px;right: 20px;}
@@ -59,3 +59,6 @@ box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14), 1px 1px 5px 0 rgba(0, 0, 0, 0.12)
 .form-control.ty_tit {border-color: hsl(270, 1%, 29%);}
 .ck-editor__editable_inline {height: 70vh;overflow: hidden !important;}
 .custom-file-input~.custom-file-label::after {display: none;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+/*spinner*/
+.spinner-border{display:none!important;}
+.spinner-border.on{display:block!important;}
