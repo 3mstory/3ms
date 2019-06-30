@@ -61,7 +61,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardImageUpload.tmssul", method = { RequestMethod.POST })
 	@ResponseBody
-	public JSONObject boardImageUpload(FileBean filebean, HttpServletRequest req, HttpServletResponse resp,Model model,HttpSession session) throws Exception {
+	public JSONObject boardImageUpload(HttpServletRequest req, HttpServletResponse resp,HttpSession session, Model model,FileBean filebean) throws Exception {
 		JSONObject json = new JSONObject();//filebean.getUpload());
 		
 		CommonsMultipartFile uploadFile = filebean.getUpload();
