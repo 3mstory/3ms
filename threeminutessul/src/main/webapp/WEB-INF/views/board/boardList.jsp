@@ -87,7 +87,7 @@
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-5" data-dismiss="modal"
+							<button type="submit" class="btn btn-primary mx-auto col-5" 
 								aria-label="login">로그인</button>
 						</div>
 					</div>
@@ -189,7 +189,8 @@
 								</div>
 							</div>
 							<div class="input-group card-reply-input mt-3">
-								<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능" aria-label="닉네임 클릭시 지정 댓글 가능" aria-describedby="basic-addon2">
+								<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
+								<span class="card-reply-mention"></span>
 								<div class="input-group-append">
 									<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="far fa-paper-plane"></i></button>
 								</div>
@@ -200,6 +201,11 @@
 						data-target="#card_${vo.boardSeq} .card-collapse">
 						<i class="fas fa-chevron-down"></i>
 						<i class="fas fa-chevron-up"></i>
+						<div class="d-flex justify-content-center">
+							<div class="spinner-border text-primary" role="status">
+								<span class="sr-only">로딩...</span>
+							</div>
+						</div>
 					</button>
 				</div>
 			</c:forEach>
