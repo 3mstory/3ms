@@ -11,7 +11,15 @@ public class CommentVO {
 	private String updatedate;
 	private int isanony;
 	private int mentionUserSeq;
+	private String nickname;
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getMentionUserSeq() {
 		return mentionUserSeq;
 	}

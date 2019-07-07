@@ -1,12 +1,15 @@
 package co.worker.threeminutessul.likeyhate.service;
 
-import co.worker.threeminutessul.likeyhate.model.HateVO;
-import co.worker.threeminutessul.likeyhate.model.LikeyVO;
+import java.util.List;
+
+import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 public interface LikeyHateServiceIF {
 
-	int insertLikey(LikeyVO likeVo);
+	List<LikeHateVO> getLikeHateCount(LikeHateVO vo);
 
-	int insertHate(HateVO hateVo);
+	int insertLikeHate(LikeHateVO vo,String type);
+
+	int updateLikeHate(LikeHateVO vo,String type);
 
 }

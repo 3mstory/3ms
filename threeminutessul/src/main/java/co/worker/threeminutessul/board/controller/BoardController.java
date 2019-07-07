@@ -2,6 +2,7 @@ package co.worker.threeminutessul.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
+import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.FileBean;
 import co.worker.threeminutessul.util.fileupload.FileUploadUtil;
 
@@ -29,18 +29,21 @@ public class BoardController {
 	
 	@Autowired
 	private BoardServiceIF service;
-
+	
+	@Autowired
+	private LikeyHateServiceIF likehateservice;
+	
 	@RequestMapping(value = "/boardList.tmssul", method = { RequestMethod.GET })
 	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
-		List<BoardVO> list = service.getBoard();
-		/*JSONArray jsonArr = new JSONArray();
-		for(BoardVO vo : list) {
-			JSONObject json = new JSONObject();
-			json.put("seq", vo.getBoardSeq());
-			json.put("content",vo.getContent());
-			jsonArr.add(json);
-		}*/
-		//req.setAttribute("jsonlist", jsonArr);
+		List<BoardVO> list = new ArrayList<BoardVO>();
+		String userSeq = (String)session.getAttribute("userSeq");
+		list = service.getBoard(userSeq);
+		if(session.getAttribute("userid")==null) { // 그냥 글 제목만 둘러볼 사람들
+			
+		}else {
+			//로그인 했으면 그 유저가 어떤글에 좋아요를 눌렀는지 표기해놔야함.
+			
+		}
 		req.setAttribute("list",list);
 		return "board/boardList";
 	}

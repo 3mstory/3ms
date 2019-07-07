@@ -32,14 +32,19 @@ public class LoginAuthPointcut {
 				//로그인정보가 없으면 -> 쫓겨나야함. 로그인 페이지로.
 				HttpServletRequest request = (HttpServletRequest)obj[0];
 				HttpServletResponse response = (HttpServletResponse)obj[1];
-				if(request.getRequestURL().toString().contains("/boardList.tmssul")
-				 ||request.getRequestURL().toString().contains("/loginok.tmssul")
-				 ||request.getRequestURL().toString().contains("/logoutOk.tmssul") 
-				) {return;} //지금페이지가 mainpage면 괜찮다.
-				
-				String actionCode ="alert('로그인을 하고 진행해주시기 바랍니다.');";
-				actionCode+="location.href='/threeminutessul/boardList.tmssul';";
-				NewPageAction.action(response, actionCode);
+				String requestURL = request.getRequestURL().toString();
+				String requestURI = request.getRequestURI().toString();
+				if(requestURI.contains("/boardList.tmssul")
+				 ||requestURI.contains("/loginok.tmssul")
+				 ||requestURI.contains("/logoutOk.tmssul") 
+				) {
+					
+				} //지금페이지가 mainpage면 괜찮다.
+				else {					
+					String actionCode ="alert('로그인을 하고 진행해주시기 바랍니다.');";
+					actionCode+="location.href='/threeminutessul/boardList.tmssul';";
+					NewPageAction.action(response, actionCode);
+				}
 			}//있으면 괜찮
 		}
 		catch (IOException e) {

@@ -20,5 +20,7 @@
 		<typeAlias type="co.worker.threeminutessul.likeyhate.model.HateVO" alias="hateVo"/>
 		<typeAlias type="co.worker.threeminutessul.likeyhate.model.LikeyVO" alias="likeyVo"/>
 		<typeAlias type="co.worker.threeminutessul.board.model.BoardVO" alias="boardVo"/>
+		<typeAlias type="co.worker.threeminutessul.likeyhate.model.LikeHateVO" alias="likehatevo"/>
+		
 	</typeAliases>	
 </configuration>

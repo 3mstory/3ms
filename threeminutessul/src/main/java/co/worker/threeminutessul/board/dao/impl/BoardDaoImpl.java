@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.board.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import co.worker.threeminutessul.board.dao.BoardDaoIF;
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDaoIF{
@@ -24,4 +26,10 @@ public class BoardDaoImpl implements BoardDaoIF{
 	public int insertBoard(BoardVO vo) {
 		return template.insert("board.insertBoard", vo);
 	}
+
+	@Override
+	public HashMap<String, Integer> getLikeHate(LikeHateVO vo) {
+		return template.selectOne("board.getLikeHate", vo);
+	}
 }
+

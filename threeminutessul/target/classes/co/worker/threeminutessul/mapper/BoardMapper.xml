@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<!--
-mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
--->
 <mapper namespace="board">
+	
 	<select id="boardList" resultType="co.worker.threeminutessul.board.model.BoardVO">
 		select
 			b.boardSeq,
@@ -34,4 +31,18 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 		)
 	</insert>
 	
+	<select id="getLikeHate" parameterType="likehatevo" resultType="java.util.HashMap">
+		select 
+			coalesce(sum(isLike)::integer,0) as like, 
+			coalesce(sum(isHate)::integer,0) as hate,
+			(select count(*) from tblLikeHate where userSeq = #{userSeq} and boardSeq = #{boardSeq})::integer as isMyClicked,--접속한유저가 그글에서 좋아요 싫어요를 눌렀는지 여부
+			(select case when isLike = 1 then 'clicklike' else 'clickhate' end 
+			 from tblLikeHate where userSeq = #{userSeq} and boardSeq = #{boardSeq}) as isLikeHate
+		from tblLikeHate 
+		where boardSeq = #{boardSeq}
+		  and (isLike=1
+		  or isHate=1)
+	</select>
+	
 </mapper>
+
