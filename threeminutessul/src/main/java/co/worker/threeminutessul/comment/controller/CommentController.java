@@ -26,8 +26,8 @@ public class CommentController {
 	@RequestMapping(value = "/commentList.tmssul", method = { RequestMethod.GET })
 	@ResponseBody
 	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, String boardSeq) {
-		
-		List<CommentVO> commentList = service.getComment(Integer.parseInt(boardSeq));
+		int paramBoardSeq = Integer.parseInt(boardSeq);
+		List<CommentVO> commentList = service.getComment(paramBoardSeq);
 		JSONArray jsonArr = new JSONArray();
 		JSONObject result = new JSONObject();
 		if(commentList !=null) {

@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.likeyhate.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,10 +34,11 @@ public class LikeyHateController {
 		}else { //해당글에 좋아요 누른적 있음 -> update
 			result = service.updateLikeHate(vo,type);
 		}
-		List<LikeHateVO> list2 = service.getLikeHateCount(vo);
+		//HashMap<String,Integer> likehatecount = service.getReturnlikehate(vo);
 		JSONObject json = new JSONObject();
-		json.put("result",result);
-		json.put("count", list2.size());
+		
+		json.put("result",result); //업데이트,인서트 결과 개수.(1개여야지 정상)
+		//
 		return json;
 	}
 }

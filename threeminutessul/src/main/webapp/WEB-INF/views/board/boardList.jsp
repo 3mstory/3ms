@@ -174,11 +174,11 @@
 							<div class="card-reply-area">
 								<div class="card-reply-header mt-4">
 									<span class="reply-tit text-dark font-weight-bolder">
-										댓글&nbsp;<span id="commentCount" class="reply-cnt font-color-main"></span>개
+										댓글&nbsp;<span id="commentCount_${vo.boardSeq}" class="reply-cnt font-color-main"></span>개
 									</span>
 								</div>
 								<div class="card-reply-body">
-									<ul id="commentList" class="card-replys">
+									<ul id="commentList_${vo.boardSeq}" class="card-replys">
 									<!-- 댓글영역 -->
 									</ul>
 								</div>
