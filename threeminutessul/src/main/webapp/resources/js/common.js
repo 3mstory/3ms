@@ -40,19 +40,16 @@ $(function () {
 	 * 질문 카드를 접을땐 어떻게해야하지?? 그때는 ajax 타면 안되는데
 	 */
     var card = $(this).closest('.card');
-    console.log(card);
     var boardSeq = card.attr('id').substr(5).trim()
-    var cardCont = card.find('.card-contents').text();
+    var cardCont = card.find('.card-contents');
     var cardContArea = card.find('.card-collapse');
     var spinner = $(this).find('.spinner-border');
     var upBtn = $(this).find('.fa-chevron-up');
     var downBtn = $(this).find('.fa-chevron-down');
-    var commentZone = $("#commentList_"+boardSeq);
-    
-    //if(cardCont.trim().length == 0){ //한번도 클릭한적 없다면 -> 질문 이게왜 클릭한적이없는거지?? 이것때문에 ajax 안타는 이슈
-      //console.log(cardContArea);
-      //cardContArea.hide();//카드 접힌 상태 유지하기
-      $(this).find('i').hide();
+    var commentZone = card.find('.card-reply-body ul');
+    var replyCount = card.find('.reply-cnt');
+    if(cardCont.text().trim().length == 0){ //한번도 클릭한적 없다면 
+      downBtn.hide();
       spinner.addClass('on');
       
 	  $.ajax({
@@ -60,18 +57,24 @@ $(function () {
 	    url : '/threeminutessul/commentList.tmssul',
 	    type : 'GET',
 	    dataType:'JSON',
-	    //async:true,
 	    data: 'boardSeq='+boardSeq,
 	    success:function(data){
-	    	$("#commentList_"+boardSeq).empty();
-	    	if(data.result.length==0){
-	    		var li = $("<li/>",{
-	    			text : '아직 댓글이 달리지 않았습니다.?'
-	    		});
-	    		$("#commentList_"+boardSeq).append(li);
-	    	}
+//	    	$("#commentList_"+boardSeq).empty();
+//	    	if(data.result.length==0){
+//	    		var li = $("<li/>",{
+//	    			text : '아직 댓글이 달리지 않았습니다.?'
+//	    		});
+//	    		$("#commentList_"+boardSeq).append(li);
+//	    	}
 	    	var commentCount = data.result.length;
-	    	$("#commentCount_"+boardSeq).text(commentCount);
+	    	var boardContent = data.result[0].boardContent ? data.result[0].boardContent : "내용이 없습니다.";
+	    	var likecount = card.find(".likecount");
+	    	var hatecount = card.find(".hatecount");
+	    	likecount.text(data.result[0].likecount? data.result[0].likecount : 9999);
+	    	hatecount.text(data.result[0].hatecount? data.result[0].hatecount : 1111);
+	    	
+	    	replyCount.text(commentCount);
+	    	cardCont.text(boardContent);
 	        $.each(data.result,function(index,object){
 	        	/**
 	        	 * li 태그 생성 구조(boardList 댓글부분 참조)
@@ -89,17 +92,14 @@ $(function () {
 	        	});
 	        	$(li).append(button);
 	        	$(li).append(span);
-	        	$("#commentList_"+boardSeq).append(li);
+	        	commentZone.append(li);
 	        });
-	    	
-	    	//var content = data[0].email; //이부분 커스텀해주면 될듯!!
-	        //card.find('.card-contents').text(content);
 	        spinner.removeClass('on'); //스피너제거
-	        //cardContArea.show();//카드 펼치기
+	        cardContArea.show();//카드 펼치기	    
 	        upBtn.show();
-	        upBtn.toggle();
-	        downBtn.toggle();
-	    },error:function(a,b,c){
+	        downBtn.hide();
+	    },
+	    error:function(a,b,c){
 	    	if($(a.responseText).text().indexOf("로그인")>-1){
 	    		spinner.removeClass('on'); //스피너제거
 	    		alert('로그인을 하고 진행해주시기 바랍니다.');
@@ -112,7 +112,7 @@ $(function () {
 	    	}
 	    }
 	  });
-    
+    }
   });
   
   $('.likeyhate').click(function(){
