@@ -87,7 +87,7 @@
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-5" data-dismiss="modal"
+							<button type="submit" class="btn btn-primary mx-auto col-5" 
 								aria-label="login">로그인</button>
 						</div>
 					</div>
@@ -156,35 +156,30 @@
 							</p>
 							<div class="row card-btn-area justify-content-center">
 								<div class="btn btn-outline-dark mx-4 d-flex flex-column justify-content-center">
-									<i class="d-block far fa-grin-squint-tears fa-2x"></i>
-									<p>${vo.likey}</p>
+									<i class="d-block far fa-grin-squint-tears fa-2x likeyhate">
+										<input type="hidden" id="hdboardSeq" value="${vo.boardSeq}" />
+										<input type="hidden" id="hdtype_${vo.boardSeq}" value="1" />
+									</i>
+									<p id="likecount">${vo.likey}</p>
 								</div>
 								<div class="btn btn-outline-dark mx-4 p-2 d-flex flex-column justify-content-center">
-									<i class="far fa-trash-alt fa-2x"></i>
-									<p>${vo.hate}</p>
+									<i class="far fa-trash-alt fa-2x likeyhate">
+										<input type="hidden" id="hdboardSeq" value="${vo.boardSeq}" />
+										<input type="hidden" id="hdtype_${vo.boardSeq}" value="2" />
+									</i>
+									<p id="hatecount">${vo.hate}</p>
 								</div>
 							</div>
 						
 							<div class="card-reply-area">
 								<div class="card-reply-header mt-4">
 									<span class="reply-tit text-dark font-weight-bolder">
-										댓글<span class="reply-cnt font-color-main">&nbsp;4</span>개
+										댓글&nbsp;<span id="commentCount" class="reply-cnt font-color-main"></span>개
 									</span>
 								</div>
 								<div class="card-reply-body">
-									<ul class="card-replys">
-										<li class="card-reply-item my-1">
-											<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
-											<span>이것은 첫번째 댓글입니다. 깔깔깔깔 너무 재밌어요 한번 더 연재해주시면 감사하겠습니다.</span>
-										</li>
-										<li class="card-reply-item my-1">
-											<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
-											<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
-										</li>
-										<li class="card-reply-item my-1">
-											<button type="button" class="btn btn-outline-secondary writer py-0 px-1 align-top">simsimjae</button>
-											<span>이것은 세번째 댓글입니다. 너무 재미 없으니까 이 글 빨리 삭제시켜주세요</span>
-										</li>
+									<ul id="commentList" class="card-replys">
+									<!-- 댓글영역 -->
 									</ul>
 								</div>
 							</div>

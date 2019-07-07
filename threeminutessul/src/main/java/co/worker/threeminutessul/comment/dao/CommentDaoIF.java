@@ -8,4 +8,6 @@ public interface CommentDaoIF {
 
 	List<CommentVO> getComment(int boardSeq);
 
+	int commentInsert(CommentVO vo);
+
 }

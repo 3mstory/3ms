@@ -8,4 +8,6 @@ public interface CommentServiceIF {
 
 	List<CommentVO> getComment(int boardSeq);
 
+	int commentInsert(CommentVO vo);
+
 }

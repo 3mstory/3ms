@@ -5,12 +5,27 @@ public class CommentVO {
 	private int commentSeq;
 	private int userSeq;
 	private int boardSeq;
-	private int parSeq;
+	private int parSeq; //이부분 어떻게 할것인가.
 	private String content;
 	private String regdate;
 	private String updatedate;
 	private int isanony;
+	private int mentionUserSeq;
+	private String nickname;
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public int getMentionUserSeq() {
+		return mentionUserSeq;
+	}
+	public void setMentionUserSeq(int mentionUserSeq) {
+		this.mentionUserSeq = mentionUserSeq;
+	}
 	public int getCommentSeq() {
 		return commentSeq;
 	}
@@ -63,6 +78,6 @@ public class CommentVO {
 	public String toString() {
 		return "CommentVO [commentSeq=" + commentSeq + ", userSeq=" + userSeq + ", boardSeq=" + boardSeq + ", parSeq="
 				+ parSeq + ", content=" + content + ", regdate=" + regdate + ", updatedate=" + updatedate + ", isanony="
-				+ isanony + "]";
+				+ isanony + ", mentionUserSeq=" + mentionUserSeq + "]";
 	}
 }

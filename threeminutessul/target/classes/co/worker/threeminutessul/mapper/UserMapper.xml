@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
+-->
+<mapper namespace="user">
+	<insert id="insertuser" parameterType="userVo">
+		insert into tbluserinfo   
+		<if test="profile!=null">
+			(userSeq,userid,userpw,nickname,profile) values (nextval('tbluserinfo_userSeq_seq'),#{userid},#{userpw},#{nickname},#{profile});
+		</if>
+		<if test="profile==null">
+			(userSeq,userid,userpw,nickname) values (nextval('tbluserinfo_userSeq_seq'),#{userid},#{userpw},#{nickname});
+		</if>
+	</insert>
+</mapper>

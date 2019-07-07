@@ -19,5 +19,10 @@ public class CommentDaoImpl implements CommentDaoIF{
 	public List<CommentVO> getComment(int boardSeq) {
 		return template.selectList("comment.commentList",boardSeq);
 	}
+
+	@Override
+	public int commentInsert(CommentVO vo) {
+		return template.insert("comment.commentInsert",vo);
+	}
 	
 }

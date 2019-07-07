@@ -16,6 +16,12 @@ public class CommentServiceImpl implements CommentServiceIF {
 
 	@Override
 	public List<CommentVO> getComment(int boardSeq) {
-		return dao.getComment(boardSeq);
+		List<CommentVO> list =dao.getComment(boardSeq);
+		return list;
+	}
+
+	@Override
+	public int commentInsert(CommentVO vo) {
+		return dao.commentInsert(vo);
 	}
 }
