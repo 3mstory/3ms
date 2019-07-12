@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.likeyhate.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import co.worker.threeminutessul.likeyhate.model.HateVO;
@@ -13,5 +14,7 @@ public interface LikeyHateDaoIF {
 	int insertLikeHate(LikeHateVO vo);
 
 	int updateLikeHate(LikeHateVO vo);
+
+	HashMap<String, Integer> getReturnlikehate(LikeHateVO vo);
 
 }

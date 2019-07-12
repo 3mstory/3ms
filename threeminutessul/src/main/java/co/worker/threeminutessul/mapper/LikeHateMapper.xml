@@ -25,7 +25,18 @@
 		update tblLikeHate set isLike = #{isLike}, isHate = #{isHate} where boardSeq =  #{boardSeq} and userSeq = #{userSeq}
 	</update>
 	
-	
+	<select id="getReturnlikehate" parameterType="likehatevo" resultType="java.util.HashMap">
+		select 
+			coalesce(sum(isLike)::integer,0) as like, 
+			coalesce(sum(isHate)::integer,0) as hate,
+			(select count(*) from tblLikeHate where userSeq = #{userSeq} and boardSeq = #{boardSeq})::integer as isMyClicked,--접속한유저가 그글에서 좋아요 싫어요를 눌렀는지 여부
+			(select case when isLike = 1 then 'clicklike' else 'clickhate' end 
+			 from tblLikeHate where userSeq = #{userSeq} and boardSeq = #{boardSeq}) as isLikeHate			
+		from tblLikeHate 
+		where boardSeq = #{boardSeq}
+		  and (isLike=1
+		  or isHate=1)
+	</select>
 	
 	
 	

@@ -13,7 +13,6 @@ public class CommentVO {
 	private int mentionUserSeq;
 	private String nickname;
 	
-	
 	public String getNickname() {
 		return nickname;
 	}

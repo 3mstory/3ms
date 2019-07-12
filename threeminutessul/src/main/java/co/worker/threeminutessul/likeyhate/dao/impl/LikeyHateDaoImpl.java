@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.likeyhate.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,6 +29,11 @@ public class LikeyHateDaoImpl implements LikeyHateDaoIF{
 	@Override
 	public int updateLikeHate(LikeHateVO vo) {
 		return template.update("likeyhate.updateLikeHate",vo);
+	}
+
+	@Override
+	public HashMap<String, Integer> getReturnlikehate(LikeHateVO vo) {
+		return template.selectOne("likeyhate.getReturnlikehate",vo);
 	}
 	
 }

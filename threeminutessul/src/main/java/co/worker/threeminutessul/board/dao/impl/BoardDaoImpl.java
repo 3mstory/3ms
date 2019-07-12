@@ -31,5 +31,10 @@ public class BoardDaoImpl implements BoardDaoIF{
 	public HashMap<String, Integer> getLikeHate(LikeHateVO vo) {
 		return template.selectOne("board.getLikeHate", vo);
 	}
+
+	@Override
+	public String getBoardContent(int paramBoardSeq) {
+		return template.selectOne("board.getBoardContent",paramBoardSeq);
+	}
 }
 

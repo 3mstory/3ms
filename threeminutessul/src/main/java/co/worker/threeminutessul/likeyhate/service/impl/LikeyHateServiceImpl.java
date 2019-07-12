@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.likeyhate.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 			vo.setIsHate(1);
 		}
 		return dao.updateLikeHate(vo);
+	}
+
+	@Override
+	public HashMap<String, Integer> getReturnlikehate(LikeHateVO vo) {
+		return dao.getReturnlikehate(vo);
 	}
 }

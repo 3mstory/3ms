@@ -14,4 +14,6 @@ public interface BoardDaoIF {
 
 	HashMap<String, Integer> getLikeHate(LikeHateVO vo);
 
+	String getBoardContent(int paramBoardSeq);
+
 }

@@ -10,4 +10,6 @@ public interface BoardServiceIF {
 
 	int insertBoard(BoardVO vo);
 
+	String getBoardContent(int paramBoardSeq);
+
 }

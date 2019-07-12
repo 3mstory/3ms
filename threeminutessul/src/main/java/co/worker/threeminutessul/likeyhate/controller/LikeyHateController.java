@@ -34,9 +34,13 @@ public class LikeyHateController {
 		}else { //해당글에 좋아요 누른적 있음 -> update
 			result = service.updateLikeHate(vo,type);
 		}
-		//HashMap<String,Integer> likehatecount = service.getReturnlikehate(vo);
+		HashMap<String,Integer> likehatecount = service.getReturnlikehate(vo);
 		JSONObject json = new JSONObject();
-		
+		json.put("like",likehatecount.get("like"));
+		json.put("hate",likehatecount.get("hate"));
+		json.put("isLikeHate",likehatecount.get("isLikeHate"));
+		json.put("isMyClicked",likehatecount.get("isMyClicked"));
+		json.put("content", likehatecount.get("content"));
 		json.put("result",result); //업데이트,인서트 결과 개수.(1개여야지 정상)
 		//
 		return json;

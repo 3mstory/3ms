@@ -7,7 +7,6 @@
 		select
 			b.boardSeq,
 			b.title,
-			b.content contents,
 			ui.userid,
 			ui.nickname,
 			ui.userSeq as writer,
@@ -42,6 +41,12 @@
 		where boardSeq = #{boardSeq}
 		  and (isLike=1
 		  or isHate=1)
+	</select>
+	
+	<select id="getBoardContent" parameterType="Integer" resultType="String">
+		select content
+		from tblBoard
+		where boardSeq = #{boardSeq}
 	</select>
 	
 </mapper>
