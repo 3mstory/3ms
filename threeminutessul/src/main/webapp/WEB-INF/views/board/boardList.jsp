@@ -93,7 +93,7 @@
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-5" data-dismiss="modal"
+							<button type="submit" class="btn btn-primary mx-auto col-5"
 								aria-label="login">로그인</button>
 						</div>
 					</div>

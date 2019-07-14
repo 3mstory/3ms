@@ -46,17 +46,60 @@ $(function () {
       cardContArea.hide(); //카드 접힌 상태 유지하기
       $(this).find('i').hide();
       spinner.addClass('on');
+      var boardSeq = card.attr('id').substr(5);
       $.ajax({
         //경로입력
-        url: 'https://jsonplaceholder.typicode.com/users',
+        url: '/threeminutessul/commentList.tmssul',
         type: 'GET',
-        data: card.attr('id').substr(4),
+        data: "boardSeq="+boardSeq,
       }).done(function (data) {
-        var content = data[0].email; //이부분 커스텀해주면 될듯!!
-        card.find('.card-contents').text(content);
-        spinner.removeClass('on'); //스피너제거
-        cardContArea.show(); //카드 펼치기
-        upBtn.show();
+    	  card.find('.card-replys').empty();
+    	  console.log(data);
+    	  if(data.toString().indexOf('<script>')>-1){
+    		  //쫒겨나야함
+			alert('로그인을 하고 진행해주시기 바랍니다.');
+			location.href='/threeminutessul/boardList.tmssul';
+    	  }else{
+			var content = data.result.boardContent; //이부분 커스텀해주면 될듯!!
+		    $("#commentCount_"+boardSeq).text(data.result[0].commentCnt); 	//댓글 ?개
+			card.find('.card-contents').text(content); 	 	//글내용(그림포함)
+		    
+			var boardContent = data.result[0].boardContent ? data.result[0].boardContent : "내용이 없습니다.";
+	    	var likecount = card.find(".likecount");
+	    	var hatecount = card.find(".hatecount");
+	    	likecount.text(data.result[0].likecount);
+	    	hatecount.text(data.result[0].hatecount);
+			
+			//댓글 리스트
+			$.each(data.result,function(index,object){
+	        	/**
+	        	 * li 태그 생성 구조(boardList 댓글부분 참조)
+	        	 */
+	        	var li = $("<li/>", {
+	        		class : 'card-reply-item my-1'
+	        	});
+	        	var button = $("<button/>",{
+	        		type: 'button',
+	        		class : 'btn btn-outline-secondary writer py-0 px-1 align-top',
+	        		text : object.nickname
+	        	});
+	        	var span = $("<span/>",{
+	        		text : object.content
+	        	});
+	        	$(li).append(button);
+	        	$(li).append(span);
+	        	card.find('.card-replys').append(li);				//댓글 리스트				
+	        });
+			
+		    /*spinner.removeClass('on'); //스피너제거
+		    cardContArea.show(); //카드 펼치기
+		    upBtn.show();*/
+			spinner.removeClass('on'); //스피너제거
+	        cardContArea.show();//카드 펼치기
+
+	        upBtn.show();
+	        downBtn.hide();
+		}
       });
     } else {
       upBtn.toggle();
@@ -66,36 +109,38 @@ $(function () {
 
   /* 좋아요,싫어요 비동기처리 */
   $('.card-btn-area').on('click', '.btn', function () {
-    var seq = parseInt($(this).parents('.card').attr('id').substr(-1));
+    var seq = parseInt($(this).parents('.card').attr('id').substr(-2));
     var btntx = $(this).children('.card-btntx');
     var type = btntx.hasClass('left') ? "like" : "hate";
     $.ajax({
       //경로입력
-      url: 'https://my-json-server.typicode.com/JaeCheolSim/JsonHolder/data',
-      // data: {
-      //   "boardSeq": seq,
-      //   "type": type
-      // }
-      success: function (data) {
-        var result = data.result[1];
-        var response = result.response;
-        if (response === "error") {
-          setTimeout(function () {
-            $('.vote-toast').toast('show');
-          }, 0);
-          return;
-        }
-        var contents = result.cardContent;
-        var likecnt = result.likecount;
-        var hatecnt = result.hatecount;
-        if (type === "like") {
-          btntx.text(likecnt);
-        } else if (type === "hate") {
-          btntx.text(hatecnt);
-        }
+      url: '/threeminutessul/likeyhateAjax.tmssul',
+      data: {
+        "boardSeq": seq,
+        "type": type
       },
-      error: function (data) {
-        console.log(data);
+      success: function (data) {
+    	  if(data.result==1){
+    		  var result = data.result[0];
+    		  var response = result.response;
+    		  var contents = result.cardContent;
+    		  var likecnt = result.likecount;
+    		  var hatecnt = result.hatecount;
+    		  btntx.text(likecnt);
+    		  btntx.text(hatecnt);    		  
+    	  }else if(data.result==-1){
+    		  var LikeOrHate = type == "like" ? "좋아요" : "싫어요";
+    		  var alertComment = "해당 글에 이미 "+LikeOrHate+"를 눌렀습니다.";
+    		  alert(alertComment);
+    	  }else{
+    		  setTimeout(function () {
+				  $('.vote-toast').toast('show');
+			  }, 0);
+			  return;
+    	  }
+      },
+      error: function (a,b,c) {
+    	  console.log(a,b,c);
       }
     });
   });

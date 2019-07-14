@@ -24,7 +24,7 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 
 	@Override
 	public int insertLikeHate(LikeHateVO vo,String type) {
-		if(type.equals("1")) { //1 좋아요, 2 싫어요.
+		if(type.equals("like")) { //1 좋아요, 2 싫어요.
 			vo.setIsLike(1);
 			vo.setIsHate(0);
 		}else {
@@ -36,7 +36,7 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 
 	@Override
 	public int updateLikeHate(LikeHateVO vo, String type) {
-		if(type.equals("1")) { //1 좋아요, 2 싫어요.
+		if(type.equals("like")) { //1 좋아요, 2 싫어요.
 			vo.setIsLike(1);
 			vo.setIsHate(0);
 		}else {

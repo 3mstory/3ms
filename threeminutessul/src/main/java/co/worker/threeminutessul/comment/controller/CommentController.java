@@ -1,5 +1,6 @@
 package co.worker.threeminutessul.comment.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.comment.medel.CommentVO;
 import co.worker.threeminutessul.comment.service.CommentServiceIF;
+import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
+import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 
 @Controller
 public class CommentController {
@@ -25,13 +28,23 @@ public class CommentController {
 	private CommentServiceIF service;
 	@Autowired
 	private BoardServiceIF boardService;
+	@Autowired
+	private LikeyHateServiceIF likehateService;
 	
 	@RequestMapping(value = "/commentList.tmssul", method = { RequestMethod.GET })
 	@ResponseBody
-	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, String boardSeq) {
-		int paramBoardSeq = Integer.parseInt(boardSeq);
-		List<CommentVO> commentList = service.getComment(paramBoardSeq);
-		String boardContent = boardService.getBoardContent(paramBoardSeq);
+	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) {
+		List<CommentVO> commentList = service.getComment(boardSeq);
+		// board 컨텐츠 가져오기
+		String boardContent = boardService.getBoardContent(boardSeq);
+		
+		LikeHateVO likehateVO = new LikeHateVO();
+		likehateVO.setBoardSeq(boardSeq);
+		likehateVO.setUserSeq(Integer.parseInt((String)session.getAttribute("userSeq")));
+		
+		//board에 달린 좋아요와 싫어요 갯수 가져오기
+		HashMap<String,Integer> rtnMap = likehateService.getReturnlikehate(likehateVO);
+		
 		JSONArray jsonArr = new JSONArray();
 		JSONObject result = new JSONObject();
 		if(commentList.size()!=0) {
@@ -47,6 +60,8 @@ public class CommentController {
 				json.put("isanony",vo.getIsanony());
 				json.put("nickname", vo.getNickname());
 				json.put("commentCnt",commentList.size());
+				json.put("likecount",rtnMap.get("like"));
+				json.put("hatecount",rtnMap.get("hate"));
 				json.put("boardContent",boardContent);
 				jsonArr.add(json);
 			}
@@ -55,6 +70,8 @@ public class CommentController {
 			JSONObject json = new JSONObject();
 			json.put("boardContent",boardContent);
 			json.put("commentCnt",commentList.size());
+			json.put("likecount",rtnMap.get("like"));
+			json.put("hatecount",rtnMap.get("hate"));
 			jsonArr.add(json);
 			result.put("result",jsonArr);
 		}
@@ -62,16 +79,22 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value = "/commentInsert.tmssul", method = { RequestMethod.GET })
-	public CommentVO commentInsert(HttpServletRequest req, HttpServletResponse resp, HttpSession session, CommentVO vo) {
+	public JSONObject commentInsert(HttpServletRequest req, HttpServletResponse resp, HttpSession session, CommentVO vo) {
 		vo.setUserSeq((Integer)session.getAttribute("userSeq"));
 		int result = service.commentInsert(vo);
+		JSONObject json = new JSONObject();
 		if(result==1) {
 			//성공
-			return vo;
+			json.put("content",vo.getContent());//댓글 넣은거.
+			json.put("nickname",(String)session.getAttribute("userid"));
+			//json.put("",);
+			//json.put("",);
+			json.put("response", true);
 		}else {
 			//실패
 			//NewPageAction
-			return null;
+			json.put("response", false);	
 		}
+		return json;
 	}
 }

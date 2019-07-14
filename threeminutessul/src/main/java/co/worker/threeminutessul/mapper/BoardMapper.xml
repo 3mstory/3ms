@@ -15,8 +15,6 @@
 				else updatedate 
 			end as regdate,
 			ui.profile,
-			b.likey,
-			b.hate,
 			b.isanony
 		from tblBoard b
 			inner join tblUserInfo ui on b.writer = ui.userSeq
