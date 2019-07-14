@@ -22,6 +22,7 @@ import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.FileBean;
+import co.worker.threeminutessul.util.NewPageAction;
 import co.worker.threeminutessul.util.fileupload.FileUploadUtil;
 
 @Controller
@@ -138,7 +139,13 @@ public class BoardController {
 		vo.setIsanony(0);
 		
 		int result = service.insertBoard(vo);
-		System.out.println(result);
+		String actionCode = "";
+		if(result==1) {//글 등록 성공
+			actionCode="alert('글을 동록했습니다.'); location.href='/threeminutessul/boardList.tmssul'";
+		}else {//글 등록 실패
+			actionCode="alert('글을 등록하는데 에러가 발생'); history.back();";
+		}
+		NewPageAction.action(resp, actionCode);
 	}
 	
 }
