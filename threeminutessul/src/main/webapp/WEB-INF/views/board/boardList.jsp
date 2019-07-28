@@ -7,7 +7,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui" />
 	<title>3분썰 - 익명 썰 게시판</title>
 	<link rel="stylesheet" href="resources/css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -25,8 +26,6 @@
 	type="image/x-icon">
 <link rel="icon" href="resources/favicon.gif" type="image/x-icon">
 </head>
-
-
 <!-- 임시 회원가입 모달 -->
 <div class="modal fade" id="join_form" tabindex="-1" role="dialog" aria-labelledby="join_form" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -110,7 +109,7 @@
 	</div>
 </div>
 
-<body style="height:100vh; background-color: #E9EBEE">
+<body style="background-color: #E9EBEE; height:100%; overflow-x:hidden!important;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
 		<div class="container flex-sm-column">
 			<a class="navbar-brand mx-auto p-0 font-header" href="#"><span class="font-color-main">3</span>분썰</a>
@@ -132,12 +131,14 @@
 				</ul>
 			</div>
 		</div>
+
 	</nav>
 	<div class="nvbar-hr"></div>
-	<div class="container-fluid smooth-scroll" id="cont">
+	<!--본문-->
+	<div class="container-fluid" id="cont">
 		<div class="accordion" id="brd-acdn">
 			<c:forEach items="${list}" var="vo">
-				<div class="card my-3" id="card_${vo.boardSeq}">
+				<div class="card" id="card_${vo.boardSeq}">
 					<div class="card-header">
 						<div class="row">
 							<img class="rounded-circle px-2"
@@ -211,21 +212,144 @@
 
 	<!-- Floating Action Button-->
 	<div class="zoom">
-		<a href="/board_write.html" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i
-			class="fas fa-pencil-alt"></i></a>
-		<!--<ul class="zoom-menu">
-			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">s</a></li>
-			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">d</a></li>
-			<li><a href="" class="zoom-fab zoom-btn-sm scale-transition scale-out mb-2">f</a></li>
-		</ul>
-		-->
+		<a href="/board_write.html" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i class="fas fa-pencil-alt"></i></a>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="resources/js/common.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="./js/jsrender.js"></script>
+	<script src="js/common.js"></script>
+	<script id="cardTemplate" type="text/x-jsrender">
+		<div class="card" id="card_{{:boardSeq}}">
+				<div class="card-header">
+					<div class="row">
+							<img class="rounded-circle px-2"
+							src="resources/files/{{:userid}}/{{:profile}}" width="50px"
+							height="50px" onerror="this.src='resources/files/default.PNG'">
+						<div class="col d-flex flex-column justify-content-center">
+							<div class="row d-block font-tit">{{:writer}}</div>
+							<div class="row d-block text-secondary card-info-sub">{{:regdate}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="font-weight-bold text-truncate">
+							{{:title}}
+					</div>
+					<div class="collapse card-text card-collapse" data-parent="#brd-acdn">
+						<p class="card-contents mb-4">
+						</p>
+						<div class="row card-btn-area justify-content-center">
+							<div class="btn btn-outline-dark mx-4 d-flex flex-column justify-content-center">
+								<i class="d-block far fa-grin-squint-tears fa-2x">
+										<input type="hidden" id="hdboardSeq" value="{{:boardSeq}}" />
+										<input type="hidden" id="hdtype_{{:boardSeq}}" value="1" />
+								</i>
+								<p class="card-btntx left likecount">5,000</p>
+							</div>
+							<div class="btn btn-outline-dark mx-4 p-2 d-flex flex-column justify-content-center">
+								<i class="far fa-trash-alt fa-2x">
+										<input type="hidden" id="hdboardSeq" value="{{:boardSeq}}" />
+										<input type="hidden" id="hdtype_{{:boardSeq}}" value="2" />
+								</i>
+								<p class="card-btntx right hatecount">1,200</p>
+							</div>
+						</div>
+
+						<div class="card-reply-area">
+							<div class="card-reply-header mt-4">
+									<span class="reply-tit text-dark font-weight-bolder">
+										댓글&nbsp;<span id="commentCount_{{:boardSeq}}" class="reply-cnt font-color-main"></span>개
+									</span>
+							</div>
+							<div class="card-reply-body">
+								<ul id="commentList_{{:boardSeq}}" class="card-replys">
+									<li class="card-reply-item my-1">
+										<button type="button"
+											class="btn btn-outline-secondary writer py-0 px-1 align-top">비동기닉네임</button>
+										<span>이곳 댓글 내용은 비동기처리되어있습니다. 서버에서 동적으로 생성해준 댓글 컨텐츠입니다.</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input-group card-reply-input mt-3">
+							<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
+							<span class="card-reply-mention"></span>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon{{:boardSeq}}"><i
+										class="far fa-paper-plane"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="card-btn btn w-100 collapsed" data-toggle="collapse"
+					data-target="#card_{{:boardSeq}} .card-collapse">
+					<i class="fas fa-chevron-down"></i>
+					<i class="fas fa-chevron-up"></i>
+					<div class="d-flex justify-content-center">
+						<div class="spinner-border text-primary" style="display:none" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+				</button>
+			</div>
+	</script>
+	<script type="text/javascript">
+		function makeSpinner(options) {
+			var spinOpts = {
+				class: "spinner-border text-primary",
+				role: "status",
+			};
+			Object.assign(spinOpts, options);
+			var wrapper = $('<div/>', { style: "text-align:center" })
+			var spinner = $('<div/>', spinOpts);
+			var spinner_inner = $('<span/>', {
+				class: 'sr-only',
+				text: '로딩중..'
+			})
+			spinner.append(spinner_inner);
+			wrapper.append(spinner);
+			return wrapper;
+		}
+		function showSpinner(spinwrap) {
+			spinwrap.children().addClass('on');
+			spinwrap.appendTo('.accordion');
+		}
+		function hideSpinner(spinwrap) {
+			spinwrap.children().removeClass('on');
+			spinwrap = spinwrap.detach();
+		}
+		//직접 만든 인피니티 스크롤 라이브러리
+		(function () {
+			var spinWrap = makeSpinner();
+			var isExecuted = false;
+			$(window).scroll(function () {
+				var top = window.scrollY;
+				var docH = document.body.offsetHeight;
+				var winH = window.innerHeight;
+
+				if (top >= docH - winH && !isExecuted) {
+					isExecuted = true;
+					var tmpl = $.templates("#cardTemplate");
+					showSpinner(spinWrap);
+					$.ajax({
+						url: 'https://my-json-server.typicode.com/JaeCheolSim/JsonHolder/page1',
+						success: function (data) {
+							var html = tmpl.render(data);
+							$(html).appendTo('.accordion');
+							hideSpinner(spinWrap);
+							isExecuted = false;
+						},
+						error: function (data) {
+							console.log(data);
+						}
+					})
+				}
+			});
+		})();
+
+
+	</script>
 </body>
 
 </html>

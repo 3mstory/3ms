@@ -7,15 +7,6 @@ $(function () {
     $('#card_write').attr('rows', breaks + 2);
   });
 
-  $('.card-collapse').on('shown.bs.collapse',function(){
-    var topoffset = $('.navbar').outerHeight();
-    var target = $(this).parents('.card');
-    var tgmargin = target.css('margin-top').substr(-2,0);
-    $('html, body').animate({
-      scrollTop: target.offset().top - topoffset - tgmargin
-    },0);
-  });
-
   $(".custom-file-input").on("change", function () {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -39,13 +30,13 @@ $(function () {
     var card = $(this).closest('.card');
     var cardCont = card.find('.card-contents').text();
     var cardContArea = card.find('.card-collapse');
-    var spinner = $(this).find('.spinner-border');
-    var upBtn = $(this).find('.fa-chevron-up');
-    var downBtn = $(this).find('.fa-chevron-down');
+    var spinner = card.find('.spinner-border');
+    var upBtn = card.find('.fa-chevron-up');
+    var downBtn = card.find('.fa-chevron-down');
     if (cardCont.trim().length == 0) { //한번도 클릭한적 없다면
       cardContArea.hide(); //카드 접힌 상태 유지하기
       $(this).find('i').hide();
-      spinner.addClass('on');
+      spinner.show();
       var boardSeq = card.attr('id').substr(5);
       $.ajax({
         //경로입력
@@ -91,14 +82,11 @@ $(function () {
 	        	card.find('.card-replys').append(li);				//댓글 리스트				
 	        });
 			
-		    /*spinner.removeClass('on'); //스피너제거
-		    cardContArea.show(); //카드 펼치기
-		    upBtn.show();*/
-			spinner.removeClass('on'); //스피너제거
+
+					spinner.hide(); //스피너제거
 	        cardContArea.show();//카드 펼치기
 
 	        upBtn.show();
-	        downBtn.hide();
 		}
       });
     } else {
@@ -126,17 +114,16 @@ $(function () {
     		  var contents = result.cardContent;
     		  var likecnt = result.likecount;
     		  var hatecnt = result.hatecount;
-    		  btntx.text(likecnt);
-    		  btntx.text(hatecnt);    		  
+        if (type === "like") {
+          btntx.text(likecnt);
+        } else if (type === "hate") {
+          btntx.text(hatecnt);
+				}   		  
+
     	  }else if(data.result==-1){
-    		  var LikeOrHate = type == "like" ? "좋아요" : "싫어요";
-    		  var alertComment = "해당 글에 이미 "+LikeOrHate+"를 눌렀습니다.";
-    		  alert(alertComment);
-    	  }else{
     		  setTimeout(function () {
-				  $('.vote-toast').toast('show');
-			  }, 0);
-			  return;
+				  	$('.vote-toast').toast('show'); 
+					}, 0);
     	  }
       },
       error: function (a,b,c) {
