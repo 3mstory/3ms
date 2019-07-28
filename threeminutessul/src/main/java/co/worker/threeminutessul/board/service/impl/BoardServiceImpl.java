@@ -17,8 +17,8 @@ public class BoardServiceImpl implements BoardServiceIF{
 	private BoardDaoIF dao;
 
 	@Override
-	public List<BoardVO> getBoard(String userSeq) {
-		List<BoardVO> list = dao.getBoard();
+	public List<BoardVO> getBoard(String userSeq,int page) {
+		List<BoardVO> list = dao.getBoard(page);
 		LikeHateVO vo = new LikeHateVO();
 		userSeq =  String.valueOf(userSeq==null ? 0 : userSeq);
 		vo.setUserSeq(Integer.parseInt(userSeq));		

@@ -18,8 +18,8 @@ public class BoardDaoImpl implements BoardDaoIF{
 	private SqlSessionTemplate template;
 
 	@Override
-	public List<BoardVO> getBoard() {
-		return template.selectList("board.boardList");
+	public List<BoardVO> getBoard(int page) {
+		return template.selectList("board.boardList",page);
 	}
 
 	@Override

@@ -28,13 +28,12 @@ $(function () {
   /* 카드 컨텐츠 불러오기 예시 */
   $('.card-btn').click(function () {
     var card = $(this).closest('.card');
-    var cardCont = card.find('.card-contents').text();
+    var cardCont = card.find('.card-contents');
     var cardContArea = card.find('.card-collapse');
     var spinner = card.find('.spinner-border');
     var upBtn = card.find('.fa-chevron-up');
     var downBtn = card.find('.fa-chevron-down');
-    if (cardCont.trim().length == 0) { //한번도 클릭한적 없다면
-      cardContArea.hide(); //카드 접힌 상태 유지하기
+    if (!cardCont.text().trim().length && !$(cardCont).children().length) { //한번도 클릭한적 없다면
       $(this).find('i').hide();
       spinner.show();
       var boardSeq = card.attr('id').substr(5);
@@ -44,47 +43,46 @@ $(function () {
         type: 'GET',
         data: "boardSeq="+boardSeq,
       }).done(function (data) {
-    	  card.find('.card-replys').empty();
-    	  console.log(data);
+    	  //card.find('.card-replys').empty();
     	  if(data.toString().indexOf('<script>')>-1){
     		  //쫒겨나야함
 			alert('로그인을 하고 진행해주시기 바랍니다.');
 			location.href='/threeminutessul/boardList.tmssul';
     	  }else{
-			var content = data.result.boardContent; //이부분 커스텀해주면 될듯!!
+			var content = data.result[0].boardContent; //이부분 커스텀해주면 될듯!!
 		    $("#commentCount_"+boardSeq).text(data.result[0].commentCnt); 	//댓글 ?개
-			card.find('.card-contents').text(content); 	 	//글내용(그림포함)
-		    
-			var boardContent = data.result[0].boardContent ? data.result[0].boardContent : "내용이 없습니다.";
+			var boardContent = content ? content : "내용이 없습니다.";
 	    	var likecount = card.find(".likecount");
 	    	var hatecount = card.find(".hatecount");
 	    	likecount.text(data.result[0].likecount);
 	    	hatecount.text(data.result[0].hatecount);
-			
+	    	$(cardCont).append(content);
 			//댓글 리스트
 			$.each(data.result,function(index,object){
-	        	/**
-	        	 * li 태그 생성 구조(boardList 댓글부분 참조)
-	        	 */
-	        	var li = $("<li/>", {
-	        		class : 'card-reply-item my-1'
-	        	});
-	        	var button = $("<button/>",{
-	        		type: 'button',
-	        		class : 'btn btn-outline-secondary writer py-0 px-1 align-top',
-	        		text : object.nickname
-	        	});
-	        	var span = $("<span/>",{
-	        		text : object.content
-	        	});
-	        	$(li).append(button);
-	        	$(li).append(span);
-	        	card.find('.card-replys').append(li);				//댓글 리스트				
+				if(object.commentCnt !=0){
+					/**
+		        	 * li 태그 생성 구조(boardList 댓글부분 참조)
+		        	 */
+		        	var li = $("<li/>", {
+		        		class : 'card-reply-item my-1'
+		        	});
+		        	var button = $("<button/>",{
+		        		type: 'button',
+		        		class : 'btn btn-outline-secondary writer py-0 px-1 align-top',
+		        		text : object.nickname
+		        	});
+		        	var span = $("<span/>",{
+		        		text : object.content
+		        	});
+		        	$(li).append(button);
+		        	$(li).append(span);
+		        	card.find('.card-replys').append(li);				//댓글 리스트
+				}
 	        });
 			
 
-					spinner.hide(); //스피너제거
-	        cardContArea.show();//카드 펼치기
+			spinner.hide(); //스피너제거
+	        //cardContArea.show();//카드 펼치기
 
 	        upBtn.show();
 		}
@@ -108,12 +106,13 @@ $(function () {
         "type": type
       },
       success: function (data) {
+    	  
     	  if(data.result==1){
-    		  var result = data.result[0];
-    		  var response = result.response;
-    		  var contents = result.cardContent;
-    		  var likecnt = result.likecount;
-    		  var hatecnt = result.hatecount;
+    		  //var result = data.result[0];
+    		  //var response = result.response;
+    		  //var contents = result.cardContent;
+    		  var likecnt = data.likecount;
+    		  var hatecnt = data.hatecount;
         if (type === "like") {
           btntx.text(likecnt);
         } else if (type === "hate") {

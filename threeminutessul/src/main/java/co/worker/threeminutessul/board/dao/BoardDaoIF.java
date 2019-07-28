@@ -8,7 +8,7 @@ import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 public interface BoardDaoIF {
 
-	List<BoardVO> getBoard();
+	List<BoardVO> getBoard(int page);
 
 	int insertBoard(BoardVO vo);
 

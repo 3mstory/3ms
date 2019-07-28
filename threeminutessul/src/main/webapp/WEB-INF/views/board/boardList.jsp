@@ -33,41 +33,41 @@
 			<div class="modal-header p-4">
 				<h4 class="mx-auto font-tit font-weight-bold">회원가입</h4>
 			</div>
-			<div class="modal-body px-4 py-0">
-				<form>
-					<div class="form-group">
-						<input type="text" class="form-control" id="id123" aria-describedby="아이디" placeholder="id">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="password1" placeholder="password">
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임">
-					</div>
-					<div class="form-group">
-						<div class="custom-file" id="customFile">
-							<input type="file" accept="image/*" class="custom-file-input" id="join-file-input"
-								aria-describedby="ProfileUpload">
-							<label class="custom-file-label text-secondary" for="exampleInputFile">
-								프로필 사진
-							</label>
+			<form action="/threeminutessul/userjoin.tmssul" method="POST" encType="multipart/form-data">
+				<div class="modal-body px-4 py-0">
+						<div class="form-group">
+							<input type="text" class="form-control" id="id123" aria-describedby="아이디" placeholder="id" name="userid" required>
 						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-6">
-							<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
-								data-toggle="modal" data-target="#login_form">로그인</button>
+						<div class="form-group">
+							<input type="password" class="form-control" id="password1" placeholder="password" name="userpw" required>
 						</div>
-						<div class="col-6">
-							<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
+						<div class="form-group">
+							<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임" name="nickname" required>
+						</div>
+						<div class="form-group">
+							<div class="custom-file" id="customFile">
+								<input type="file" accept="image/*" class="custom-file-input" id="join-file-input" name="input_file" required
+									aria-describedby="ProfileUpload">
+								<label class="custom-file-label text-secondary" for="exampleInputFile" required>
+									프로필 사진
+								</label>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-6">
+								<button type="button" class="btn btn-outline-secondary mx-auto col-12 mb-4" data-dismiss="modal"
+									data-toggle="modal" data-target="#login_form">로그인</button>
+							</div>
+							<div class="col-6">
+								<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -81,11 +81,11 @@
 			<div class="modal-body px-4 py-0">
 				<form action="/threeminutessul/loginok.tmssul" method="POST">
 					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="userid" name="userid"
+						<input type="text" class="form-control" id="userid" name="userid" required
 							aria-describedby="아이디" placeholder="id">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control " id="userpw"
+						<input type="password" class="form-control " id="userpw" required
 							name="userpw" placeholder="password">
 					</div>
 					<div class="container my-4">
@@ -197,11 +197,12 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="card-btn btn w-100 collapsed">
+					<button type="button" class="card-btn btn w-100 collapsed" data-toggle="collapse"
+					data-target="#card_${vo.boardSeq} .card-collapse">
 						<i class="fas fa-chevron-down"></i> <i class="fas fa-chevron-up"></i>
 						<div class="d-flex justify-content-center">
-							<div class="spinner-border text-primary" role="status">
-								<span class="sr-only">로딩...</span>
+							<div class="spinner-border text-primary" style="display: none;" role="status">
+								<span class="sr-only">Loading...</span>
 							</div>
 						</div>
 					</button>
@@ -212,13 +213,13 @@
 
 	<!-- Floating Action Button-->
 	<div class="zoom">
-		<a href="/board_write.html" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i class="fas fa-pencil-alt"></i></a>
+		<a href="/threeminutessul/boardAdd.tmssul" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i class="fas fa-pencil-alt"></i></a>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="./js/jsrender.js"></script>
-	<script src="js/common.js"></script>
+	<script src="/threeminutessul/resources/js/jsrender.js"></script>
+	<script src="/threeminutessul/resources/js/common.js"></script>
 	<script id="cardTemplate" type="text/x-jsrender">
 		<div class="card" id="card_{{:boardSeq}}">
 				<div class="card-header">
@@ -266,8 +267,8 @@
 								<ul id="commentList_{{:boardSeq}}" class="card-replys">
 									<li class="card-reply-item my-1">
 										<button type="button"
-											class="btn btn-outline-secondary writer py-0 px-1 align-top">비동기닉네임</button>
-										<span>이곳 댓글 내용은 비동기처리되어있습니다. 서버에서 동적으로 생성해준 댓글 컨텐츠입니다.</span>
+											class="btn btn-outline-secondary writer py-0 px-1 align-top">{{:nickname}}</button>
+										<span>{{:content}}</span>
 									</li>
 								</ul>
 							</div>
@@ -321,6 +322,7 @@
 		}
 		//직접 만든 인피니티 스크롤 라이브러리
 		(function () {
+			var pagecount = 2;
 			var spinWrap = makeSpinner();
 			var isExecuted = false;
 			$(window).scroll(function () {
@@ -333,12 +335,19 @@
 					var tmpl = $.templates("#cardTemplate");
 					showSpinner(spinWrap);
 					$.ajax({
-						url: 'https://my-json-server.typicode.com/JaeCheolSim/JsonHolder/page1',
+						url: '/threeminutessul/ajaxboardList.tmssul',
+						dataType:'json',
+						data:'page='+pagecount,
 						success: function (data) {
-							var html = tmpl.render(data);
-							$(html).appendTo('.accordion');
-							hideSpinner(spinWrap);
-							isExecuted = false;
+							if(data.length!=0){
+								var html = tmpl.render(data);
+								$(html).appendTo('.accordion');
+								hideSpinner(spinWrap);
+								isExecuted = false;
+								pagecount++;
+							}else{
+								hideSpinner(spinWrap);
+							}
 						},
 						error: function (data) {
 							console.log(data);

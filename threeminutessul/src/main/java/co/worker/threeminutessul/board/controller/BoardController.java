@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +36,24 @@ public class BoardController {
 	private LikeyHateServiceIF likehateservice;
 	
 	@RequestMapping(value = "/boardList.tmssul", method = { RequestMethod.GET })
-	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Integer page) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
+		if(page==null) page = 1;
 		String userSeq = (String)session.getAttribute("userSeq");
-		list = service.getBoard(userSeq);
+		list = service.getBoard(userSeq,page);
+		JSONArray jsonArr = new JSONArray();
+		for(BoardVO vo : list) {
+			JSONObject json = new JSONObject();
+			json.put("userid", vo.getUserid());
+			json.put("profile", vo.getProfile());
+			json.put("writer",vo.getNickname());
+			json.put("regdate",vo.getRegdate());
+			json.put("title",vo.getTitle());
+			json.put("boardSeq",vo.getBoardSeq());
+			jsonArr.add(json);
+		}
 		if(session.getAttribute("userid")==null) { // 그냥 글 제목만 둘러볼 사람들
+			
 			
 		}else {
 			//로그인 했으면 그 유저가 어떤글에 좋아요를 눌렀는지 표기해놔야함.
@@ -48,6 +62,28 @@ public class BoardController {
 		req.setAttribute("list",list);
 		return "board/boardList";
 	}
+	
+	@RequestMapping(value = "/ajaxboardList.tmssul", method = { RequestMethod.GET })
+	@ResponseBody
+	public JSONArray ajaxboardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,int page) {
+		List<BoardVO> list = new ArrayList<BoardVO>();
+		String userSeq = (String)session.getAttribute("userSeq");
+		list = service.getBoard(userSeq,page);
+		JSONArray jsonArr = new JSONArray();
+		for(BoardVO vo : list) {
+			JSONObject json = new JSONObject();
+			json.put("userid", vo.getUserid());
+			json.put("profile", vo.getProfile());
+			json.put("writer",vo.getNickname());
+			json.put("regdate",vo.getRegdate());
+			json.put("title",vo.getTitle());
+			json.put("boardSeq",vo.getBoardSeq());
+			jsonArr.add(json);
+		}
+		
+		return jsonArr;
+	}
+	
 	
 	@RequestMapping(value = "/boardAdd.tmssul", method = { RequestMethod.GET })
 	public String boardAdd(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws IOException {
