@@ -1,15 +1,21 @@
 /* reset css*/
+
 body {
   font-family: 'Nanum Gothic';
   background-color: #E9EBEE;
 }
+
 
 body::-webkit-scrollbar {
   display: none;
 }
 
 #cont {
-  min-height: 100vh;
+  height: auto;
+}
+
+.ck-content {
+  height: 50vh !important;
 }
 
 p,
@@ -53,6 +59,10 @@ li {
   font-size: 1rem;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.accordion {
+  position: relative;
 }
 
 .navbar-brand {
@@ -270,12 +280,8 @@ li {
 }
 
 /*spinner*/
-.spinner-border {
-  display: none !important;
-}
-
 .spinner-border.on {
-  display: block !important;
+  display: inline-block !important;
 }
 
 /* toast */
