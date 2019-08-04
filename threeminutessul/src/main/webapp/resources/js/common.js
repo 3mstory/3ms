@@ -18,19 +18,6 @@ $(function() {
       .html(fileName);
   });
 
-  $(".card-reply-item").on("click", "button", function() {
-    var cardClpse = $(this).closest(".card-collapse");
-    var replyMention = cardClpse.find(".card-reply-mention");
-    var replyInput = cardClpse.find(".card-reply-input input");
-    replyMention.text("@" + $(this).text());
-    var mentionSize = replyMention.outerWidth();
-    var inpXpad = replyInput.css("padding-right").substr(0, 2);
-    var totalPadLft = Number(inpXpad) + mentionSize;
-
-    replyInput.removeAttr("placeholder");
-    replyInput.css("padding-left", totalPadLft + "px");
-  });
-
   /* 카드 컨텐츠 불러오기 예시 */
   $(".card-btn").click(function() {
     var card = $(this).closest(".card");
@@ -140,20 +127,6 @@ $(function() {
         console.log(a, b, c);
       }
     });
-  });
-
-  /* 댓글 언급 기능 */
-  $(".card-replys").on("click", "button", function() {
-    var cardClpse = $(this).closest(".card-collapse");
-    var replyMention = cardClpse.find(".card-reply-mention");
-    var replyInput = cardClpse.find(".card-reply-input input");
-    replyMention.text("@" + $(this).text());
-    var mentionSize = replyMention.outerWidth();
-    var inpXpad = replyInput.css("padding-right").substr(0, 2);
-    var totalPadLft = Number(inpXpad) + mentionSize;
-
-    replyInput.removeAttr("placeholder");
-    replyInput.css("padding-left", totalPadLft + "px");
   });
 
   /* 댓글 비동기 입력 처리*/

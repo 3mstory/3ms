@@ -1,10 +1,9 @@
 /* reset css*/
 
 body {
-  font-family: 'Nanum Gothic';
-  background-color: #E9EBEE;
+  font-family: "Nanum Gothic";
+  background-color: #e9ebee;
 }
-
 
 body::-webkit-scrollbar {
   display: none;
@@ -38,14 +37,14 @@ li {
 
 /*button*/
 .btn-primary {
-  background-color: #FFF !important;
-  border: 1px solid #FC8A15 !important;
-  color: #FC8A15 !important;
+  background-color: #fff !important;
+  border: 1px solid #fc8a15 !important;
+  color: #fc8a15 !important;
 }
 
 .btn-primary:hover {
-  background-color: #FC8A15 !important;
-  color: #FFF !important;
+  background-color: #fc8a15 !important;
+  color: #fff !important;
 }
 
 .btn:focus,
@@ -87,7 +86,7 @@ li {
 
 /*font*/
 .font-tit {
-  font-family: 'Sunflower', sans-serif;
+  font-family: "Sunflower", sans-serif;
 }
 
 .font-sm {
@@ -95,11 +94,11 @@ li {
 }
 
 .font-header {
-  font-family: 'Gugi', cursive;
+  font-family: "Gugi", cursive;
 }
 
 .font-color-main {
-  color: #FC8A15;
+  color: #fc8a15;
 }
 
 /*card*/
@@ -110,7 +109,7 @@ li {
 .card .image img {
   display: block;
   box-sizing: border-box;
-  width: 100%
+  width: 100%;
 }
 
 .card-body {
@@ -136,13 +135,27 @@ li {
 }
 
 .card-reply-mention {
+  display: none;
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
   font-size: 0.5rem;
-  color: grey;
+  color: #b6b6b6;
   z-index: 999;
+  padding: 2px 5px 2px 7px;
+  background: #e8e8e8;
+  border-radius: 8px;
+}
+
+.card-reply-mention:after {
+  content: "x";
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 11px;
+  margin-left: 2px;
+  color: #;
 }
 
 .card-reply-input input {
@@ -176,7 +189,7 @@ li {
 
 .zoom-fab:hover {
   background-color: #4db6ac;
-  color: #fff
+  color: #fff;
 }
 
 .zoom-fab {
@@ -187,24 +200,26 @@ li {
   vertical-align: middle;
   text-align: center;
   transition: 0.2s ease-out;
-  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14), 1px 1px 5px 0 rgba(0, 0, 0, 0.12), 3px 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14),
+    1px 1px 5px 0 rgba(0, 0, 0, 0.12), 3px 3px 1px -2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   color: #fff;
-  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14), 1px 1px 5px 0 rgba(0, 0, 0, 0.12), 3px 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14),
+    1px 1px 5px 0 rgba(0, 0, 0, 0.12), 3px 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .zoom-fab i {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .zoom-menu {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -100%)
+  transform: translate(-50%, -100%);
 }
 
 .zoom-btn-large {
@@ -272,7 +287,7 @@ li {
   overflow: hidden !important;
 }
 
-.custom-file-input~.custom-file-label::after {
+.custom-file-input ~ .custom-file-label::after {
   display: none;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -301,7 +316,7 @@ li {
 }
 
 .vote-toast .toast-body {
-  padding: .35rem
+  padding: 0.35rem;
 }
 
 .toast.fade {

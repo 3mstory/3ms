@@ -298,6 +298,27 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="./js/jsrender.js"></script>
 	<script src="./js/common.js"></script>
+	<script type="text/javascript">
+
+		/* 댓글 언급 기능 */
+		$(".card-replys").on('click', 'button', function () {
+			var cardClpse = $(this).closest('.card-collapse');
+			var replyMention = cardClpse.find('.card-reply-mention');
+			var replyInput = cardClpse.find('.card-reply-input input');
+			replyMention.text('@' + $(this).text());
+			var mentionSize = replyMention.outerWidth();
+			var inpXpad = replyInput.css('padding-right').substr(0, 2);
+			var totalPadLft = Number(inpXpad) + mentionSize;
+			replyMention.show();
+			replyInput.removeAttr('placeholder');
+			replyInput.css('padding-left', totalPadLft + 'px');
+		});
+		$('.card-reply-mention').on('click', function (e) {
+			var mention = $(this).toggle();
+			var input = mention.siblings('input');
+			input.css('padding-left', input.css('padding-right'));
+		})
+	</script>
 </body>
 
 </html>
