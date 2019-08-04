@@ -110,7 +110,7 @@ $(function() {
           //var result = data.result[0];
           //var response = result.response;
           //var contents = result.cardContent;
-        	debugger;
+          debugger;
           var likecnt = data.likecount;
           var hatecnt = data.hatecount;
           if (type === "like") {
@@ -169,61 +169,9 @@ $(function() {
     });
   });
 
-  /* 토스트 */
-  function makeToast(content) {
-    var tst = $(".toast");
-    if (tst.length > 0) {
-      showToast(tst, content);
-      return;
-    }
-    var data = {
-      content: content
-    };
-    var tmpl = $.templates("#toastTemplate");
-    tst = tmpl.render(data);
-    $(tst).appendTo("body");
-    showToast($(".toast"), content);
-  }
-
-  function showToast(tst, content) {
-    tst.find(".toast-body").text(content);
-    setTimeout(function() {
-      tst.toast("show");
-    }, 0);
-  }
-
-  /* 스피너 */
-  function makeSpinner(options) {
-    var spinOpts = {
-      class: "spinner-border text-primary",
-      role: "status"
-    };
-    Object.assign(spinOpts, options);
-    var wrapper = $("<div/>", {
-      style: "text-align:center"
-    });
-    var spinner = $("<div/>", spinOpts);
-    var spinner_inner = $("<span/>", {
-      class: "sr-only",
-      text: "로딩중.."
-    });
-    spinner.append(spinner_inner);
-    wrapper.append(spinner);
-    return wrapper;
-  }
-
-  function showSpinner(spinwrap) {
-    spinwrap.children().addClass("on");
-    spinwrap.appendTo(".accordion");
-  }
-
-  function hideSpinner(spinwrap) {
-    spinwrap.children().removeClass("on");
-    spinwrap = spinwrap.detach();
-  }
   //직접 만든 인피니티 스크롤 라이브러리
   (function() {
-	var pagecount = 2;
+    var pagecount = 2;
     var spinWrap = makeSpinner();
     var isExecuted = false;
     $(window).scroll(function() {
@@ -236,20 +184,20 @@ $(function() {
         var tmpl = $.templates("#cardTemplate");
         showSpinner(spinWrap);
         $.ajax({
-        	url: '/threeminutessul/ajaxboardList.tmssul',
-			dataType:'json',
-			data:'page='+pagecount,
-			success: function (data) {
-				if(data.length!=0){
-					var html = tmpl.render(data);
-					$(html).appendTo('.accordion');
-					hideSpinner(spinWrap);
-					isExecuted = false;
-					pagecount++;
-				}else{
-					hideSpinner(spinWrap);
-				}
-			},
+          url: "/threeminutessul/ajaxboardList.tmssul",
+          dataType: "json",
+          data: "page=" + pagecount,
+          success: function(data) {
+            if (data.length != 0) {
+              var html = tmpl.render(data);
+              $(html).appendTo(".accordion");
+              hideSpinner(spinWrap);
+              isExecuted = false;
+              pagecount++;
+            } else {
+              hideSpinner(spinWrap);
+            }
+          },
           error: function(data) {
             console.log(data);
           }
@@ -258,3 +206,56 @@ $(function() {
     });
   })();
 });
+
+/* 토스트 */
+function makeToast(content) {
+  var tst = $(".toast");
+  if (tst.length > 0) {
+    showToast(tst, content);
+    return;
+  }
+  var data = {
+    content: content
+  };
+  var tmpl = $.templates("#toastTemplate");
+  tst = tmpl.render(data);
+  $(tst).appendTo("body");
+  showToast($(".toast"), content);
+}
+
+function showToast(tst, content) {
+  tst.find(".toast-body").text(content);
+  setTimeout(function() {
+    tst.toast("show");
+  }, 0);
+}
+
+/* 스피너 */
+function makeSpinner(options) {
+  var spinOpts = {
+    class: "spinner-border text-primary",
+    role: "status"
+  };
+  Object.assign(spinOpts, options);
+  var wrapper = $("<div/>", {
+    style: "text-align:center"
+  });
+  var spinner = $("<div/>", spinOpts);
+  var spinner_inner = $("<span/>", {
+    class: "sr-only",
+    text: "로딩중.."
+  });
+  spinner.append(spinner_inner);
+  wrapper.append(spinner);
+  return wrapper;
+}
+
+function showSpinner(spinwrap) {
+  spinwrap.children().addClass("on");
+  spinwrap.appendTo(".accordion");
+}
+
+function hideSpinner(spinwrap) {
+  spinwrap.children().removeClass("on");
+  spinwrap = spinwrap.detach();
+}
