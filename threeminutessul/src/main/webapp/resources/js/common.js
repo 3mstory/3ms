@@ -221,6 +221,7 @@ $(function() {
   }
   //직접 만든 인피니티 스크롤 라이브러리
   (function() {
+	var pagecount = 2;
     var spinWrap = makeSpinner();
     var isExecuted = false;
     $(window).scroll(function() {
@@ -233,14 +234,20 @@ $(function() {
         var tmpl = $.templates("#cardTemplate");
         showSpinner(spinWrap);
         $.ajax({
-          url:
-            "https://my-json-server.typicode.com/JaeCheolSim/JsonHolder/page1",
-          success: function(data) {
-            var html = tmpl.render(data);
-            $(html).appendTo(".accordion");
-            hideSpinner(spinWrap);
-            isExecuted = false;
-          },
+        	url: '/threeminutessul/ajaxboardList.tmssul',
+			dataType:'json',
+			data:'page='+pagecount,
+			success: function (data) {
+				if(data.length!=0){
+					var html = tmpl.render(data);
+					$(html).appendTo('.accordion');
+					hideSpinner(spinWrap);
+					isExecuted = false;
+					pagecount++;
+				}else{
+					hideSpinner(spinWrap);
+				}
+			},
           error: function(data) {
             console.log(data);
           }

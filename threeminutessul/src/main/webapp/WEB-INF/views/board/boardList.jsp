@@ -296,8 +296,8 @@
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="./js/jsrender.js"></script>
-	<script src="./js/common.js"></script>
+	<script src="resources/js/jsrender.js"></script>
+	<script src="resources/js/common.js"></script>
 	<script type="text/javascript">
 
 		/* 댓글 언급 기능 */

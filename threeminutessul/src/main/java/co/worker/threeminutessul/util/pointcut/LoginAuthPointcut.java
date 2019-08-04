@@ -38,6 +38,7 @@ public class LoginAuthPointcut {
 				 ||requestURI.contains("/loginok.tmssul")
 				 ||requestURI.contains("/logoutOk.tmssul") 
 				 ||requestURI.contains("/ajaxboardList.tmssul")
+				 ||requestURI.contains("/commentList.tmssul")
 				) {
 					
 				} //지금페이지가 mainpage면 괜찮다.
