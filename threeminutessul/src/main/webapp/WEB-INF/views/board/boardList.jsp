@@ -179,9 +179,8 @@
 								<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
 								<span class="card-reply-mention"></span>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary " type="button" id="button-addon2">
-										<i class="far fa-paper-plane"></i>
-									</button>
+									<button class="btn btn-outline-secondary reply_submit_btn" type="button" id="button-addon2"><i
+											class="far fa-paper-plane"></i></button>
 								</div>
 							</div>
 						</div>
@@ -302,7 +301,7 @@
 	<script type="text/javascript">
 
 		/* 댓글 언급 기능 */
-		$(".card-replys").on('click', 'button', function () {
+		$("accordion").on('click', '.card-replys button', function () {
 			var cardClpse = $(this).closest('.card-collapse');
 			var replyMention = cardClpse.find('.card-reply-mention');
 			var replyInput = cardClpse.find('.card-reply-input input');
@@ -314,7 +313,7 @@
 			replyInput.removeAttr('placeholder');
 			replyInput.css('padding-left', totalPadLft + 'px');
 		});
-		$('.card-reply-mention').on('click', function (e) {
+		$('accordion').on('click', '.card-reply-mention', function (e) {
 			var mention = $(this).toggle();
 			var input = mention.siblings('input');
 			input.css('padding-left', input.css('padding-right'));
