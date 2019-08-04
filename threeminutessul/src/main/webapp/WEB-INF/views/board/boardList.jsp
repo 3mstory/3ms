@@ -301,7 +301,6 @@
 	<script src="resources/js/jsrender.js"></script>
 	<script src="resources/js/common.js"></script>
 	<script type="text/javascript">
-
 		/* 댓글 언급 기능 */
 		$(".accordion").on('click', '.card-replys button', function () {
 			var cardClpse = $(this).closest('.card-collapse');
