@@ -138,17 +138,17 @@ public class BoardController {
 			}
 			
 			// 저장될 파일의 경로
-			uploadPath = rootPath+"/"+userid;
+			uploadPath = rootPath+"\\"+userid;
 			
 			filename = FileUploadUtil.getFileName(uploadPath, uploadFile.getOriginalFilename());
 			String filename2 = uploadFile.getOriginalFilename(); 
-			filePath=uploadPath +'/'+ filename2; //실제저장할 파일명 _1 _2이런식.
+			filePath=uploadPath +'\\'+ filename2; //실제저장할 파일명 _1 _2이런식.
 			file = new File(filePath);
 			// 스프링이 받아놓은 첨부파일을 임시 폴더에서 우리가 희망하는 폴더에 이동하기.(Was가 temp라는 임시폴더에 저장해논걸 files 폴더로
 			// 이동시켜야함)
 			uploadFile.transferTo(file); // 실제 파일 이동.(temp -> files)
 			
-			filePath = uploadPath +'/'+ filename2;
+			filePath = uploadPath +'\\'+ filename2;
 		}
 		
 	

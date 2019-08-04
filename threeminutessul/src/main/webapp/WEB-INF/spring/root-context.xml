@@ -63,4 +63,11 @@
 <!-- 어노테이션 방식으로 Spring Transaction을 가능하게 -->
 	<tx:annotation-driven transaction-manager="transactionManager" /> <!-- x마크 뜨면 namespace가서 tx 클릭 -->
 	
+	<bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="WEB-INF/messages/message" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="180" />
+    </bean>
+	
 </beans>

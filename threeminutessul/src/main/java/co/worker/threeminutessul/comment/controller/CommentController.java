@@ -40,7 +40,10 @@ public class CommentController {
 		
 		LikeHateVO likehateVO = new LikeHateVO();
 		likehateVO.setBoardSeq(boardSeq);
-		likehateVO.setUserSeq(Integer.parseInt((String)session.getAttribute("userSeq")));
+		likehateVO.setUserSeq(Integer.parseInt(
+										(String)session.getAttribute("userSeq") == null ? 
+										"0" : (String)session.getAttribute("userSeq")
+		));
 		
 		//board에 달린 좋아요와 싫어요 갯수 가져오기
 		HashMap<String,Integer> rtnMap = likehateService.getReturnlikehate(likehateVO);
