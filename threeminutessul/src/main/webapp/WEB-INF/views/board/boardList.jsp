@@ -179,8 +179,9 @@
 								<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
 								<span class="card-reply-mention"></span>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-											class="far fa-paper-plane"></i></button>
+									<button class="btn btn-outline-secondary " type="button" id="button-addon2">
+										<i class="far fa-paper-plane"></i>
+									</button>
 								</div>
 							</div>
 						</div>
