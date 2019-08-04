@@ -19,8 +19,8 @@ $(function() {
   });
 
   /* 카드 컨텐츠 불러오기 예시 */
-  $(".card-btn").click(function() {
-    var card = $(this).closest(".card");
+  $(".card").on("click", ".card-btn", function(e) {
+    var card = $(e.delegateTarget);
     var cardCont = card.find(".card-contents");
     var cardContArea = card.find(".card-collapse");
     var spinner = card.find(".spinner-border");
