@@ -21,10 +21,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/favicon.gif"
-	type="image/x-icon">
-<link rel="icon" href="resources/favicon.gif" type="image/x-icon">
+	<!-- 파비콘 -->
+	<link rel="shortcut icon" href="resources/favicon.gif" type="image/x-icon">
+	<link rel="icon" href="resources/favicon.gif" type="image/x-icon">
 </head>
 <!-- 임시 회원가입 모달 -->
 <div class="modal fade" id="join_form" tabindex="-1" role="dialog" aria-labelledby="join_form" aria-hidden="true">
@@ -35,24 +34,26 @@
 			</div>
 			<form action="/threeminutessul/userjoin.tmssul" method="POST" encType="multipart/form-data">
 				<div class="modal-body px-4 py-0">
-						<div class="form-group">
-							<input type="text" class="form-control" id="id123" aria-describedby="아이디" placeholder="id" name="userid" required>
+					<div class="form-group">
+						<input type="text" class="form-control" id="id123" aria-describedby="아이디" placeholder="id" name="userid"
+							required>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="password1" placeholder="password" name="userpw" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임" name="nickname"
+							required>
+					</div>
+					<div class="form-group">
+						<div class="custom-file" id="customFile">
+							<input type="file" accept="image/*" class="custom-file-input" id="join-file-input" name="input_file"
+								required aria-describedby="ProfileUpload">
+							<label class="custom-file-label text-secondary" for="exampleInputFile" required>
+								프로필 사진
+							</label>
 						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" id="password1" placeholder="password" name="userpw" required>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="nick" aria-describedby="닉네임" placeholder="닉네임" name="nickname" required>
-						</div>
-						<div class="form-group">
-							<div class="custom-file" id="customFile">
-								<input type="file" accept="image/*" class="custom-file-input" id="join-file-input" name="input_file" required
-									aria-describedby="ProfileUpload">
-								<label class="custom-file-label text-secondary" for="exampleInputFile" required>
-									프로필 사진
-								</label>
-							</div>
-						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="container-fluid">
@@ -81,19 +82,17 @@
 			<div class="modal-body px-4 py-0">
 				<form action="/threeminutessul/loginok.tmssul" method="POST">
 					<div class="form-group mb-4">
-						<input type="text" class="form-control" id="userid" name="userid" required
-							aria-describedby="아이디" placeholder="id">
+						<input type="text" class="form-control" id="userid" name="userid" required aria-describedby="아이디"
+							placeholder="id">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control " id="userpw" required
-							name="userpw" placeholder="password">
+						<input type="password" class="form-control " id="userpw" required name="userpw" placeholder="password">
 					</div>
 					<div class="container my-4">
 						<div class="row">
 							<button type="button" class="btn btn-outline-secondary mx-auto col-5" data-dismiss="modal"
 								data-toggle="modal" data-target="#join_form" aria-label="join">회원가입</button>
-							<button type="submit" class="btn btn-primary mx-auto col-5"
-								aria-label="login">로그인</button>
+							<button type="submit" class="btn btn-primary mx-auto col-5" aria-label="login">로그인</button>
 						</div>
 					</div>
 				</form>
@@ -101,13 +100,7 @@
 		</div>
 	</div>
 </div>
-<!-- 좋아요, 싫어요 토스트 메세지 -->
-<div class="toast vote-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-delay="1000"
-	data-autohide="true">
-	<div class="toast-body">
-		이미 투표에 참여하셨습니다
-	</div>
-</div>
+
 
 <body style="background-color: #E9EBEE; height:100%; overflow-x:hidden!important;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
@@ -120,10 +113,9 @@
 
 			<div class="collapse navbar-collapse " id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-						data-target="#login_form" href="#">임시로그인버튼</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/threeminutessul/boardAdd.tmssul">임시게시판 글쓰기</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">임시로그인버튼</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/threeminutessul/boardAdd.tmssul">임시게시판 글쓰기</a></li>
 					<li class="nav-item active"><a class="nav-link" href="#">연애</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">공포</a></li>
@@ -141,8 +133,7 @@
 				<div class="card" id="card_${vo.boardSeq}">
 					<div class="card-header">
 						<div class="row">
-							<img class="rounded-circle px-2"
-								src="resources/files/${vo.userid}/${vo.profile}" width="50px"
+							<img class="rounded-circle px-2" src="resources/files/${vo.userid}/${vo.profile}" width="50px"
 								height="50px" onError="this.src='resources/files/default.PNG'">
 							<div class="col d-flex flex-column justify-content-center">
 								<div class="row d-block font-tit">${vo.writer}</div>
@@ -164,11 +155,9 @@
 									</i>
 									<p class="card-btntx left likecount"></p>
 								</div>
-								<div
-									class="btn btn-outline-dark mx-4 p-2 d-flex flex-column justify-content-center">
-									<i class="far fa-trash-alt fa-2x likeyhate"> <input
-										type="hidden" id="hdboardSeq" value="${vo.boardSeq}" /> <input
-										type="hidden" id="hdtype_${vo.boardSeq}" value="2" />
+								<div class="btn btn-outline-dark mx-4 p-2 d-flex flex-column justify-content-center">
+									<i class="far fa-trash-alt fa-2x likeyhate"> <input type="hidden" id="hdboardSeq"
+											value="${vo.boardSeq}" /> <input type="hidden" id="hdtype_${vo.boardSeq}" value="2" />
 									</i>
 									<p class="card-btntx right hatecount"></p>
 								</div>
@@ -177,8 +166,7 @@
 							<div class="card-reply-area">
 								<div class="card-reply-header mt-4">
 									<span class="reply-tit text-dark font-weight-bolder">
-										댓글&nbsp;<span id="commentCount_${vo.boardSeq}"
-										class="reply-cnt font-color-main"></span>개
+										댓글&nbsp;<span id="commentCount_${vo.boardSeq}" class="reply-cnt font-color-main"></span>개
 									</span>
 								</div>
 								<div class="card-reply-body">
@@ -191,14 +179,14 @@
 								<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
 								<span class="card-reply-mention"></span>
 								<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-										class="far fa-paper-plane"></i></button>
+									<button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+											class="far fa-paper-plane"></i></button>
 								</div>
 							</div>
 						</div>
 					</div>
 					<button type="button" class="card-btn btn w-100 collapsed" data-toggle="collapse"
-					data-target="#card_${vo.boardSeq} .card-collapse">
+						data-target="#card_${vo.boardSeq} .card-collapse">
 						<i class="fas fa-chevron-down"></i> <i class="fas fa-chevron-up"></i>
 						<div class="d-flex justify-content-center">
 							<div class="spinner-border text-primary" style="display: none;" role="status">
@@ -213,13 +201,9 @@
 
 	<!-- Floating Action Button-->
 	<div class="zoom">
-		<a href="/threeminutessul/boardAdd.tmssul" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i class="fas fa-pencil-alt"></i></a>
+		<a href="/threeminutessul/boardAdd.tmssul" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i
+				class="fas fa-pencil-alt"></i></a>
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="/threeminutessul/resources/js/jsrender.js"></script>
-	<script src="/threeminutessul/resources/js/common.js"></script>
 	<script id="cardTemplate" type="text/x-jsrender">
 		<div class="card" id="card_{{:boardSeq}}">
 				<div class="card-header">
@@ -295,70 +279,25 @@
 				</button>
 			</div>
 	</script>
-	<script type="text/javascript">
-		function makeSpinner(options) {
-			var spinOpts = {
-				class: "spinner-border text-primary",
-				role: "status",
-			};
-			Object.assign(spinOpts, options);
-			var wrapper = $('<div/>', { style: "text-align:center" })
-			var spinner = $('<div/>', spinOpts);
-			var spinner_inner = $('<span/>', {
-				class: 'sr-only',
-				text: '로딩중..'
-			})
-			spinner.append(spinner_inner);
-			wrapper.append(spinner);
-			return wrapper;
-		}
-		function showSpinner(spinwrap) {
-			spinwrap.children().addClass('on');
-			spinwrap.appendTo('.accordion');
-		}
-		function hideSpinner(spinwrap) {
-			spinwrap.children().removeClass('on');
-			spinwrap = spinwrap.detach();
-		}
-		//직접 만든 인피니티 스크롤 라이브러리
-		(function () {
-			var pagecount = 2;
-			var spinWrap = makeSpinner();
-			var isExecuted = false;
-			$(window).scroll(function () {
-				var top = window.scrollY;
-				var docH = document.body.offsetHeight;
-				var winH = window.innerHeight;
-
-				if (top >= docH - winH && !isExecuted) {
-					isExecuted = true;
-					var tmpl = $.templates("#cardTemplate");
-					showSpinner(spinWrap);
-					$.ajax({
-						url: '/threeminutessul/ajaxboardList.tmssul',
-						dataType:'json',
-						data:'page='+pagecount,
-						success: function (data) {
-							if(data.length!=0){
-								var html = tmpl.render(data);
-								$(html).appendTo('.accordion');
-								hideSpinner(spinWrap);
-								isExecuted = false;
-								pagecount++;
-							}else{
-								hideSpinner(spinWrap);
-							}
-						},
-						error: function (data) {
-							console.log(data);
-						}
-					})
-				}
-			});
-		})();
-
-
+	<script id="replyTemplate" type="text/x-jsrender">
+		<li class="card-reply-item my-1">
+			<button type="button"
+				class="btn btn-outline-secondary writer py-0 px-1 align-top">{{:nickname}}</button>
+			<span>{{:content}}</span>
+		</li>
 	</script>
+	<script id="toastTemplate" type="text/x-jsrender">
+		<div class="toast vote-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-delay="1000"
+			data-autohide="true">
+			<div class="toast-body">
+				{{:content}}
+			</div>
+		</div>
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="./js/jsrender.js"></script>
+	<script src="./js/common.js"></script>
 </body>
 
 </html>
