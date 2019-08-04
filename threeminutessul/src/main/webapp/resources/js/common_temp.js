@@ -1,36 +1,3 @@
-/* 카드 컨텐츠 불러오기 예시 */
-$(".accordion").on("click", ".card-btn", function(e) {
-  var card = $(e.delegateTarget);
-  var cardCont = card.find(".card-contents").text();
-  var cardContArea = card.find(".card-collapse");
-  var spinner = card.find(".spinner-border");
-  var upBtn = card.find(".fa-chevron-up");
-  var downBtn = card.find(".fa-chevron-down");
-  if (cardCont.trim().length == 0) {
-    //한번도 클릭한적 없다면
-    cardContArea.hide(); //카드 접힌 상태 유지하기
-    $(this)
-      .find("i")
-      .hide();
-    spinner.show();
-    $.ajax({
-      //경로입력
-      url: "https://jsonplaceholder.typicode.com/users",
-      type: "GET",
-      data: card.attr("id").substr(4)
-    }).done(function(data) {
-      var content = data[0].email; //이부분 커스텀해주면 될듯!!
-      card.find(".card-contents").text(content);
-      spinner.hide(); //스피너제거
-      cardContArea.show(); //카드 펼치기
-      upBtn.show();
-    });
-  } else {
-    upBtn.toggle();
-    downBtn.toggle();
-  }
-});
-
 /* 좋아요,싫어요 비동기처리 */
 $(".card-btn-area").on("click", ".btn", function() {
   var seq = parseInt(

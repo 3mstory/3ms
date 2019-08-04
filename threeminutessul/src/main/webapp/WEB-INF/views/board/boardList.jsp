@@ -115,6 +115,8 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">임시로그인버튼</a>
 					</li>
+					<li class="nav-item"><a class="nav-link" href="/threeminutessul/logoutOk.tmssul">로그아웃</a>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="/threeminutessul/boardAdd.tmssul">임시게시판 글쓰기</a></li>
 					<li class="nav-item active"><a class="nav-link" href="#">연애</a>
 					</li>
@@ -301,7 +303,7 @@
 	<script type="text/javascript">
 
 		/* 댓글 언급 기능 */
-		$("accordion").on('click', '.card-replys button', function () {
+		$(".accordion").on('click', '.card-replys button', function () {
 			var cardClpse = $(this).closest('.card-collapse');
 			var replyMention = cardClpse.find('.card-reply-mention');
 			var replyInput = cardClpse.find('.card-reply-input input');
@@ -313,7 +315,7 @@
 			replyInput.removeAttr('placeholder');
 			replyInput.css('padding-left', totalPadLft + 'px');
 		});
-		$('accordion').on('click', '.card-reply-mention', function (e) {
+		$('.accordion').on('click', '.card-reply-mention', function (e) {
 			var mention = $(this).toggle();
 			var input = mention.siblings('input');
 			input.css('padding-left', input.css('padding-right'));

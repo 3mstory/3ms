@@ -19,7 +19,7 @@ $(function() {
   });
 
   /* 카드 컨텐츠 불러오기 예시 */
-  $(".card-btn").click(function() {
+  $(".accordion").on("click", ".card-btn", function(e) {
     var card = $(this).closest(".card");
     var cardCont = card.find(".card-contents");
     var cardContArea = card.find(".card-collapse");
@@ -110,7 +110,6 @@ $(function() {
           //var result = data.result[0];
           //var response = result.response;
           //var contents = result.cardContent;
-        	debugger;
           var likecnt = data.likecount;
           var hatecnt = data.hatecount;
           if (type === "like") {
@@ -145,13 +144,18 @@ $(function() {
       boardSeq: cardId,
       content: text
     };
-    debugger;
     $.ajax({
       url: "/threeminutessul/commentInsert.tmssul",
       method: "POST",
       data: reqData,
       success: function(data) {
         var result = data.result;
+        if (data.toString().indexOf("<script>") > -1) {
+            //쫒겨나야함
+            alert("로그인을 하고 진행해주시기 바랍니다.");
+            location.href = "/threeminutessul/boardList.tmssul";
+            return false;
+        }
         if (result !== -1) {
           var replys = wrapper
             .siblings(".card-reply-area")
@@ -163,8 +167,8 @@ $(function() {
           makeToast("댓글이 등록 되지 못했습니다.");
         }
       },
-      error: function(data) {
-        console.log(data);
+      error: function(a,b,c) {
+    	  console.log(a,b,c);
       }
     });
   });

@@ -81,22 +81,27 @@ public class CommentController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/commentInsert.tmssul", method = { RequestMethod.GET })
+	@RequestMapping(value = "/commentInsert.tmssul", method = { RequestMethod.POST })
+	@ResponseBody
 	public JSONObject commentInsert(HttpServletRequest req, HttpServletResponse resp, HttpSession session, CommentVO vo) {
-		vo.setUserSeq((Integer)session.getAttribute("userSeq"));
-		int result = service.commentInsert(vo);
 		JSONObject json = new JSONObject();
+		try { // 예외처리
+			vo.setUserSeq(Integer.parseInt((String)session.getAttribute("userSeq")));
+		} catch (NumberFormatException e) {
+			return null;
+		}
+		int result = service.commentInsert(vo);
 		if(result==1) {
 			//성공
 			json.put("content",vo.getContent());//댓글 넣은거.
 			json.put("nickname",(String)session.getAttribute("userid"));
 			//json.put("",);
 			//json.put("",);
-			json.put("response", true);
+			json.put("response", 1);
 		}else {
 			//실패
 			//NewPageAction
-			json.put("response", false);	
+			json.put("response", -1);	
 		}
 		return json;
 	}
