@@ -303,7 +303,7 @@
 	<script type="text/javascript">
 
 		/* 댓글 언급 기능 */
-		$("accordion").on('click', '.card-replys button', function () {
+		$(".accordion").on('click', '.card-replys button', function () {
 			var cardClpse = $(this).closest('.card-collapse');
 			var replyMention = cardClpse.find('.card-reply-mention');
 			var replyInput = cardClpse.find('.card-reply-input input');
@@ -315,7 +315,7 @@
 			replyInput.removeAttr('placeholder');
 			replyInput.css('padding-left', totalPadLft + 'px');
 		});
-		$('accordion').on('click', '.card-reply-mention', function (e) {
+		$('.accordion').on('click', '.card-reply-mention', function (e) {
 			var mention = $(this).toggle();
 			var input = mention.siblings('input');
 			input.css('padding-left', input.css('padding-right'));
