@@ -67,11 +67,12 @@ $(function() {
                 class: "btn btn-outline-secondary writer py-0 px-1 align-top",
                 text: object.nickname
               });
-              var span = $("<span/>", {
-                text: object.content
+              var p = $("<p/>", {
+                text: object.content,
+                style: "display:inline"
               });
               $(li).append(button);
-              $(li).append(span);
+              $(li).append(p);
               card.find(".card-replys").append(li); //댓글 리스트
             }
           });
@@ -140,6 +141,7 @@ $(function() {
     input.val("");
     input.css("padding-left", "12px");
     mention.text("");
+    mention.hide();
     var reqData = {
       boardSeq: cardId,
       content: text
@@ -163,6 +165,7 @@ $(function() {
           var replyTmpl = $.templates("#replyTemplate");
           var html = replyTmpl.render(data);
           $(html).appendTo(replys);
+          card.find('.reply-cnt').text(data.commentSize);
         } else {
           makeToast("댓글이 등록 되지 못했습니다.");
         }
@@ -173,58 +176,6 @@ $(function() {
     });
   });
 
-  /* 토스트 */
-  function makeToast(content) {
-    var tst = $(".toast");
-    if (tst.length > 0) {
-      showToast(tst, content);
-      return;
-    }
-    var data = {
-      content: content
-    };
-    var tmpl = $.templates("#toastTemplate");
-    tst = tmpl.render(data);
-    $(tst).appendTo("body");
-    showToast($(".toast"), content);
-  }
-
-  function showToast(tst, content) {
-    tst.find(".toast-body").text(content);
-    setTimeout(function() {
-      tst.toast("show");
-    }, 0);
-  }
-
-  /* 스피너 */
-  function makeSpinner(options) {
-    var spinOpts = {
-      class: "spinner-border text-primary",
-      role: "status"
-    };
-    Object.assign(spinOpts, options);
-    var wrapper = $("<div/>", {
-      style: "text-align:center"
-    });
-    var spinner = $("<div/>", spinOpts);
-    var spinner_inner = $("<span/>", {
-      class: "sr-only",
-      text: "로딩중.."
-    });
-    spinner.append(spinner_inner);
-    wrapper.append(spinner);
-    return wrapper;
-  }
-
-  function showSpinner(spinwrap) {
-    spinwrap.children().addClass("on");
-    spinwrap.appendTo(".accordion");
-  }
-
-  function hideSpinner(spinwrap) {
-    spinwrap.children().removeClass("on");
-    spinwrap = spinwrap.detach();
-  }
   //직접 만든 인피니티 스크롤 라이브러리
   (function() {
 	var pagecount = 2;

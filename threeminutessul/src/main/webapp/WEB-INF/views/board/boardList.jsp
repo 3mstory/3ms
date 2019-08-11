@@ -138,15 +138,15 @@
 							<img class="rounded-circle px-2" src="resources/files/${vo.userid}/${vo.profile}" width="50px"
 								height="50px" onError="this.src='resources/files/default.PNG'">
 							<div class="col d-flex flex-column justify-content-center">
-								<div class="row d-block font-tit">${vo.writer}</div>
-								<div class="row d-block text-secondary card-info-sub">${vo.regdate}</div>
+								<div class="row d-block font-tit"><c:out value="${vo.nickname}" escapeXml="true"/></div>
+								<div class="row d-block text-secondary card-info-sub"><c:out value="${vo.regdate}" escapeXml="true"/></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="card-body">
 						<div class="card-title font-weight-bold text-truncate">
-							${vo.title}</div>
+							<c:out value="${vo.title}" escapeXml="true"/></div>
 						<div class="collapse card-collapse card-text" data-parent="#brd-acdn">
 							<p class="card-contents mb-4"></p>
 							<div class="row card-btn-area justify-content-center">
@@ -281,6 +281,10 @@
 				</button>
 			</div>
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="resources/js/jsrender.js"></script>
+	<script src="resources/js/common.js"></script>
 	<script id="replyTemplate" type="text/x-jsrender">
 		<li class="card-reply-item my-1">
 			<button type="button"
@@ -296,10 +300,7 @@
 			</div>
 		</div>
 	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="resources/js/jsrender.js"></script>
-	<script src="resources/js/common.js"></script>
+	
 	<script type="text/javascript">
 
 		/* 댓글 언급 기능 */
