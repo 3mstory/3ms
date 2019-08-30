@@ -24,4 +24,9 @@ public class CommentServiceImpl implements CommentServiceIF {
 	public int commentInsert(CommentVO vo) {
 		return dao.commentInsert(vo);
 	}
+
+	@Override
+	public int getCommentSize(CommentVO vo) {
+		return dao.getCommentSize(vo);
+	}
 }

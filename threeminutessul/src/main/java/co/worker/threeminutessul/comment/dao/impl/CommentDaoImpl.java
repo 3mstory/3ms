@@ -24,5 +24,10 @@ public class CommentDaoImpl implements CommentDaoIF{
 	public int commentInsert(CommentVO vo) {
 		return template.insert("comment.commentInsert",vo);
 	}
+
+	@Override
+	public int getCommentSize(CommentVO vo) {
+		return template.selectOne("comment.getCommentSize",vo);
+	}
 	
 }

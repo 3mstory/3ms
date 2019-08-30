@@ -23,6 +23,7 @@ import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.FileBean;
+import co.worker.threeminutessul.util.JavaUtil;
 import co.worker.threeminutessul.util.NewPageAction;
 import co.worker.threeminutessul.util.fileupload.FileUploadUtil;
 
@@ -124,15 +125,16 @@ public class BoardController {
 		System.out.println(profile.getContentType()); // MIME(파일 종류)
 		*/
 		//profile 업로드 처리
+
+		// 첨부파일 저장될 폴더 경로 (id별로 폴더만들것임)
+		// 3. a.zip -> a_1.zip -> a_2.zip
+		String rootPath = req.getSession().getServletContext().getRealPath("resources/boardUpload");
+		
 		if (!uploadFile.isEmpty()) {
-			
-			// 첨부파일 저장될 폴더 경로 (id별로 폴더만들것임)
-			// 3. a.zip -> a_1.zip -> a_2.zip
-			String rootPath = req.getSession().getServletContext().getRealPath("resources/boardUpload");
 			
 			//폴더생성.
 			File uploadFolder = new File(rootPath,userid);
-			System.out.println(uploadFolder.exists());
+			
 			if(!uploadFolder.exists()) {
 				uploadFolder.mkdirs();
 			}
@@ -162,7 +164,7 @@ public class BoardController {
 			NewPageAction.action(resp, actionCode);
 		}*/
 		String returl = req.getSession().getServletContext().getContextPath();
-		json.put("url", "resources/boardUpload/"+userid+"/"+uploadFile.getOriginalFilename()); //여기에 업로드된 경로 넣기.
+		json.put("url", returl+"/resources/boardUpload/"+userid+"/"+uploadFile.getOriginalFilename()); //여기에 업로드된 경로 넣기.
 		
 		return json;
 		

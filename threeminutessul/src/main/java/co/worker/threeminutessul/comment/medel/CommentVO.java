@@ -1,10 +1,10 @@
 package co.worker.threeminutessul.comment.medel;
 
-public class CommentVO {
+import co.worker.threeminutessul.common.model.CommonVO;
+
+public class CommentVO extends CommonVO{
 	
 	private int commentSeq;
-	private int userSeq;
-	private int boardSeq;
 	private int parSeq; //이부분 어떻게 할것인가.
 	private String content;
 	private String regdate;
@@ -30,18 +30,6 @@ public class CommentVO {
 	}
 	public void setCommentSeq(int commentSeq) {
 		this.commentSeq = commentSeq;
-	}
-	public int getUserSeq() {
-		return userSeq;
-	}
-	public void setUserSeq(int userSeq) {
-		this.userSeq = userSeq;
-	}
-	public int getBoardSeq() {
-		return boardSeq;
-	}
-	public void setBoardSeq(int boardSeq) {
-		this.boardSeq = boardSeq;
 	}
 	public int getParSeq() {
 		return parSeq;
@@ -75,8 +63,9 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [commentSeq=" + commentSeq + ", userSeq=" + userSeq + ", boardSeq=" + boardSeq + ", parSeq="
-				+ parSeq + ", content=" + content + ", regdate=" + regdate + ", updatedate=" + updatedate + ", isanony="
-				+ isanony + ", mentionUserSeq=" + mentionUserSeq + "]";
+		return "CommentVO [commentSeq=" + commentSeq + ", parSeq=" + parSeq + ", content=" + content + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + ", isanony=" + isanony + ", mentionUserSeq=" + mentionUserSeq
+				+ ", nickname=" + nickname + "]";
 	}
+
 }

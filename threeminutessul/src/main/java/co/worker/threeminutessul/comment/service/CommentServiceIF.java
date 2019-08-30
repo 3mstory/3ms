@@ -10,4 +10,6 @@ public interface CommentServiceIF {
 
 	int commentInsert(CommentVO vo);
 
+	int getCommentSize(CommentVO vo);
+
 }

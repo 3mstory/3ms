@@ -10,4 +10,6 @@ public interface CommentDaoIF {
 
 	int commentInsert(CommentVO vo);
 
+	int getCommentSize(CommentVO vo);
+
 }

@@ -35,6 +35,7 @@ public class CommentController {
 	@ResponseBody
 	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) {
 		List<CommentVO> commentList = service.getComment(boardSeq);
+		
 		// board 컨텐츠 가져오기
 		String boardContent = boardService.getBoardContent(boardSeq);
 		
@@ -91,11 +92,12 @@ public class CommentController {
 			return null;
 		}
 		int result = service.commentInsert(vo);
+		int commentSize = service.getCommentSize(vo);
 		if(result==1) {
 			//성공
 			json.put("content",vo.getContent());//댓글 넣은거.
 			json.put("nickname",(String)session.getAttribute("userid"));
-			//json.put("",);
+			json.put("commentSize",commentSize);
 			//json.put("",);
 			json.put("response", 1);
 		}else {

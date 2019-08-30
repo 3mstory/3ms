@@ -22,10 +22,16 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 			inner join tblUserInfo U on U.userSeq = C.userSeq
 		where boardSeq = #{boardSeq}
 		  and parSeq = 0
+		order by commentSeq
 	</select>
 	<insert id="commentInsert" parameterType="commentVO">
 		insert into 
 			tblComment(userSeq, boardSeq, parSeq, content, regdate, updatedate, isanony) 
 			values(#{userSeq}, #{boardSeq}, #{parSeq}, #{content}, now(), now(), 0)
 	</insert>
+	
+	<select id="getCommentSize" parameterType="commentVO" resultType="Integer">
+		select count(*) from tblComment where boardSeq = #{boardSeq}
+	</select>
+	
 </mapper>
