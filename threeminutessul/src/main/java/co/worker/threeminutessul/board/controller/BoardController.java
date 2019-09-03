@@ -36,6 +36,14 @@ public class BoardController {
 	@Autowired
 	private LikeyHateServiceIF likehateservice;
 	
+	/**
+	 * 게시판 list 그리는 메소드. 여기추가하면 ajaxboardlist 메소드도 추가해야하는지 판단할것.
+	 * @param req
+	 * @param resp
+	 * @param session
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value = "/boardList.tmssul", method = { RequestMethod.GET })
 	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Integer page) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
@@ -45,25 +53,29 @@ public class BoardController {
 		JSONArray jsonArr = new JSONArray();
 		for(BoardVO vo : list) {
 			JSONObject json = new JSONObject();
+			json.put("loginUserSeq", session.getAttribute("userSeq"));
 			json.put("userid", vo.getUserid());
 			json.put("profile", vo.getProfile());
 			json.put("writer",vo.getNickname());
-			json.put("regdate",vo.getRegdate());
+			json.put("userSeq", vo.getWriter());
+			json.put("regdate",vo.getTimechange() == null ? vo.getRegdate() : vo.getTimechange());
 			json.put("title",vo.getTitle());
 			json.put("boardSeq",vo.getBoardSeq());
 			jsonArr.add(json);
 		}
-		if(session.getAttribute("userid")==null) { // 그냥 글 제목만 둘러볼 사람들
-			
-			
-		}else {
-			//로그인 했으면 그 유저가 어떤글에 좋아요를 눌렀는지 표기해놔야함.
-			
-		}
-		req.setAttribute("list",list);
+		
+		req.setAttribute("list",jsonArr);
 		return "board/boardList";
 	}
 	
+	/**
+	 * ajax로 보드 페이징 처리하는 메소드. 내용 추가시 boardlist 메소드도 추가해야하는지 판단할 것.
+	 * @param req
+	 * @param resp
+	 * @param session
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value = "/ajaxboardList.tmssul", method = { RequestMethod.GET })
 	@ResponseBody
 	public JSONArray ajaxboardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,int page) {
@@ -73,10 +85,12 @@ public class BoardController {
 		JSONArray jsonArr = new JSONArray();
 		for(BoardVO vo : list) {
 			JSONObject json = new JSONObject();
+			json.put("userSeq", session.getAttribute("userSeq"));
 			json.put("userid", vo.getUserid());
 			json.put("profile", vo.getProfile());
 			json.put("writer",vo.getNickname());
-			json.put("regdate",vo.getRegdate());
+			json.put("userSeq", vo.getWriter());
+			json.put("regdate",vo.getTimechange() == null ? vo.getRegdate() : vo.getTimechange());
 			json.put("title",vo.getTitle());
 			json.put("boardSeq",vo.getBoardSeq());
 			jsonArr.add(json);
@@ -115,5 +129,16 @@ public class BoardController {
 		}
 		NewPageAction.action(resp, actionCode);
 	}
+	
+
+	@RequestMapping(value = "/boardUpdate.tmssul", method = { RequestMethod.GET })
+	public String boardUpdate(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws IOException {
+		
+		
+		
+		return "board/boardUpdate";
+	}
+	
+	
 	
 }

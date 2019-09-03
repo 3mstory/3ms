@@ -7,6 +7,7 @@
 		select
 			b.boardSeq,
 			b.title,
+			b.writer,
 			ui.userid,
 			ui.nickname,
 			ui.userSeq as writer,
@@ -14,6 +15,11 @@
 				when updatedate = regdate then to_char(regdate,'YYYY-MM-DD hh24:mi:ss') 
 				else to_char(updatedate,'YYYY-MM-DD HH24:mi:ss')
 			end as regdate,
+			case 
+				when now() - updatedate <![CDATA[<]]> interval '1 minute' then extract ('epoch' from (now() - updatedate)::interval)::integer||'초 전'
+				when now() - updatedate <![CDATA[<]]> interval '1 hour' then extract ('epoch' from (now() - updatedate)::interval)::integer/60||'분 전'
+				else NULL::text
+			end timechange,
 			ui.profile,
 			b.isanony
 		from tblBoard b

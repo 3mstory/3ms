@@ -9,12 +9,21 @@ public class BoardVO {
 	private String updatedate;
 	private int likey;
 	private int hate;
-	private int isanony;
+	private int isanony;	
 	
 	//추가요소..
 	private String profile;
 	private String userid; //=id
 	private String nickname;//=닉네임
+	private String timechange;
+	
+	
+	public String getTimechange() {
+		return timechange;
+	}
+	public void setTimechange(String timechange) {
+		this.timechange = timechange;
+	}
 	public String getNickname() {
 		return nickname;
 	}
