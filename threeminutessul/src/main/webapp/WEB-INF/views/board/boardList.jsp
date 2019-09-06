@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="co.worker.threeminutessul.util.JavaUtil"  %>
+<% 
+	String sessionUserSeq = (String)session.getAttribute("userSeq");
+	pageContext.setAttribute("sessionUserSeq",sessionUserSeq);
+%>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +25,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <!-- 우성환 css -->
+    <link rel="stylesheet" href="resources/css/sh.css" />
+    
 	<!-- 파비콘 -->
 	<link rel="shortcut icon" href="resources/favicon.gif" type="image/x-icon">
 	<link rel="icon" href="resources/favicon.gif" type="image/x-icon">
@@ -138,7 +146,7 @@
 							<img class="rounded-circle px-2" src="resources/files/${vo.userid}/${vo.profile}" width="50px"
 								height="50px" onError="this.src='resources/files/default.PNG'">
 							<div class="col d-flex flex-column justify-content-center">
-								<div class="row d-block font-tit"><c:out value="${vo.nickname}" escapeXml="true"/></div>
+								<div class="row d-block font-tit"><c:out value="${vo.writer}" escapeXml="true"/></div>
 								<div class="row d-block text-secondary card-info-sub"><c:out value="${vo.regdate}" escapeXml="true"/></div>
 							</div>
 						</div>
@@ -146,9 +154,18 @@
 
 					<div class="card-body">
 						<div class="card-title font-weight-bold text-truncate">
-							<c:out value="${vo.title}" escapeXml="true"/></div>
+							<c:out value="${vo.title}" escapeXml="true"/>
+						</div>
+						
 						<div class="collapse card-collapse card-text" data-parent="#brd-acdn">
-							<p class="card-contents mb-4"></p>
+							<p class="card-contents mb-4">
+								<c:if test="${sessionUserSeq == vo.userSeq}">
+									<div style="text-align:right">
+										<!-- <input type="button" id="updateBtn" value="수정" class="btn btn-info btn-xs"/> -->
+										<a href="/threeminutessul/boardUpdate.tmssul?boardSeq=${vo.boardSeq}" id="updateBtn">수정</a>
+									</div>
+								</c:if>
+							</p>
 							<div class="row card-btn-area justify-content-center">
 								<div class="btn btn-outline-dark mx-4 d-flex flex-column justify-content-center">
 									<i class="d-block far fa-grin-squint-tears fa-2x likeyhate">
@@ -285,6 +302,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="resources/js/jsrender.js"></script>
 	<script src="resources/js/common.js"></script>
+	
+	<!-- 우성환 js 파일 -->
+	<script src="resources/js/common_sh.js"></script>
+	
 	<script id="replyTemplate" type="text/x-jsrender">
 		<li class="card-reply-item my-1">
 			<button type="button"

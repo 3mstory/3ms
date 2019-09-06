@@ -1,6 +1,5 @@
 package co.worker.threeminutessul.board.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +12,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
-import co.worker.threeminutessul.util.FileBean;
-import co.worker.threeminutessul.util.JavaUtil;
 import co.worker.threeminutessul.util.NewPageAction;
-import co.worker.threeminutessul.util.fileupload.FileUploadUtil;
 
 @Controller
 public class BoardController {
@@ -132,13 +127,26 @@ public class BoardController {
 	
 
 	@RequestMapping(value = "/boardUpdate.tmssul", method = { RequestMethod.GET })
-	public String boardUpdate(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws IOException {
-		
-		
-		
+	public String boardUpdate(HttpServletRequest req, HttpServletResponse resp,HttpSession session, Integer boardSeq) throws Exception {
+		if(boardSeq != null) {
+			BoardVO board = service.getBoard(boardSeq);
+			req.setAttribute("board",board);
+		}else {
+			throw new Exception("[Error] : update boardSeq null");
+		}
 		return "board/boardUpdate";
 	}
 	
-	
-	
+	@PostMapping("/boardUpdateOk")
+	public String boardUpdateOk(HttpServletRequest req, HttpServletResponse resp,HttpSession session, BoardVO board) throws Exception {
+		int result = 0;
+		//업데이트 처리
+		if(board!=null) {
+			result = service.updateBoard(board);
+			req.setAttribute("result",result);
+		}else {
+			throw new Exception("[Error] : boardUpdateOk boardVO null");
+		}
+		return "redirect:/boardList.tmssul"; 
+	}
 }

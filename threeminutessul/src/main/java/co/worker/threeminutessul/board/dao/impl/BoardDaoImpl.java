@@ -36,5 +36,15 @@ public class BoardDaoImpl implements BoardDaoIF{
 	public String getBoardContent(int paramBoardSeq) {
 		return template.selectOne("board.getBoardContent",paramBoardSeq);
 	}
+
+	@Override
+	public BoardVO getBoard(Integer boardSeq) {
+		return template.selectOne("board.getBoard",boardSeq);
+	}
+
+	@Override
+	public int updateBoard(BoardVO board) {
+		return template.update("board.updateBoard", board);
+	}
 }
 

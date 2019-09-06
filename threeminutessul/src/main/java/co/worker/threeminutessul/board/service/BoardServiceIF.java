@@ -12,4 +12,8 @@ public interface BoardServiceIF {
 
 	String getBoardContent(int paramBoardSeq);
 
+	BoardVO getBoard(Integer boardSeq);
+
+	int updateBoard(BoardVO board);
+
 }

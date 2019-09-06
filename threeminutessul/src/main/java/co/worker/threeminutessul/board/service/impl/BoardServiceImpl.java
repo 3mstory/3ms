@@ -40,4 +40,14 @@ public class BoardServiceImpl implements BoardServiceIF{
 	public String getBoardContent(int paramBoardSeq) {
 		return dao.getBoardContent(paramBoardSeq);
 	}
+
+	@Override
+	public BoardVO getBoard(Integer boardSeq) {
+		return dao.getBoard(boardSeq);
+	}
+
+	@Override
+	public int updateBoard(BoardVO board) {
+		return dao.updateBoard(board);
+	}
 }

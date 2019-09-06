@@ -55,5 +55,13 @@
 		where boardSeq = #{boardSeq}
 	</select>
 	
+	<select id="getBoard" parameterType="Integer" resultType="boardVo">
+		select boardSeq, title, content contents from tblboard where boardSeq = #{boardSeq}
+	</select>
+	
+	<update id="updateBoard" parameterType="boardVo">
+		update tblboard set title = #{title}, content = #{contents}, updatedate = now() where boardSeq = #{boardSeq}
+	</update>
+	
 </mapper>
 
