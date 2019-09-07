@@ -14,6 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+  <link rel="stylesheet" href="resources/css/sh.css" />
+  
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -21,6 +23,7 @@
 </head>
 
 <body>
+<div class="updateBody">
   <link href="resources/css/custom.css" type="text/css" rel="stylesheet">
   <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
     <div class="container justify-content-between align-items-center text-secondary">
@@ -74,9 +77,16 @@
       </div>
     </form>
   </div>
+</div>  
   <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="resources/js/common.js"></script>
   <script src="resources/js/CKEditor.js"></script>
+  
+  <!-- 우성환 스크립트 -->
+  <script src="resources/js/common_sh.js"></script>
+  <script>
+  	adjustSizeByDevice();
+  </script>
 </body>

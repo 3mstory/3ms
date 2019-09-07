@@ -155,7 +155,7 @@ $(function() {
         if (data.toString().indexOf("<script>") > -1) {
             //쫒겨나야함
             alert("로그인을 하고 진행해주시기 바랍니다.");
-            location.href = "/threeminutessul/boardList.tmssul";
+            //location.href = "/threeminutessul/boardList.tmssul";
             return false;
         }
         if (result !== -1) {
