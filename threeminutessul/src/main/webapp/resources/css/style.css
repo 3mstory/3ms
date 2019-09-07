@@ -279,12 +279,11 @@ li {
 
 /*form*/
 .form-control.ty_tit {
-  border-color: hsl(270, 1%, 29%);
+  /* border-color: hsl(270, 1%, 29%); */
 }
 
 .ck-editor__editable_inline {
-  height: 70vh;
-  overflow: hidden !important;
+  overflow: scroll !important;
 }
 
 .custom-file-input ~ .custom-file-label::after {

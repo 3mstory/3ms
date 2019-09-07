@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +31,7 @@
 <div class="addBody">
   <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
     <div class="container justify-content-between align-items-center text-secondary">
-      <a href="index.html"><span class="octicon octicon-home text-secondary"></span></a>
+      <a href="/threeminutessul/boardList.tmssul"><span class="octicon octicon-home text-secondary"></span></a>
       <h3 class="navbar-brand mx-auto p-0 font-header">
         <span class="font-color-main">썰&nbsp;</span>풀기
       </h3>
@@ -42,7 +43,12 @@
   <div class="container-fluid" id="cont">
     <form action="/threeminutessul/boardAddOk.tmssul" method="post" class="mb-0" novalidate>
       <div class="form-group my-3">
-        <input type="text" class="form-control ty_tit" name="title" placeholder="글 제목을 입력해주세요." required>
+        <input type="text" class="form-control ty_tit" id="title" name="title" placeholder="글 제목을 입력해주세요." required style="display:inline-block;">
+        <select id="categoryList" class="form-control" style="display:inline-block;">
+      		<c:forEach items = "${categoryList}" var="category">
+      			<option value="">${category.categoryName}</option>
+      		</c:forEach>
+      	</select>
       </div>
       <div class="form-group">
         <textarea class="form-control vh-75" placeholder="내용을 입력해주세요." name="contents" id="write_cont" cols="30" rows="10"
@@ -89,6 +95,10 @@
   <!-- 우성환 스크립트 -->
   <script src="resources/js/common_sh.js"></script>
   <script>
-  	adjustSizeByDevice();
+  	$(document).ready(function(){
+		//화면 width 조절
+	  	adjustSizeByDevice();
+		
+	}); 
   </script>
 </body>

@@ -121,11 +121,13 @@
 
 			<div class="collapse navbar-collapse " id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">임시로그인버튼</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/threeminutessul/logoutOk.tmssul">로그아웃</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/threeminutessul/boardAdd.tmssul">임시게시판 글쓰기</a></li>
+					<c:if test="${sessionUserSeq ==null }">
+						<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#login_form" href="#">로그인</a></li>
+					</c:if>
+					<c:if test="${sessionUserSeq !=null }">
+						<li class="nav-item"><a class="nav-link" href="/threeminutessul/logoutOk.tmssul">로그아웃</a></li>
+					</c:if>
+					<li class="nav-item"><a class="nav-link" href="/threeminutessul/boardAdd.tmssul">썰 풀기</a></li>
 					<li class="nav-item active"><a class="nav-link" href="#">연애</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">공포</a></li>
@@ -238,7 +240,9 @@
 				</div>
 				<div class="card-body">
 					<div class="font-weight-bold text-truncate">
-							{{:title}}
+							<span escapeXml = "true">
+								{{>title}}
+							</span>
 					</div>
 					<div class="collapse card-text card-collapse" data-parent="#brd-acdn">
 						<p class="card-contents mb-4">
@@ -270,8 +274,8 @@
 								<ul id="commentList_{{:boardSeq}}" class="card-replys">
 									<li class="card-reply-item my-1">
 										<button type="button"
-											class="btn btn-outline-secondary writer py-0 px-1 align-top">{{:nickname}}</button>
-										<span>{{:content}}</span>
+											class="btn btn-outline-secondary writer py-0 px-1 align-top">{{>nickname}}</button>
+										<p>{{>content}}</p>
 									</li>
 								</ul>
 							</div>
@@ -280,7 +284,7 @@
 							<input type="text" class="form-control" placeholder="닉네임 클릭시 지정 댓글 가능">
 							<span class="card-reply-mention"></span>
 							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon{{:boardSeq}}"><i
+								<button class="btn btn-outline-secondary reply_submit_btn" type="button" id="button-addon{{:boardSeq}}"><i
 										class="far fa-paper-plane"></i></button>
 							</div>
 						</div>
@@ -309,21 +313,21 @@
 	<script id="replyTemplate" type="text/x-jsrender">
 		<li class="card-reply-item my-1">
 			<button type="button"
-				class="btn btn-outline-secondary writer py-0 px-1 align-top">{{:nickname}}</button>
-			<span>{{:content}}</span>
+				class="btn btn-outline-secondary btn writer py-0 px-1 align-top">{{>nickname}}</button>
+			<span>{{>content}}</span>
 		</li>
 	</script>
 	<script id="toastTemplate" type="text/x-jsrender">
 		<div class="toast vote-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-delay="1000"
 			data-autohide="true">
 			<div class="toast-body">
-				{{:content}}
+				{{>content}}
 			</div>
 		</div>
 	</script>
 	
 	<script type="text/javascript">
-
+		adjustSizeByDevice();
 		/* 댓글 언급 기능 */
 		$(".accordion").on('click', '.card-replys button', function () {
 			var cardClpse = $(this).closest('.card-collapse');
@@ -341,7 +345,51 @@
 			var mention = $(this).toggle();
 			var input = mention.siblings('input');
 			input.css('padding-left', input.css('padding-right'));
-		})
+		});
+		/* 댓글 비동기 입력 처리*/
+        $(".reply_submit_btn").on("click", function(e) {
+      	  var wrapper = $(this).closest(".card-reply-input");
+      	    var input = wrapper.children("input");
+      	    var mention = wrapper.find(".card-reply-mention");
+      	    var card = wrapper.closest(".card");
+      	    var cardId = card.attr("id").substr(-2);
+      	    var text = input.val();
+      	    input.val("");
+      	    input.css("padding-left", "12px");
+      	    mention.text("");
+      	    mention.hide();
+      	    var reqData = {
+      	      boardSeq: cardId,
+      	      content: text
+      	    };
+      	    $.ajax({
+      	      url: "/threeminutessul/commentInsert.tmssul",
+      	      method: "POST",
+      	      data: reqData,
+      	      success: function(data) {
+      	        var result = data.result;
+      	        if (data.toString().indexOf("<script>") > -1) {
+      	            //쫒겨나야함
+      	            alert("로그인을 하고 진행해주시기 바랍니다.");
+      	            //location.href = "/threeminutessul/boardList.tmssul";
+      	            return false;
+      	        }
+      	        if (result !== -1) {
+      	          var replys = wrapper.siblings(".card-reply-area").find(".card-replys");
+      	          var replyTmpl = $.templates("#replyTemplate");
+      	          var html = replyTmpl.render(data);
+      	          $(html).appendTo(replys);
+      	          card.find('.reply-cnt').text(data.commentSize);
+      	        } else {
+      	          makeToast("댓글이 등록 되지 못했습니다.");
+      	        }
+      	      },
+      	      error: function(a,b,c) {
+      	    	  console.log(a,b,c);
+      	      }
+      	    });
+      	    
+        });
 	</script>
 </body>
 

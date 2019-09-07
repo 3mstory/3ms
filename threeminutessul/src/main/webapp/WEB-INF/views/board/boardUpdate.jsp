@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +15,10 @@
   <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
-  <link rel="stylesheet" href="resources/css/sh.css" />
+  <link href="resources/css/custom.css" type="text/css" rel="stylesheet">
   
+  <!-- 우성환 css -->
+  <link rel="stylesheet" href="resources/css/sh.css" />
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,10 +27,9 @@
 
 <body>
 <div class="updateBody">
-  <link href="resources/css/custom.css" type="text/css" rel="stylesheet">
   <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
     <div class="container justify-content-between align-items-center text-secondary">
-      <a href="index.html"><span class="octicon octicon-home text-secondary"></span></a>
+      <a href="/threeminutessul/boardList.tmssul"><span class="octicon octicon-home text-secondary"></span></a>
       <h3 class="navbar-brand mx-auto p-0 font-header">
         <span class="font-color-main">썰&nbsp;</span>풀기
       </h3>
@@ -38,9 +40,15 @@
 
   <div class="container-fluid" id="cont">
     <form action="/threeminutessul/boardUpdateOk.tmssul" method="post" class="mb-0" novalidate>
-    	<input type="hidden" name="boardSeq" value="${board.boardSeq}" />
+      <input type="hidden" name="boardSeq" value="${board.boardSeq}"/>
       <div class="form-group my-3">
-        <input type="text" class="form-control ty_tit" name="title" placeholder="글 제목을 입력해주세요." required value="${board.title }">
+      	
+      	<input type="text" id="title" class="form-control" name="title" placeholder="글 제목을 입력해주세요." required value="${board.title }" >
+       	<select id="categoryList" class="form-control" >
+      		<c:forEach items = "${categoryList}" var="category">
+      			<option value="">${category.categoryName}</option>
+      		</c:forEach>
+      	</select>
       </div>
       <div class="form-group">
         <textarea class="form-control vh-75" placeholder="내용을 입력해주세요." name="contents" id="write_cont" cols="30" rows="10"
@@ -87,6 +95,10 @@
   <!-- 우성환 스크립트 -->
   <script src="resources/js/common_sh.js"></script>
   <script>
-  	adjustSizeByDevice();
+  	$(document).ready(function(){
+  		//화면 width 조절
+  	  	adjustSizeByDevice();
+  		
+  	});  	
   </script>
 </body>

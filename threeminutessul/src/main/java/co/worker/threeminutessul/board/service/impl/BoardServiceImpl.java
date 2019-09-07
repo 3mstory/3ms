@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import co.worker.threeminutessul.board.dao.BoardDaoIF;
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.board.model.CategoryVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
@@ -49,5 +50,10 @@ public class BoardServiceImpl implements BoardServiceIF{
 	@Override
 	public int updateBoard(BoardVO board) {
 		return dao.updateBoard(board);
+	}
+
+	@Override
+	public List<CategoryVO> getAllCategoryList() {
+		return dao.getAllCategoryList();
 	}
 }

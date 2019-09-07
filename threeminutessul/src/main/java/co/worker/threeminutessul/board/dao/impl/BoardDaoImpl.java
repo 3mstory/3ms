@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import co.worker.threeminutessul.board.dao.BoardDaoIF;
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.board.model.CategoryVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 @Repository
@@ -45,6 +46,11 @@ public class BoardDaoImpl implements BoardDaoIF{
 	@Override
 	public int updateBoard(BoardVO board) {
 		return template.update("board.updateBoard", board);
+	}
+
+	@Override
+	public List<CategoryVO> getAllCategoryList() {
+		return template.selectList("getAllCategoryList");
 	}
 }
 

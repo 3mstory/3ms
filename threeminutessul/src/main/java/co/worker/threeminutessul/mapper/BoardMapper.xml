@@ -63,5 +63,9 @@
 		update tblboard set title = #{title}, content = #{contents}, updatedate = now() where boardSeq = #{boardSeq}
 	</update>
 	
+	<select id="getAllCategoryList" resultType="categoryVo">
+		select * from tblcategory
+	</select>
+	
 </mapper>
 

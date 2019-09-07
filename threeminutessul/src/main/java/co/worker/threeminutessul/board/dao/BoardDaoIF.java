@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.board.model.CategoryVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 public interface BoardDaoIF {
@@ -19,5 +20,7 @@ public interface BoardDaoIF {
 	BoardVO getBoard(Integer boardSeq);
 
 	int updateBoard(BoardVO board);
+
+	List<CategoryVO> getAllCategoryList();
 
 }

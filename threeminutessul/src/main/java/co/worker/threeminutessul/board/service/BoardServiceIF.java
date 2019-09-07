@@ -3,6 +3,7 @@ package co.worker.threeminutessul.board.service;
 import java.util.List;
 
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.board.model.CategoryVO;
 
 public interface BoardServiceIF {
 
@@ -15,5 +16,7 @@ public interface BoardServiceIF {
 	BoardVO getBoard(Integer boardSeq);
 
 	int updateBoard(BoardVO board);
+
+	List<CategoryVO> getAllCategoryList();
 
 }

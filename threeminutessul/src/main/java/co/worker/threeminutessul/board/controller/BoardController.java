@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.worker.threeminutessul.board.model.BoardVO;
+import co.worker.threeminutessul.board.model.CategoryVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.NewPageAction;
@@ -105,6 +106,10 @@ public class BoardController {
 			NewPageAction.action(resp, actionCode);
 			return null
 		};*/
+		List<CategoryVO> categoryList = service.getAllCategoryList();
+		
+		req.setAttribute("categoryList", categoryList);
+		
 		return "board/boardAdd";
 		//로그인을 먼저 진행해주시기 바랍니다.
 	}
@@ -130,6 +135,9 @@ public class BoardController {
 	public String boardUpdate(HttpServletRequest req, HttpServletResponse resp,HttpSession session, Integer boardSeq) throws Exception {
 		if(boardSeq != null) {
 			BoardVO board = service.getBoard(boardSeq);
+			List<CategoryVO> categoryList = service.getAllCategoryList();
+			
+			req.setAttribute("categoryList", categoryList);
 			req.setAttribute("board",board);
 		}else {
 			throw new Exception("[Error] : update boardSeq null");
