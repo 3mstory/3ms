@@ -33,6 +33,8 @@
 	<link rel="shortcut icon" href="resources/favicon.gif" type="image/x-icon">
 	<link rel="icon" href="resources/favicon.gif" type="image/x-icon">
 </head>
+
+
 <!-- 임시 회원가입 모달 -->
 <div class="modal fade" id="join_form" tabindex="-1" role="dialog" aria-labelledby="join_form" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -135,7 +137,16 @@
 				</ul>
 			</div>
 		</div>
-
+		<div id="search" style="display:none;">
+			<select name="searchSelect" id="searchSelect" class="form-control" style="display:inline-block;">
+				<option value="0">전체</option>
+				<option value="1">제목</option>
+				<option value="2">내용</option>
+				<option value="3">닉네임</option>
+			</select>
+			<input type="text" id="searchtext" name="searchtext" class="form-control" style="display:inline-block;"/>
+			<input type="button" id="searchBtn" class="p-0 font-header btn btn-default form-control" value="검색" style="border:1px solid #D3D3D3; display:inline-block;"/>
+		</div>
 	</nav>
 	<div class="nvbar-hr"></div>
 	<!--본문-->
@@ -225,6 +236,28 @@
 		<a href="/threeminutessul/boardAdd.tmssul" id="zoomBtn" class="zoom-fab zoom-btn-mid"><i
 				class="fas fa-pencil-alt"></i></a>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
 	<script id="cardTemplate" type="text/x-jsrender">
 		<div class="card" id="card_{{:boardSeq}}">
 				<div class="card-header">
@@ -309,6 +342,18 @@
 	
 	<!-- 우성환 js 파일 -->
 	<script src="resources/js/common_sh.js"></script>
+	<script id="noneTemplate" type="text/x-jsrender">
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col d-flex flex-column justify-content-center">
+						해당 검색어 <span style="color:red;">{{>searchtext}}</span> 검색결과가 없습니다.
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	
 	
 	<script id="replyTemplate" type="text/x-jsrender">
 		<li class="card-reply-item my-1">
@@ -327,6 +372,8 @@
 	</script>
 	
 	<script type="text/javascript">
+		var searchText = null;
+		var searchOption = null;
 		adjustSizeByDevice();
 		/* 댓글 언급 기능 */
 		$(".accordion").on('click', '.card-replys button', function () {
@@ -347,7 +394,7 @@
 			input.css('padding-left', input.css('padding-right'));
 		});
 		/* 댓글 비동기 입력 처리*/
-        $(".reply_submit_btn").on("click", function(e) {
+        $(".accordion").on("click", ".reply_submit_btn", function(e) {
       	  var wrapper = $(this).closest(".card-reply-input");
       	    var input = wrapper.children("input");
       	    var mention = wrapper.find(".card-reply-mention");

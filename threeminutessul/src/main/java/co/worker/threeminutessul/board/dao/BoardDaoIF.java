@@ -5,11 +5,12 @@ import java.util.List;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.model.CategoryVO;
+import co.worker.threeminutessul.board.model.SearchVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 public interface BoardDaoIF {
 
-	List<BoardVO> getBoard(int page);
+	List<BoardVO> getBoard(SearchVO searchVO);
 
 	int insertBoard(BoardVO vo);
 

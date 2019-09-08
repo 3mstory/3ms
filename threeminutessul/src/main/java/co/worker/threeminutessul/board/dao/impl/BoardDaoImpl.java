@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import co.worker.threeminutessul.board.dao.BoardDaoIF;
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.model.CategoryVO;
+import co.worker.threeminutessul.board.model.SearchVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 
 @Repository
@@ -19,8 +20,8 @@ public class BoardDaoImpl implements BoardDaoIF{
 	private SqlSessionTemplate template;
 
 	@Override
-	public List<BoardVO> getBoard(int page) {
-		return template.selectList("board.boardList",page);
+	public List<BoardVO> getBoard(SearchVO searchVO) {
+		return template.selectList("board.boardList",searchVO);
 	}
 
 	@Override

@@ -28,9 +28,7 @@ $(function() {
     var downBtn = card.find(".fa-chevron-down");
     if (!cardCont.text().trim().length && !$(cardCont).children().length) {
       //한번도 클릭한적 없다면
-      $(this)
-        .find("i")
-        .hide();
+      $(this).find("i").hide();
       spinner.show();
       var boardSeq = card.attr("id").substr(5);
       $.ajax({
@@ -130,62 +128,25 @@ $(function() {
     });
   });
 
-  /* 댓글 비동기 입력 처리*/
-  $(".reply_submit_btn").on("click", function(e) {
-    var wrapper = $(this).closest(".card-reply-input");
-    var input = wrapper.children("input");
-    var mention = wrapper.find(".card-reply-mention");
-    var card = wrapper.closest(".card");
-    var cardId = card.attr("id").substr(-2);
-    var text = input.val();
-    input.val("");
-    input.css("padding-left", "12px");
-    mention.text("");
-    mention.hide();
-    var reqData = {
-      boardSeq: cardId,
-      content: text
-    };
-    $.ajax({
-      url: "/threeminutessul/commentInsert.tmssul",
-      method: "POST",
-      data: reqData,
-      success: function(data) {
-        var result = data.result;
-        if (data.toString().indexOf("<script>") > -1) {
-            //쫒겨나야함
-            alert("로그인을 하고 진행해주시기 바랍니다.");
-            //location.href = "/threeminutessul/boardList.tmssul";
-            return false;
-        }
-        if (result !== -1) {
-          var replys = wrapper
-            .siblings(".card-reply-area")
-            .find(".card-replys");
-          var replyTmpl = $.templates("#replyTemplate");
-          var html = replyTmpl.render(data);
-          $(html).appendTo(replys);
-          card.find('.reply-cnt').text(data.commentSize);
-        } else {
-          makeToast("댓글이 등록 되지 못했습니다.");
-        }
-      },
-      error: function(a,b,c) {
-    	  console.log(a,b,c);
-      }
-    });
-  });
 
   //직접 만든 인피니티 스크롤 라이브러리
   (function() {
 	var pagecount = 2;
     var spinWrap = makeSpinner();
     var isExecuted = false;
+    
     $(window).scroll(function() {
       var top = window.scrollY;
       var docH = document.body.offsetHeight;
       var winH = window.innerHeight;
-
+      var param = {};
+      if(searchText){
+    	  param.searchtext = searchText;
+      }
+      if(searchOption){
+    	  param.searchoption = searchOption;
+      }
+      param.page = pagecount;
       if (top >= docH - winH && !isExecuted) {
         isExecuted = true;
         var tmpl = $.templates("#cardTemplate");
@@ -193,7 +154,7 @@ $(function() {
         $.ajax({
         	url: '/threeminutessul/ajaxboardList.tmssul',
 			dataType:'json',
-			data:'page='+pagecount,
+			data:param,
 			success: function (data) {
 				if(data.length!=0){
 					var html = tmpl.render(data);

@@ -8,10 +8,11 @@ function adjustSizeByDevice(){
 		
 		var bodySize = $("#cont").width();
 		
-		$("#categoryList").width(bodySize);
-  		$("#title.form-control").width(bodySize);
-  		
   		$("#title.form-control").css("margin-bottom","20");
+  		
+  		//List페이지 검색
+  		$("#searchSelect").width(bodySize*0.23);
+  		$("#searchtext").width(bodySize*0.6);
 	} else {
 		
 		
@@ -29,3 +30,51 @@ function adjustSizeByDevice(){
 	    $("#title.form-control").css("display","inline-block");
 	}
 }
+
+//검색어들 사라지도록
+$(".navbar-toggler").on("click",function(e){
+	$("#search").toggle();
+});
+
+//검색버튼
+$("#searchBtn").on("click",function(e){
+	if($("#searchtext").val() == ""){
+		alert("검색어를 입력해주세요.");
+		return false;
+	}
+		
+	searchOption = $("#searchSelect").val();
+	searchText = $("#searchtext").val();
+	var pagecount = 1;
+	var tmpl = $.templates("#cardTemplate");
+	$.ajax({
+		type:"get",
+		url:"/threeminutessul/ajaxboardList.tmssul",
+		dataType:"json",
+		data : "searchoption="+searchOption+"&searchtext="+searchText+"&page = "+pagecount,
+		success:function(data){
+			$(".accordion").empty();
+			console.log(data);
+			if(data.length!=0){
+				
+				var html = tmpl.render(data);
+				$(html).appendTo('.accordion');
+				
+				pagecount++;
+			}else{
+				var noneData = {searchtext : searchText};
+				
+				var none = $.templates("#noneTemplate");
+				var html = none.render(noneData);
+				$(html).appendTo('.accordion');
+			}
+			$(".navbar-toggler").click();
+		},
+		error: function(a,b,c){
+			console.log(a,b,c);
+		}
+		
+		
+	});
+	
+});

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -41,29 +39,30 @@ public class CkeditorFileUploadController {
 		String userid = (String)session.getAttribute("userid");
 		String userSeq = (String)session.getAttribute("userSeq");
 		
-
-		
 		CommonsMultipartFile file = filebean.getUpload();
-		String fileName = file.getOriginalFilename();
 		if(file != null){
 			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())){
 				System.out.println(file.getContentType());
 				if(file.getContentType().toLowerCase().startsWith("image/")){
 					try{
-						
+						String fileName = file.getOriginalFilename();
 						byte[] bytes = file.getBytes();
 						String uploadPath = session.getServletContext().getRealPath("/resources/boardUpload");
+						uploadPath = uploadPath +"\\"+userid+"\\" + fileName;
 						File uploadFile = new File(uploadPath);
+						
+						//fileName = UUID.randomUUID().toString();
+						
+						
 						if(!uploadFile.exists()){
 							uploadFile.mkdirs();
 						}
-						fileName = UUID.randomUUID().toString();
-						uploadPath = uploadPath +"/"+userid+"/" + fileName;
+						
 						out = new FileOutputStream(new File(uploadPath));
                         out.write(bytes);
-                        
+                        resp.setCharacterEncoding("UTF-8");
+                		resp.setContentType("text/html; charset=utf-8");
                         printWriter = resp.getWriter();
-                        resp.setContentType("text/html");
                         String fileUrl = req.getContextPath() + "/resources/boardUpload/"+userid+"/"+ fileName;
                         
                         // json 데이터로 등록

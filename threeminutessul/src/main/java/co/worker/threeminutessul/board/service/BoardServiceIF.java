@@ -4,19 +4,20 @@ import java.util.List;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.model.CategoryVO;
+import co.worker.threeminutessul.board.model.SearchVO;
 
 public interface BoardServiceIF {
 
-	List<BoardVO> getBoard(String userSeq, int page);
+	List<BoardVO> getBoard(String userSeq, SearchVO searchVO) throws Exception;
 
-	int insertBoard(BoardVO vo);
+	int insertBoard(BoardVO vo) throws Exception;
 
-	String getBoardContent(int paramBoardSeq);
+	String getBoardContent(int paramBoardSeq) throws Exception;
 
-	BoardVO getBoard(Integer boardSeq);
+	BoardVO getBoard(Integer boardSeq) throws Exception;
 
-	int updateBoard(BoardVO board);
+	int updateBoard(BoardVO board) throws Exception;
 
-	List<CategoryVO> getAllCategoryList();
+	List<CategoryVO> getAllCategoryList() throws Exception;
 
 }

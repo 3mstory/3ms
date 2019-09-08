@@ -46,7 +46,7 @@
         <input type="text" class="form-control ty_tit" id="title" name="title" placeholder="글 제목을 입력해주세요." required style="display:inline-block;">
         <select id="categoryList" class="form-control" style="display:inline-block;">
       		<c:forEach items = "${categoryList}" var="category">
-      			<option value="">${category.categoryName}</option>
+      			<option value="${category.categorySeq}">${category.categoryName}</option>
       		</c:forEach>
       	</select>
       </div>

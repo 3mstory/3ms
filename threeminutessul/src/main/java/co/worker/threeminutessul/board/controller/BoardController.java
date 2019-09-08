@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.model.CategoryVO;
+import co.worker.threeminutessul.board.model.SearchVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.NewPageAction;
@@ -41,11 +42,11 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value = "/boardList.tmssul", method = { RequestMethod.GET })
-	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,Integer page) {
+	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,SearchVO searchVO) throws Exception {
 		List<BoardVO> list = new ArrayList<BoardVO>();
-		if(page==null) page = 1;
+		if(searchVO.getPage()==null) searchVO.setPage(1);
 		String userSeq = (String)session.getAttribute("userSeq");
-		list = service.getBoard(userSeq,page);
+		list = service.getBoard(userSeq,searchVO);
 		JSONArray jsonArr = new JSONArray();
 		for(BoardVO vo : list) {
 			JSONObject json = new JSONObject();
@@ -74,10 +75,12 @@ public class BoardController {
 	 */
 	@RequestMapping(value = "/ajaxboardList.tmssul", method = { RequestMethod.GET })
 	@ResponseBody
-	public JSONArray ajaxboardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,int page) {
+	public JSONArray ajaxboardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session
+				, SearchVO searchVO) throws Exception {
 		List<BoardVO> list = new ArrayList<BoardVO>();
+		if(searchVO.getPage()==null) searchVO.setPage(1);
 		String userSeq = (String)session.getAttribute("userSeq");
-		list = service.getBoard(userSeq,page);
+		list = service.getBoard(userSeq,searchVO);
 		JSONArray jsonArr = new JSONArray();
 		for(BoardVO vo : list) {
 			JSONObject json = new JSONObject();
@@ -97,7 +100,7 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/boardAdd.tmssul", method = { RequestMethod.GET })
-	public String boardAdd(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws IOException {
+	public String boardAdd(HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws Exception {
 		/*if(session.getAttribute("userid")==null 
 				|| session.getAttribute("userid").equals("")) {
 			//로그인안했으면 튕겨내야함.

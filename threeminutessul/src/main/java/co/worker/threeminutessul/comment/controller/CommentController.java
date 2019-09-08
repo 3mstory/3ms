@@ -33,7 +33,7 @@ public class CommentController {
 	
 	@RequestMapping(value = "/commentList.tmssul", method = { RequestMethod.GET })
 	@ResponseBody
-	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) {
+	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) throws Exception {
 		List<CommentVO> commentList = service.getComment(boardSeq);
 		
 		// board 컨텐츠 가져오기
