@@ -31,6 +31,7 @@ public class LoginController {
 		if(user != null) {//로그인 성공.
 			session.setAttribute("userSeq", user.getUserSeq());
 			session.setAttribute("userid", user.getUserid());
+			session.setAttribute("nickname", user.getNickname());
 			req.setAttribute("user", user);
 			actionCode = "alert('환영합니다.'); location.href='/threeminutessul/boardList.tmssul';";
 		}else {//로그인실패

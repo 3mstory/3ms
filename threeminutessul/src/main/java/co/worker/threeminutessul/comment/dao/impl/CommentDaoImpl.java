@@ -29,5 +29,10 @@ public class CommentDaoImpl implements CommentDaoIF{
 	public int getCommentSize(CommentVO vo) {
 		return template.selectOne("comment.getCommentSize",vo);
 	}
+
+	@Override
+	public int deleteByBoardSeq(int boardSeq) {
+		return template.delete("comment.deleteByBoardSeq", boardSeq);
+	}
 	
 }

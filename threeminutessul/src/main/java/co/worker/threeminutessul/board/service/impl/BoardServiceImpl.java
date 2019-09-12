@@ -62,4 +62,9 @@ public class BoardServiceImpl implements BoardServiceIF{
 	public List<CategoryVO> getAllCategoryList() throws Exception{
 		return dao.getAllCategoryList();
 	}
+
+	@Override
+	public int boardDelete(int boardSeq) throws Exception {
+		return dao.boardDelete(boardSeq);
+	}
 }

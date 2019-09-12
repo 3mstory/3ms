@@ -173,9 +173,11 @@
 						<div class="collapse card-collapse card-text" data-parent="#brd-acdn">
 							<p class="card-contents mb-4">
 								<c:if test="${sessionUserSeq == vo.userSeq}">
-									<div style="text-align:right">
+									<div style="text-align:right;">
 										<!-- <input type="button" id="updateBtn" value="수정" class="btn btn-info btn-xs"/> -->
 										<a href="/threeminutessul/boardUpdate.tmssul?boardSeq=${vo.boardSeq}" id="updateBtn">수정</a>
+										<!-- <input type="button" id="updateBtn" value="수정" class="btn btn-info btn-xs"/> -->
+										<a href="#none" class="deleteBtn" data-boardseq="${vo.boardSeq}">삭제</a>
 									</div>
 								</c:if>
 							</p>

@@ -1,5 +1,17 @@
 #updateBtn{
 	color: gray;
-	text-decoration: underline;
 	font-size:13px;
+}
+#updateBtn:hover{
+	color:black;
+	text-shadow: 0 0 0.5px black;
+}
+#deleteBtn{
+	color: gray;
+	font-size:13px;
+}
+#deleteBtn:hover{
+	cursor:pointer;
+	color:black;
+	text-shadow: 0 0 0.5px black;
 }

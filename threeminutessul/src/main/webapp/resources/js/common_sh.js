@@ -73,8 +73,36 @@ $("#searchBtn").on("click",function(e){
 		error: function(a,b,c){
 			console.log(a,b,c);
 		}
-		
+	});
+	
+});
+
+$(".deleteBtn").bind("click",function(){
+	if(!confirm("해당 썰을 삭제하시겠습니까?")){
+		return;
+	}
+	var boardSeq = $(this).data('boardseq');
+	$.ajax({
+		type:'POST',
+		url:'/threeminutessul/boardDelete.tmssul',
+//		contentType:"application/json; charset=utf-8",
+		data: 'boardSeq='+boardSeq,
+		dataType:'json',
+		success:function(result){
+			var result = result.result;
+			if(result==1){
+				location.reload();
+			}else{
+				alert("알 수 없는 에러 발생.");
+			}
+		},error:function(xhr, status, er){
+			console.log(xhr, status, er);
+		}
+			
 		
 	});
 	
 });
+
+
+

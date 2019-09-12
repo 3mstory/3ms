@@ -20,4 +20,6 @@ public interface BoardServiceIF {
 
 	List<CategoryVO> getAllCategoryList() throws Exception;
 
+	int boardDelete(int boardSeq) throws Exception;
+
 }

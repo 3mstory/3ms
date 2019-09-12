@@ -85,5 +85,9 @@
 		select * from tblcategory
 	</select>
 	
+	<delete id="boardDelete">
+		delete from tblboard where boardSeq = #{boardSeq}
+	</delete>
+	
 </mapper>
 

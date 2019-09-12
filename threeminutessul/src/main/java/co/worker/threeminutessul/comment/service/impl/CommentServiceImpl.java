@@ -29,4 +29,9 @@ public class CommentServiceImpl implements CommentServiceIF {
 	public int getCommentSize(CommentVO vo) {
 		return dao.getCommentSize(vo);
 	}
+
+	@Override
+	public int deleteByBoardSeq(int boardSeq) {
+		return dao.deleteByBoardSeq(boardSeq);
+	}
 }

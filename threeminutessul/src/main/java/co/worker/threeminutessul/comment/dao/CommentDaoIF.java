@@ -12,4 +12,6 @@ public interface CommentDaoIF {
 
 	int getCommentSize(CommentVO vo);
 
+	int deleteByBoardSeq(int parseInt);
+
 }

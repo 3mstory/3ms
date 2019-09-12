@@ -1,6 +1,5 @@
 package co.worker.threeminutessul.board.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +11,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.worker.threeminutessul.board.model.BoardVO;
 import co.worker.threeminutessul.board.model.CategoryVO;
 import co.worker.threeminutessul.board.model.SearchVO;
 import co.worker.threeminutessul.board.service.BoardServiceIF;
+import co.worker.threeminutessul.comment.service.CommentServiceIF;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 import co.worker.threeminutessul.util.NewPageAction;
 
@@ -32,6 +34,9 @@ public class BoardController {
 	
 	@Autowired
 	private LikeyHateServiceIF likehateservice;
+	
+	@Autowired
+	private CommentServiceIF commentService;
 	
 	/**
 	 * 게시판 list 그리는 메소드. 여기추가하면 ajaxboardlist 메소드도 추가해야하는지 판단할것.
@@ -118,6 +123,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/boardAddOk.tmssul", method = { RequestMethod.POST })
+	@Transactional
 	public void boardAddOk(HttpServletRequest req, HttpServletResponse resp, HttpSession session, BoardVO vo) throws Exception {
 		vo.setUserid((String)session.getAttribute("userid"));
 		vo.setWriter(Integer.parseInt((String)session.getAttribute("userSeq")));
@@ -149,6 +155,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/boardUpdateOk")
+	@Transactional
 	public String boardUpdateOk(HttpServletRequest req, HttpServletResponse resp,HttpSession session, BoardVO board) throws Exception {
 		int result = 0;
 		//업데이트 처리
@@ -159,5 +166,23 @@ public class BoardController {
 			throw new Exception("[Error] : boardUpdateOk boardVO null");
 		}
 		return "redirect:/boardList.tmssul"; 
+	}
+	
+	@PostMapping("/boardDelete")
+	@ResponseBody
+	@Transactional
+	public JSONObject boardDelete(HttpServletRequest req, HttpServletResponse resp, HttpSession session, @RequestParam("boardSeq") Integer boardSeq) throws Exception{
+		JSONObject result = new JSONObject();
+		
+		//댓글 먼저 삭제
+		int commentResult = commentService.deleteByBoardSeq(boardSeq);
+		
+		//글 삭제
+		int boardResult = service.boardDelete(boardSeq);
+		if(boardResult == 1)
+			result.put("result",boardResult);
+		else
+			result.put("result",-1);
+		return result;
 	}
 }

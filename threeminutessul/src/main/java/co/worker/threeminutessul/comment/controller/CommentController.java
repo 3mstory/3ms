@@ -96,7 +96,7 @@ public class CommentController {
 		if(result==1) {
 			//성공
 			json.put("content",vo.getContent());//댓글 넣은거.
-			json.put("nickname",(String)session.getAttribute("userid"));
+			json.put("nickname",(String)session.getAttribute("nickname"));
 			json.put("commentSize",commentSize);
 			//json.put("",);
 			json.put("response", 1);

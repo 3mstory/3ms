@@ -24,4 +24,6 @@ public interface BoardDaoIF {
 
 	List<CategoryVO> getAllCategoryList();
 
+	int boardDelete(int boardSeq);
+
 }

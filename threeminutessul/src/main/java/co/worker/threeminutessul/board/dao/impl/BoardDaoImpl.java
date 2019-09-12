@@ -51,7 +51,12 @@ public class BoardDaoImpl implements BoardDaoIF{
 
 	@Override
 	public List<CategoryVO> getAllCategoryList() {
-		return template.selectList("getAllCategoryList");
+		return template.selectList("board.getAllCategoryList");
+	}
+
+	@Override
+	public int boardDelete(int boardSeq) {
+		return template.delete("board.boardDelete",boardSeq);
 	}
 }
 
