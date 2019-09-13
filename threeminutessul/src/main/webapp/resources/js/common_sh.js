@@ -1,3 +1,7 @@
+$(".category").on("click",function(){
+	nowCategory = $(this).data('category');
+});
+
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -51,7 +55,7 @@ $("#searchBtn").on("click",function(e){
 		type:"get",
 		url:"/threeminutessul/ajaxboardList.tmssul",
 		dataType:"json",
-		data : "searchoption="+searchOption+"&searchtext="+searchText+"&page = "+pagecount,
+		data : "searchoption="+searchOption+"&searchtext="+searchText+"&page = "+pagecount+"&category = "+nowCategory,
 		success:function(data){
 			$(".accordion").empty();
 			console.log(data);

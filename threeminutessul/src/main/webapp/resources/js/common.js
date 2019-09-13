@@ -134,7 +134,6 @@ $(function() {
 	var pagecount = 2;
     var spinWrap = makeSpinner();
     var isExecuted = false;
-    
     $(window).scroll(function() {
       var top = window.scrollY;
       var docH = document.body.offsetHeight;
@@ -147,7 +146,10 @@ $(function() {
     	  param.searchoption = searchOption;
       }
       param.page = pagecount;
-      if (top >= docH - winH && !isExecuted) {
+      param.category = nowCategory;
+
+
+      if (top >= docH - winH-1 && !isExecuted) {
         isExecuted = true;
         var tmpl = $.templates("#cardTemplate");
         showSpinner(spinWrap);

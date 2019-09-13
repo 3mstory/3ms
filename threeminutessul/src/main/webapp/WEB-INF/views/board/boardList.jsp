@@ -34,6 +34,9 @@
 	<link rel="icon" href="resources/favicon.gif" type="image/x-icon">
 </head>
 
+<script>
+	var nowCategory = '<c:out value="${category}"/>';
+</script>
 
 <!-- 임시 회원가입 모달 -->
 <div class="modal fade" id="join_form" tabindex="-1" role="dialog" aria-labelledby="join_form" aria-hidden="true">
@@ -130,10 +133,11 @@
 						<li class="nav-item"><a class="nav-link" href="/threeminutessul/logoutOk.tmssul">로그아웃</a></li>
 					</c:if>
 					<li class="nav-item"><a class="nav-link" href="/threeminutessul/boardAdd.tmssul">썰 풀기</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">연애</a>
+					<li class="nav-item category" data-category="1"><a class="nav-link" href="/threeminutessul/boardList.tmssul">모든 썰</a>
+					<li class="nav-item category" data-category="1"><a class="nav-link" href="/threeminutessul/boardList.tmssul?category=1">연애</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">공포</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">19</a></li>
+					<li class="nav-item category" data-category="2"><a class="nav-link" href="/threeminutessul/boardList.tmssul?category=2">공포</a></li>
+					<li class="nav-item category" data-category="3"><a class="nav-link" href="/threeminutessul/boardList.tmssul?category=3">19</a></li>
 				</ul>
 			</div>
 		</div>
@@ -152,6 +156,17 @@
 	<!--본문-->
 	<div class="container-fluid" id="cont">
 		<div class="accordion" id="brd-acdn">
+			<c:if test="${list.size() == 0}">
+				<div class="card">
+					<div class="card-header">
+						<div class="row">
+							<div class="col d-flex flex-column justify-content-center">
+								아직 썰이 등록되지 않았습니다. <span class="font-header"><span class="font-color-main ">3</span>분썰</span>의 첫 주인공이 되어보세요.
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
 			<c:forEach items="${list}" var="vo">
 				<div class="card" id="card_${vo.boardSeq}">
 					<div class="card-header">

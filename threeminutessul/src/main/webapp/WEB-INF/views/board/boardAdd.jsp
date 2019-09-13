@@ -44,7 +44,7 @@
     <form action="/threeminutessul/boardAddOk.tmssul" method="post" class="mb-0" novalidate>
       <div class="form-group my-3">
         <input type="text" class="form-control ty_tit" id="title" name="title" placeholder="글 제목을 입력해주세요." required style="display:inline-block;">
-        <select id="categoryList" class="form-control" style="display:inline-block;">
+        <select id="categoryList" name="category" class="form-control" style="display:inline-block;">
       		<c:forEach items = "${categoryList}" var="category">
       			<option value="${category.categorySeq}">${category.categoryName}</option>
       		</c:forEach>

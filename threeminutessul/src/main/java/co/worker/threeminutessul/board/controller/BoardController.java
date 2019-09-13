@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +51,7 @@ public class BoardController {
 	public String boardList(HttpServletRequest req, HttpServletResponse resp, HttpSession session,SearchVO searchVO) throws Exception {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		if(searchVO.getPage()==null) searchVO.setPage(1);
+		
 		String userSeq = (String)session.getAttribute("userSeq");
 		list = service.getBoard(userSeq,searchVO);
 		JSONArray jsonArr = new JSONArray();
@@ -63,6 +65,7 @@ public class BoardController {
 			json.put("regdate",vo.getTimechange() == null ? vo.getRegdate() : vo.getTimechange());
 			json.put("title",vo.getTitle());
 			json.put("boardSeq",vo.getBoardSeq());
+			json.put("category", vo.getCategory());
 			jsonArr.add(json);
 		}
 		
@@ -97,6 +100,7 @@ public class BoardController {
 			json.put("regdate",vo.getTimechange() == null ? vo.getRegdate() : vo.getTimechange());
 			json.put("title",vo.getTitle());
 			json.put("boardSeq",vo.getBoardSeq());
+			json.put("category", vo.getCategory());
 			jsonArr.add(json);
 		}
 		
@@ -132,7 +136,7 @@ public class BoardController {
 		int result = service.insertBoard(vo);
 		String actionCode = "";
 		if(result==1) {//글 등록 성공
-			actionCode="alert('글을 동록했습니다.'); location.href='/threeminutessul/boardList.tmssul'";
+			actionCode="alert('글을 동록했습니다.'); location.href='/threeminutessul/boardList.tmssul?category="+vo.getCategory()+"'";
 		}else {//글 등록 실패
 			actionCode="alert('글을 등록하는데 에러가 발생'); history.back();";
 		}

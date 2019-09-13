@@ -25,7 +25,10 @@
 		from tblBoard b
 			inner join tblUserInfo ui on b.writer = ui.userSeq
 		
-		where 1=1 
+		where 1=1
+		<if test="category != null">
+			and b.category = #{category}
+		</if>
 		<if test="(searchtext != null and searchoption != null)">
 			<!-- 검색상태임 -->
 			<if test="searchoption == 0"> <!-- 전체검색(title, content, userid(닉네임)  -->
@@ -48,9 +51,9 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="boardVo">
-		insert into tblBoard(writer,title,content,regdate,updatedate,likey,hate,isanony) 
+		insert into tblBoard(writer,title,content,regdate,updatedate,likey,hate,isanony, category) 
 		values(
-			#{writer},#{title},#{contents},now(),now(),#{likey},#{hate},#{isanony}	
+			#{writer}, #{title}, #{contents}, now(), now(), #{likey}, #{hate}, #{isanony}, #{category}	
 		)
 	</insert>
 	
