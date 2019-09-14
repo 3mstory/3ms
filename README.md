@@ -46,11 +46,11 @@ OnePage 커뮤니티 웹 프로젝트<br>
 <img width ="300" src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EB%AA%A8%EB%B0%94%EC%9D%BC%EA%B2%80%EC%83%89.PNG">
 
 * 3분썰 모바일 썰풀기화면
-<img width = "300" src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EB%AA%A8%EB%B0%94%EC%9D%BC%EC%8D%B0%ED%92%80%EA%B8%B0.PNG">
+<img width = "300" src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EB%AA%A8%EB%B0%94%EC%9D%BC_%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%85%EB%A1%9C%EB%93%9C.PNG">
 
 * 3분썰 웹 메인화면<br><br>
 <img src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EC%9B%B9%EB%A9%94%EC%9D%B8.PNG">
 
 * 3분썰 웹 썰풀기 화면<br><br>
-<img src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EC%9B%B9%EC%8D%B0%ED%92%80%EA%B8%B0.PNG">
+<img src="https://github.com/3mstory/3ms/blob/master/3ms%20%EC%BA%A1%EC%B2%98%EC%82%AC%EC%A7%84/%EC%9B%B9%ED%99%94%EB%A9%B4_%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%97%85%EB%A1%9C%EB%93%9C.PNG">
 
