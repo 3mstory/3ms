@@ -67,9 +67,7 @@ public class CkeditorFileUploadController {
 						
 						//파일 이동
 						file.transferTo(saveFile);
-//						
-//						out = new FileOutputStream(new File(filePath));
-//                        out.write(bytes);
+						
                         resp.setCharacterEncoding("UTF-8");
                 		resp.setContentType("text/html; charset=utf-8");
                         printWriter = resp.getWriter();
