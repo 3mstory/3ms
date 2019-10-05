@@ -31,12 +31,66 @@ $(function() {
       $(this).find("i").hide();
       spinner.show();
       var boardSeq = card.attr("id").substr(5);
+     
+      $.getJSON("/threeminutessul/commentList.tmssul?boardSeq="+boardSeq, 
+    	   function(data){
+    	   
+	    	  	if(data == ''){
+	    	  		//로그인 안함.
+	    	  		//쫒겨나야함
+	    	        location.href = "/threeminutessul/boardList.tmssul";
+	    	        alert("로그인을 하고 진행해주시기 바랍니다.");
+	    	  	}
+	    	  	
+	    	  	var content = data[0].boardContent; //이부분 커스텀해주면 될듯!!
+	            
+	    	  	$("#commentCount_" + boardSeq).text(data[0].commentCnt); //댓글 ?개
+	            // 이게 왜필요하지? var boardContent = content ? content : "내용이 없습니다.";
+	            var likecount = card.find(".likecount");
+	            var hatecount = card.find(".hatecount");
+	            likecount.text(data[0].likecnt);
+	            hatecount.text(data[0].hatecnt);
+	            $(cardCont).append(content);
+	    	  	
+	    	  	
+	    	  	//댓글 리스트
+	    	  	
+	    	  	$.each(data, function(index, object) {
+	                if (object.commentCnt != 0) {
+	                  
+	                  //li 태그 생성 구조(boardList 댓글부분 참조)
+	                   
+	                  var li = $("<li/>", {
+	                    class: "card-reply-item my-1"
+	                  });
+	                  var button = $("<button/>", {
+	                    type: "button",
+	                    class: "btn btn-outline-secondary writer py-0 px-1 align-top",
+	                    text: object.nickname
+	                  });
+	                  var p = $("<p/>", {
+	                    text: object.content,
+	                    style: "display:inline"
+	                  });
+	                  $(li).append(button);
+	                  $(li).append(p);
+	                  card.find(".card-replys").append(li); //댓글 리스트
+	                }
+	            });
+	    	  	
+	    	  	spinner.hide(); //스피너제거
+	            //cardContArea.show();//카드 펼치기
+
+	            upBtn.show();
+	    	  	
+      });
+      /*
       $.ajax({
         //경로입력
-        url: "/threeminutessul/commentList.tmssul",
+        url: "/threeminutessul/commentList/"+boardSeq,
         type: "GET",
-        data: "boardSeq=" + boardSeq
       }).done(function(data) {
+    	  debugger;
         //card.find('.card-replys').empty();
         if (data.toString().indexOf("<script>") > -1) {
           //쫒겨나야함
@@ -51,12 +105,13 @@ $(function() {
           likecount.text(data.result[0].likecount);
           hatecount.text(data.result[0].hatecount);
           $(cardCont).append(content);
+          
           //댓글 리스트
           $.each(data.result, function(index, object) {
             if (object.commentCnt != 0) {
-              /**
-               * li 태그 생성 구조(boardList 댓글부분 참조)
-               */
+              
+              //li 태그 생성 구조(boardList 댓글부분 참조)
+               
               var li = $("<li/>", {
                 class: "card-reply-item my-1"
               });
@@ -80,7 +135,8 @@ $(function() {
 
           upBtn.show();
         }
-      });
+      });*/
+      
     } else {
       upBtn.toggle();
       downBtn.toggle();

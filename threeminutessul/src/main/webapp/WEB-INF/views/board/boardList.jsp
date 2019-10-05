@@ -426,24 +426,28 @@
       	      boardSeq: cardId,
       	      content: text
       	    };
+      	    
       	    $.ajax({
       	      url: "/threeminutessul/commentInsert.tmssul",
       	      method: "POST",
-      	      data: reqData,
+      	   	  data : JSON.stringify(reqData),
+      	   	  contentType : "application/json; charset=utf-8",
       	      success: function(data) {
-      	        var result = data.result;
-      	        if (data.toString().indexOf("<script>") > -1) {
+      	    	
+      	        /* 애초에 이게 필요가 없음. 어차피 로그인 안하면 카드 못열음
+      	        if (data.toString().indexOf("<script>") > -1) { /
       	            //쫒겨나야함
       	            alert("로그인을 하고 진행해주시기 바랍니다.");
       	            //location.href = "/threeminutessul/boardList.tmssul";
       	            return false;
-      	        }
-      	        if (result !== -1) {
+      	        } */
+      	        if (data.result !== -1) {
       	          var replys = wrapper.siblings(".card-reply-area").find(".card-replys");
       	          var replyTmpl = $.templates("#replyTemplate");
+      	          
       	          var html = replyTmpl.render(data);
       	          $(html).appendTo(replys);
-      	          card.find('.reply-cnt').text(data.commentSize);
+      	          card.find('.reply-cnt').text(data.commentCnt);
       	        } else {
       	          makeToast("댓글이 등록 되지 못했습니다.");
       	        }

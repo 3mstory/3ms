@@ -7,21 +7,36 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 -->
 <mapper namespace="comment">
 	<select id="commentList" parameterType="Integer" resultType="commentVo">
+		with likey as(
+			select boardSeq, count(*) likeCnt from tbllikehate where boardSeq = #{boardSeq} and islike = 1 group by boardSeq 
+		) 
+		, hate as (
+			select boardSeq, count(*) hateCnt from tbllikehate where boardSeq = #{boardSeq} and ishate = 1 group by boardSeq
+		), commentSize as (
+			select #{boardSeq} as boardSeq, count(*) commentCnt from tblcomment where boardSeq = #{boardSeq}
+		)
 		select
 			C.commentSeq
-			, U.userSeq
+			, U.userSeq 
 			, U.nickname
-			, C.boardSeq
+			, B.boardSeq
 			, C.content
 			, case 
-				when to_char(regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(regdate,'YYYY-MM-DD hh24:mi:ss') then regdate 
-				else updatedate 
+				when to_char(C.regdate,'YYYY-MM-DD hh24:mi:ss') = to_char(C.regdate,'YYYY-MM-DD hh24:mi:ss') then C.regdate 
+				else C.updatedate 
 			end as regdate
-			,C.isanony
-		from tblComment C
-			inner join tblUserInfo U on U.userSeq = C.userSeq
-		where boardSeq = #{boardSeq}
-		  and parSeq = 0
+			, C.isanony
+			, COALESCE(L.likeCnt, 0) likeCnt
+			, COALESCE(H.hateCnt, 0) hateCnt
+			, B.content boardContent
+			, CS.commentCnt
+		from tblboard B 
+			left outer join tblcomment C on C.boardSeq = B.boardSeq
+			left outer join tblUserInfo U on U.userSeq = B.writer
+			left outer join likey L on L.boardSeq = B.boardSeq
+			left outer join hate H on H.boardSeq = B.boardSeq
+			left outer join commentSize CS on CS.boardSeq = B.boardSeq
+		where B.boardSeq = #{boardSeq}
 		order by commentSeq
 	</select>
 	<insert id="commentInsert" parameterType="commentVO">

@@ -1,27 +1,29 @@
 package co.worker.threeminutessul.comment.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.worker.threeminutessul.board.service.BoardServiceIF;
 import co.worker.threeminutessul.comment.medel.CommentVO;
 import co.worker.threeminutessul.comment.service.CommentServiceIF;
-import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 
-@Controller
+@RestController
 public class CommentController {
 	
 	@Autowired
@@ -31,80 +33,46 @@ public class CommentController {
 	@Autowired
 	private LikeyHateServiceIF likehateService;
 	
-	@RequestMapping(value = "/commentList.tmssul", method = { RequestMethod.GET })
-	@ResponseBody
-	public JSONObject commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) throws Exception {
-		List<CommentVO> commentList = service.getComment(boardSeq);
+	@GetMapping(value = "/commentList.tmssul", 
+			produces= {MediaType.APPLICATION_XML_VALUE,
+					   MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<CommentVO>> commentList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, int boardSeq) throws Exception {
+		List<CommentVO> commentList = new ArrayList<CommentVO>();
 		
-		// board 컨텐츠 가져오기
-		String boardContent = boardService.getBoardContent(boardSeq);
-		
-		LikeHateVO likehateVO = new LikeHateVO();
-		likehateVO.setBoardSeq(boardSeq);
-		likehateVO.setUserSeq(Integer.parseInt(
-										(String)session.getAttribute("userSeq") == null ? 
-										"0" : (String)session.getAttribute("userSeq")
-		));
-		
-		//board에 달린 좋아요와 싫어요 갯수 가져오기
-		HashMap<String,Integer> rtnMap = likehateService.getReturnlikehate(likehateVO);
-		
-		JSONArray jsonArr = new JSONArray();
-		JSONObject result = new JSONObject();
-		if(commentList.size()!=0) {
-			for(CommentVO vo : commentList) {
-				JSONObject json = new JSONObject();
-				json.put("commentSeq",vo.getCommentSeq());
-				json.put("userSeq",vo.getUserSeq());
-				json.put("boardSeq",vo.getBoardSeq());
-				json.put("parSeq",vo.getParSeq());
-				json.put("content",vo.getContent());
-				json.put("regdate",vo.getRegdate());
-				json.put("updatedate",vo.getUpdatedate());
-				json.put("isanony",vo.getIsanony());
-				json.put("nickname", vo.getNickname());
-				json.put("commentCnt",commentList.size());
-				json.put("likecount",rtnMap.get("like"));
-				json.put("hatecount",rtnMap.get("hate"));
-				json.put("boardContent",boardContent);
-				jsonArr.add(json);
-			}
-			result.put("result",jsonArr);
-		}else {//댓글없을때
-			JSONObject json = new JSONObject();
-			json.put("boardContent",boardContent);
-			json.put("commentCnt",commentList.size());
-			json.put("likecount",rtnMap.get("like"));
-			json.put("hatecount",rtnMap.get("hate"));
-			jsonArr.add(json);
-			result.put("result",jsonArr);
+		//세션검사.
+		if(session.getAttribute("userid") == null) {
+			return new ResponseEntity<>(commentList, HttpStatus.OK);
 		}
-		return result;
+		commentList = service.getComment(boardSeq); 
+		return new ResponseEntity<>(commentList, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/commentInsert.tmssul", method = { RequestMethod.POST })
-	@ResponseBody
-	public JSONObject commentInsert(HttpServletRequest req, HttpServletResponse resp, HttpSession session, CommentVO vo) {
-		JSONObject json = new JSONObject();
+	@PostMapping(value = "/commentInsert.tmssul"
+			, consumes ="application/json"
+			, produces= {MediaType.APPLICATION_JSON_VALUE})
+	
+	public ResponseEntity<CommentVO> commentInsert(HttpServletRequest req, HttpServletResponse resp, HttpSession session
+			, @RequestBody CommentVO vo) {
+		
+		//JSONObject json = new JSONObject();
 		try { // 예외처리
-			vo.setUserSeq(Integer.parseInt((String)session.getAttribute("userSeq")));
+			vo.setUserSeq(Integer.parseInt((String)session.getAttribute("userSeq"))); // 로그인한 유저의 seq 번호 넣기.
 		} catch (NumberFormatException e) {
 			return null;
 		}
-		int result = service.commentInsert(vo);
-		int commentSize = service.getCommentSize(vo);
-		if(result==1) {
-			//성공
-			json.put("content",vo.getContent());//댓글 넣은거.
-			json.put("nickname",(String)session.getAttribute("nickname"));
-			json.put("commentSize",commentSize);
-			//json.put("",);
-			json.put("response", 1);
-		}else {
-			//실패
-			//NewPageAction
-			json.put("response", -1);	
+		
+		int result = service.commentInsert(vo); //등록 성공여부. 1/0
+		int commentCnt = service.getCommentSize(vo);
+		CommentVO resultVO = new CommentVO();
+		if(result == 1) {
+			resultVO.setResult(result);//등록성공여부
+			resultVO.setCommentCnt(commentCnt); // 댓글 개수
+			resultVO.setNickname((String)session.getAttribute("nickname"));
+			resultVO.setContent(vo.getContent());
 		}
-		return json;
+		
+		return result == 1
+				? new ResponseEntity<>(resultVO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		
 	}
 }

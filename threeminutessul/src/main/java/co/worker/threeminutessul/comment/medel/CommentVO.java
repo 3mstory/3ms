@@ -1,7 +1,9 @@
 package co.worker.threeminutessul.comment.medel;
 
 import co.worker.threeminutessul.common.model.CommonVO;
+import lombok.Data;
 
+@Data
 public class CommentVO extends CommonVO{
 	
 	private int commentSeq;
@@ -13,59 +15,12 @@ public class CommentVO extends CommonVO{
 	private int mentionUserSeq;
 	private String nickname;
 	
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public int getMentionUserSeq() {
-		return mentionUserSeq;
-	}
-	public void setMentionUserSeq(int mentionUserSeq) {
-		this.mentionUserSeq = mentionUserSeq;
-	}
-	public int getCommentSeq() {
-		return commentSeq;
-	}
-	public void setCommentSeq(int commentSeq) {
-		this.commentSeq = commentSeq;
-	}
-	public int getParSeq() {
-		return parSeq;
-	}
-	public void setParSeq(int parSeq) {
-		this.parSeq = parSeq;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	public String getUpdatedate() {
-		return updatedate;
-	}
-	public void setUpdatedate(String updatedate) {
-		this.updatedate = updatedate;
-	}
-	public int getIsanony() {
-		return isanony;
-	}
-	public void setIsanony(int isanony) {
-		this.isanony = isanony;
-	}
-	@Override
-	public String toString() {
-		return "CommentVO [commentSeq=" + commentSeq + ", parSeq=" + parSeq + ", content=" + content + ", regdate="
-				+ regdate + ", updatedate=" + updatedate + ", isanony=" + isanony + ", mentionUserSeq=" + mentionUserSeq
-				+ ", nickname=" + nickname + "]";
-	}
+	private int commentCnt;
+	private int likecnt;
+	private int hatecnt;
+	private String boardContent;
+	
+	//등록성공여부
+	private int result;
 
 }
