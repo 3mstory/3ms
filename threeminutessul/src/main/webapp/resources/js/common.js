@@ -153,13 +153,17 @@ $(function() {
     );
     var btntx = $(this).children(".card-btntx");
     var type = btntx.hasClass("left") ? "like" : "hate";
+    var param = {
+            boardSeq: seq,
+            type: type
+          };
     $.ajax({
       //경로입력
       url: "/threeminutessul/likeyhateAjax.tmssul",
-      data: {
-        boardSeq: seq,
-        type: type
-      },
+      type:'post',
+      dataType:"json",
+      contentType:"application/json; charset=utf-8",
+      data : JSON.stringify(param),
       success: function(data) {
         if (data.result == 1) {
           //var result = data.result[0];
@@ -172,9 +176,10 @@ $(function() {
           } else if (type === "hate") {
             btntx.text(hatecnt);
           }
+          makeToast('투표하였습니다.');
         } else if (data.result == -1) {
           setTimeout(function() {
-            $(".vote-toast").toast("show");
+        	  makeToast('이미 투표한 썰입니다.');
           }, 0);
         }
       },

@@ -22,5 +22,6 @@
 		<typeAlias type="co.worker.threeminutessul.likeyhate.model.LikeHateVO" alias="likehatevo"/>
 		<typeAlias type="co.worker.threeminutessul.board.model.CategoryVO" alias="categoryVo"/>
 		<typeAlias type="co.worker.threeminutessul.board.model.SearchVO" alias="searchVo"/>
+		<typeAlias type="co.worker.threeminutessul.likeyhate.model.ResultLHVO" alias="resultLHVO"/>
 	</typeAliases>	
 </configuration>

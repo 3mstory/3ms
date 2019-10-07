@@ -1,24 +1,20 @@
 package co.worker.threeminutessul.likeyhate.dao.impl;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import co.worker.threeminutessul.likeyhate.dao.LikeyHateDaoIF;
-import co.worker.threeminutessul.likeyhate.model.HateVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
-import co.worker.threeminutessul.likeyhate.model.LikeyVO;
+import co.worker.threeminutessul.likeyhate.model.ResultLHVO;
 
 @Repository
 public class LikeyHateDaoImpl implements LikeyHateDaoIF{
 	@Autowired
 	private SqlSessionTemplate template;
 	@Override
-	public List<LikeHateVO> getLikeHateCount(LikeHateVO vo) {
-		return template.selectList("likeyhate.getLikeHateCount",vo);
+	public LikeHateVO getLikeHateCount(LikeHateVO vo) {
+		return template.selectOne("likeyhate.getLikeHateCount",vo);
 	}
 
 	@Override
@@ -32,7 +28,7 @@ public class LikeyHateDaoImpl implements LikeyHateDaoIF{
 	}
 
 	@Override
-	public HashMap<String, Integer> getReturnlikehate(LikeHateVO vo) {
+	public ResultLHVO getReturnlikehate(LikeHateVO vo) {
 		return template.selectOne("likeyhate.getReturnlikehate",vo);
 	}
 	

@@ -1,15 +1,11 @@
 package co.worker.threeminutessul.likeyhate.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.worker.threeminutessul.likeyhate.dao.LikeyHateDaoIF;
-import co.worker.threeminutessul.likeyhate.model.HateVO;
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
-import co.worker.threeminutessul.likeyhate.model.LikeyVO;
+import co.worker.threeminutessul.likeyhate.model.ResultLHVO;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 
 @Service
@@ -18,13 +14,13 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 	private LikeyHateDaoIF dao;
 
 	@Override
-	public List<LikeHateVO> getLikeHateCount(LikeHateVO vo) {
+	public LikeHateVO getLikeHateCount(LikeHateVO vo) {
 		return dao.getLikeHateCount(vo);
 	}
 
 	@Override
-	public int insertLikeHate(LikeHateVO vo,String type) {
-		if(type.equals("like")) { //1 좋아요, 2 싫어요.
+	public int insertLikeHate(LikeHateVO vo) {
+		if(vo.getType().equals("like")) { //1 좋아요, 2 싫어요.
 			vo.setIsLike(1);
 			vo.setIsHate(0);
 		}else {
@@ -34,7 +30,7 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 		return dao.insertLikeHate(vo);
 	}
 
-	@Override
+	/* @Override
 	public int updateLikeHate(LikeHateVO vo, String type) {
 		if(type.equals("like")) { //1 좋아요, 2 싫어요.
 			vo.setIsLike(1);
@@ -44,10 +40,10 @@ public class LikeyHateServiceImpl implements LikeyHateServiceIF{
 			vo.setIsHate(1);
 		}
 		return dao.updateLikeHate(vo);
-	}
+	}*/
 
 	@Override
-	public HashMap<String, Integer> getReturnlikehate(LikeHateVO vo) {
+	public ResultLHVO getReturnlikehate(LikeHateVO vo) {
 		return dao.getReturnlikehate(vo);
 	}
 }

@@ -1,18 +1,16 @@
 package co.worker.threeminutessul.likeyhate.service;
 
-import java.util.HashMap;
-import java.util.List;
-
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
+import co.worker.threeminutessul.likeyhate.model.ResultLHVO;
 
 public interface LikeyHateServiceIF {
 
-	List<LikeHateVO> getLikeHateCount(LikeHateVO vo);
+	LikeHateVO getLikeHateCount(LikeHateVO vo);
 
-	int insertLikeHate(LikeHateVO vo,String type);
+	int insertLikeHate(LikeHateVO vo);
 
-	int updateLikeHate(LikeHateVO vo,String type);
+	//int updateLikeHate(LikeHateVO vo,String type);
 
-	HashMap<String, Integer> getReturnlikehate(LikeHateVO vo);
+	ResultLHVO getReturnlikehate(LikeHateVO vo);
 
 }
