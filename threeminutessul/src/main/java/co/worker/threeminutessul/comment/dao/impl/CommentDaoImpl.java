@@ -31,8 +31,18 @@ public class CommentDaoImpl implements CommentDaoIF{
 	}
 
 	@Override
-	public int deleteByBoardSeq(int boardSeq) {
+	public int deleteByBoardSeq(int boardSeq) { //글삭제할때 댓글 먼저 삭제.(글 번호)
 		return template.delete("comment.deleteByBoardSeq", boardSeq);
+	}
+
+	@Override
+	public int commentDelete(CommentVO vo) { // 댓글 삭제 로직.(댓글번호)
+		return template.delete("comment.commentDelete", vo);
+	}
+
+	@Override
+	public int commentUpdate(CommentVO vo) {
+		return template.update("comment.commentUpdate", vo);
 	}
 	
 }

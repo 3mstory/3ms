@@ -14,4 +14,8 @@ public interface CommentDaoIF {
 
 	int deleteByBoardSeq(int parseInt);
 
+	int commentDelete(CommentVO vo);
+
+	int commentUpdate(CommentVO vo);
+
 }

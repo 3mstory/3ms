@@ -15,4 +15,8 @@ public interface CommentServiceIF {
 	//해당 글 댓글 전체 삭제
 	int deleteByBoardSeq(int boardSeq);
 
+	int commentDelete(CommentVO vo);
+
+	int commentUpdate(CommentVO vo);
+
 }

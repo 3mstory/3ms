@@ -34,4 +34,14 @@ public class CommentServiceImpl implements CommentServiceIF {
 	public int deleteByBoardSeq(int boardSeq) {
 		return dao.deleteByBoardSeq(boardSeq);
 	}
+
+	@Override
+	public int commentDelete(CommentVO vo) {
+		return dao.commentDelete(vo);
+	}
+
+	@Override
+	public int commentUpdate(CommentVO vo) {
+		return dao.commentUpdate(vo);
+	}
 }

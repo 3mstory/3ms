@@ -53,4 +53,12 @@ mapper : MyBatis에서 사용하는 모든 SQL 을 작성하는 파일
 		delete from tblcomment where boardSeq = #{boardSeq}
 	</delete>
 	
+	<delete id="commentDelete">
+		delete from tblComment where commentSeq = #{commentSeq}
+	</delete>
+	
+	<update id="commentUpdate" parameterType="commentVO">
+		update tblComment set content = #{content}, updatedate = now() where commentSeq = #{commentSeq}
+	</update>
+	
 </mapper>
