@@ -4,20 +4,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.worker.threeminutessul.likeyhate.model.LikeHateVO;
 import co.worker.threeminutessul.likeyhate.model.ResultLHVO;
 import co.worker.threeminutessul.likeyhate.service.LikeyHateServiceIF;
 
-@Controller
+@RestController
 public class LikeyHateController {
 	@Autowired
 	private LikeyHateServiceIF service;
