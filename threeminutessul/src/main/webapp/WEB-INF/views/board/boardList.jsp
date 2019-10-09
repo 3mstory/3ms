@@ -195,7 +195,7 @@
 										<!-- <input type="button" id="updateBtn" value="수정" class="btn btn-info btn-xs"/> -->
 										<a href="/threeminutessul/boardUpdate.tmssul?boardSeq=${vo.boardSeq}" id="updateBtn">수정</a>
 										<!-- <input type="button" id="updateBtn" value="수정" class="btn btn-info btn-xs"/> -->
-										<a href="#none" class="deleteBtn" data-boardseq="${vo.boardSeq}">삭제</a>
+										<a href="#none" id ="deleteBtn" class="deleteBtn" data-boardseq="${vo.boardSeq}">삭제</a>
 									</div>
 								</c:if>
 							</p>
