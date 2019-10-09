@@ -8,4 +8,6 @@ public interface UserServiceIF {
 
 	int insertNewUser(UserVO vo,MultipartFile profile);
 
+	int duplicateIdCheck(String inputId);
+
 }

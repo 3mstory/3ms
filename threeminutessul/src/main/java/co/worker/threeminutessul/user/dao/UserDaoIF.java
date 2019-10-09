@@ -6,4 +6,6 @@ public interface UserDaoIF {
 
 	int insertNewUser(UserVO vo);
 
+	int duplicateIdCheck(String inputId);
+
 }

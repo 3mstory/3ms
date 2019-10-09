@@ -17,5 +17,10 @@ public class UserDaoImpl implements UserDaoIF{
 	public int insertNewUser(UserVO vo) {
 		return template.insert("user.insertuser",vo);
 	}
+
+	@Override
+	public int duplicateIdCheck(String inputId) {
+		return template.selectOne("user.duplicateIdCheck", inputId);
+	}
 	
 }

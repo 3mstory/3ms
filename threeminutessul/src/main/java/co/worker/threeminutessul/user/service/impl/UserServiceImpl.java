@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserServiceIF{
 		vo.setProfile(profile.getOriginalFilename());
 		return dao.insertNewUser(vo);
 	}
+
+	@Override
+	public int duplicateIdCheck(String inputId) {
+		return dao.duplicateIdCheck(inputId);
+	}
 }

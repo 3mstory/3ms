@@ -48,8 +48,10 @@
 			<form action="/threeminutessul/userjoin.tmssul" method="POST" encType="multipart/form-data">
 				<div class="modal-body px-4 py-0">
 					<div class="form-group">
-						<input type="text" class="form-control" id="id123" aria-describedby="아이디" placeholder="id" name="userid"
+						<input type="text" class="form-control" id="userid" aria-describedby="아이디" placeholder="id" name="userid" data-isDuplOK="false" style="width:65%; display:inline-block;"
 							required>
+						<button type="button" class="form-control btn-primary" id="idDupl" style="width:33%;display:inline-block;">중복확인</button>
+						<div id="checktext" style="color:red; font-size:9px;">아이디 중복체크를 완료해주세요.</div>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" id="password1" placeholder="password" name="userpw" required>
@@ -60,11 +62,12 @@
 					</div>
 					<div class="form-group">
 						<div class="custom-file" id="customFile">
-							<input type="file" accept="image/*" class="custom-file-input" id="join-file-input" name="input_file"
+							<input type="file" class="custom-file-input" id="join-file-input" name="input_file" accept="image/png, image/jpg, image/jpeg"
 								required aria-describedby="ProfileUpload">
 							<label class="custom-file-label text-secondary" for="exampleInputFile" required>
 								프로필 사진
 							</label>
+							<div id="checktext" style="color:green; font-size:9px;">* png, jpg, jpeg형식으로만 등록해주시기 바랍니다.</div>
 						</div>
 					</div>
 				</div>
@@ -76,7 +79,7 @@
 									data-toggle="modal" data-target="#login_form">로그인</button>
 							</div>
 							<div class="col-6">
-								<button type="submit" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
+								<button id="joinBtn" class="btn btn-primary mx-auto col-12 mb-4">가입신청</button>
 							</div>
 						</div>
 					</div>

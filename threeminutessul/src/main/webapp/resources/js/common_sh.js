@@ -15,7 +15,7 @@ function adjustSizeByDevice(){
   		$("#title.form-control").css("margin-bottom","20");
   		
   		//List페이지 검색
-  		$("#searchSelect").width(bodySize*0.23);
+  		$("#searchSelect").width(bodySize*0.22);
   		$("#searchtext").width(bodySize*0.6);
 	} else {
 		
@@ -102,11 +102,54 @@ $(".deleteBtn").bind("click",function(){
 		},error:function(xhr, status, er){
 			console.log(xhr, status, er);
 		}
-			
-		
 	});
 	
 });
 
+$("#joinBtn").on("click", function(e){
+	//아이디 중복체크 되었으면.
+	if($("input[name='userid']").data('isduplok')){
+		if(!$("#password1").val()){
+			return false;
+		}
+		if(!$("#nick").val()){
+			return false;
+		}
+		if(!$("#join-file-input").val()){
+			return false;
+		}
+		$("form").submit();
+	}else{
+		alert("아이디 중복체크를 해주시기 바랍니다.");
+	}
+});
+
+$("#idDupl").on("click", function(e){
+	var inputId = $("input[name='userid']").val();
+	if(!inputId){
+		return;
+	}
+	$("#checktext").css('color', 'red');
+	$("#checktext").text("아이디 중복체크중입니다.");
+	$.ajax({
+		url : 'idduplcheck.tmssul',
+		type : 'GET',
+	    data : 'inputId='+inputId,
+		success : function(result){
+			if(result != 'duplicate'){
+				//input id 중복체크 상태 true로 변경
+				$("#userid").data('isduplok', true);
+				$("#checktext").css('color','green');
+				$("#checktext").text("확인되었습니다.");
+			}else{
+				//중복된 상황
+				$("#checktext").text("중복된 아이디가 존재합니다.");
+			}
+		},error : function(a, b, c){
+			console.log(a, b, c);
+		}
+		
+	});
+});
 
 
