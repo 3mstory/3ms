@@ -88,13 +88,12 @@ $(".deleteBtn").bind("click",function(){
 	}
 	var boardSeq = $(this).data('boardseq');
 	$.ajax({
-		type:'POST',
-		url:'/threeminutessul/boardDelete.tmssul',
+		type:'DELETE',
+		url:'/threeminutessul/'+boardSeq+'/boardDelete.tmssul',
 //		contentType:"application/json; charset=utf-8",
-		data: 'boardSeq='+boardSeq,
+		//data: 'boardSeq='+boardSeq,
 		dataType:'json',
 		success:function(result){
-			var result = result.result;
 			if(result==1){
 				location.reload();
 			}else{

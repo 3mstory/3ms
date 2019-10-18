@@ -10,13 +10,15 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.worker.threeminutessul.board.model.BoardVO;
@@ -172,11 +174,9 @@ public class BoardController {
 		return "redirect:/boardList.tmssul"; 
 	}
 	
-	@PostMapping("/boardDelete")
-	@ResponseBody
+	@DeleteMapping("/{boardSeq}/boardDelete")
 	@Transactional
-	public JSONObject boardDelete(HttpServletRequest req, HttpServletResponse resp, HttpSession session, @RequestParam("boardSeq") Integer boardSeq) throws Exception{
-		JSONObject result = new JSONObject();
+	public ResponseEntity<Integer> boardDelete(HttpServletRequest req, HttpServletResponse resp, HttpSession session, @PathVariable Integer boardSeq) throws Exception{
 		
 		//댓글 먼저 삭제
 		int commentResult = commentService.deleteByBoardSeq(boardSeq);
@@ -184,9 +184,8 @@ public class BoardController {
 		//글 삭제
 		int boardResult = service.boardDelete(boardSeq);
 		if(boardResult == 1)
-			result.put("result",boardResult);
+			return new ResponseEntity<>(boardResult, HttpStatus.OK);
 		else
-			result.put("result",-1);
-		return result;
+			return new ResponseEntity<>(-1, HttpStatus.OK);
 	}
 }
